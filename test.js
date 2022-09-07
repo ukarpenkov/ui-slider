@@ -1,2 +1,1 @@
-console.log('hi');
-alert('d')
+console.log('fff')
