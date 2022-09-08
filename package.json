@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "jquery": "^3.6.1"
+  },
+  "name": "ui-slider",
+  "version": "1.0.0",
+  "description": "This is a plugin for jQuery that implemented the “slider” functionality - a special controller that allows you to drag for a given numeric value",
+  "main": "index.js",
+  "repository": "https://github.com/ukarpenkov/ui-slider.git",
+  "author": "ukarpenkov <truloveu@gmail.com>",
+  "license": "MIT"
+}
