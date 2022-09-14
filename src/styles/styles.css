@@ -4,5 +4,6 @@ h1 {
 }
 
 div {
-  max-height: 250px;
+  height: 250px;
+  background-color: red;
 }
