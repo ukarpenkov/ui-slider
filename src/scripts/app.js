@@ -6,8 +6,12 @@ console.log('hella');
 (function ($) {
 
     var methods = {
-        init: function (options) {
-            return this
+        init: function () {
+            let newSlider = $('<div>', {
+                'class': 'new-slider',
+                text: 'Новый текст сообщения.'
+            })
+            newSlider.appendTo(this)
         },
         show: function () {
             return this
@@ -17,10 +21,15 @@ console.log('hella');
         },
         update: function (content) {
             return this
+        },
+        position: function (position) {
+            return this.css({
+                'position': position
+            })
         }
     };
 
-    $.fn.tooltip = function (method) {
+    $.fn.ukslider = function (method) {
 
         // логика вызова метода
         if (methods[method]) {
@@ -28,12 +37,15 @@ console.log('hella');
         } else if (typeof method === 'object' || !method) {
             return methods.init.apply(this, arguments);
         } else {
-            $.error('Метод с именем ' + method + ' не существует для jQuery.tooltip');
+            $.error('Метод с именем ' + method + ' не существует для jQuery.ukslider');
         }
     };
 
 })(jQuery);
 
 
-$('div').tooltip('changeColor', 'blue');
-$('div').tooltip('update', 'Теперь тут новое содержимое');
+// $('div').ukslider('changeColor', 'blue');
+// $('div').ukslider('update', 'Теперь тут новое содержимое');
+// $('.ukslider').ukslider('position', 'relative');
+$('.ukslider').ukslider('init');
+$('.test').ukslider('init');
