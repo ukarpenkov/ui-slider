@@ -5,7 +5,7 @@ console.log('hella');
 
 (function ($) {
 
-    var methods = {
+    const methods = {
         init: function () {
             let newSlider = $('<div>', {
                 'class': 'new-slider',
@@ -47,5 +47,6 @@ console.log('hella');
 // $('div').ukslider('changeColor', 'blue');
 // $('div').ukslider('update', 'Теперь тут новое содержимое');
 // $('.ukslider').ukslider('position', 'relative');
-$('.ukslider').ukslider('init');
-$('.test').ukslider('init');
+$('.ukslider').ukslider('init')
+$('div').ukslider('changeColor', 'blue');
+// $('.test').ukslider('init');
