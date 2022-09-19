@@ -11,16 +11,16 @@ console.log('hella');
                 'class': 'new-slider',
                 text: 'Новый текст сообщения.'
             })
-            newSlider.appendTo(this)
+            return newSlider.appendTo(this)
         },
         show: function () {
             return this
         },
         changeColor: function (color) {
-            this.css({ 'background-color': color })
+            return this.css({ 'background-color': color })
         },
-        update: function (content) {
-            return this
+        update: function () {
+            return this.css({ 'border': '6px solid' })
         },
         position: function (position) {
             return this.css({
@@ -31,7 +31,7 @@ console.log('hella');
 
     $.fn.ukslider = function (method) {
 
-        // логика вызова метода
+
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         } else if (typeof method === 'object' || !method) {
@@ -44,9 +44,5 @@ console.log('hella');
 })(jQuery);
 
 
-// $('div').ukslider('changeColor', 'blue');
-// $('div').ukslider('update', 'Теперь тут новое содержимое');
-// $('.ukslider').ukslider('position', 'relative');
-$('.ukslider').ukslider('init')
-$('div').ukslider('changeColor', 'blue');
-// $('.test').ukslider('init');
+
+$('.ukslider').ukslider('init').ukslider('changeColor', 'yellow').ukslider('update')
