@@ -7,10 +7,22 @@ console.log('hella');
 
     const methods = {
         init: function () {
+            let $this = $(this)
+            let data = $this.data('newSlider')
             let newSlider = $('<div>', {
                 'class': 'new-slider',
                 text: 'Новый текст сообщения.'
             })
+            if (!data) {
+                // выполняем инит
+                $(this).data('newSlider', {
+                    target: $this,
+                    newSlider: newSlider
+                })
+                console.log('initialization is done!')
+            } else {
+                console.log('initialization is done before!')
+            }
             return newSlider.appendTo(this)
         },
         show: function () {
@@ -25,6 +37,16 @@ console.log('hella');
         position: function (position) {
             return this.css({
                 'position': position
+            })
+        },
+        destroy: function () {
+            return this.each(function () {
+                let $this = $(this)
+                let data = $this.data('newSlider')
+                $(window).unbind('.new-slider')
+                data.newSlider.remove()
+                $this.removeData('newSlider')
+                console.log('destroy is done')
             })
         }
     };
@@ -46,3 +68,8 @@ console.log('hella');
 
 
 $('.ukslider').ukslider('init').ukslider('changeColor', 'yellow').ukslider('update')
+
+$('.ukslider').ukslider('destroy')
+
+$('.ukslider').ukslider('init').ukslider('changeColor', 'yellow').ukslider('update')
+
