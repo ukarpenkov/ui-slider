@@ -73,10 +73,10 @@ console.log('hella');
 (function () {
 
     function rangeInputChangeEventHandler(e) {
-        var minBtn = $(this).parent().children('.min');
-        var maxBtn = $(this).parent().children('.max');
-        var range_min = $(this).parent().children('.range_min');
-        var range_max = $(this).parent().children('.range_max');
+        var minBtn = $(this).parent().children('.js-uk-min');
+        var maxBtn = $(this).parent().children('.js-uk-max');
+        var range_min = $(this).parent().children('.js-uk-range_min');
+        var range_max = $(this).parent().children('.js-uk-range_max');
         var minVal = ($(minBtn).val());
         var maxVal = ($(maxBtn).val());
 
@@ -94,5 +94,5 @@ console.log('hella');
         $(range_max).html((maxVal * 1000) + ' €');
     }
 
-    $('input[type="range"]').on('input', rangeInputChangeEventHandler);
+    $('.uk-slider__input').on('input', rangeInputChangeEventHandler);
 })();

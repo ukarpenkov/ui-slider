@@ -1,66 +1,25 @@
-/* h1 {
-  color: hotpink;
-  font-family: cursive;
-}
-
-.uk-slidecontainer {
-  width: 25%;
-}
-
-.uk-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 25px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
-}
-
-.uk-slider:hover {
-  opacity: 1;
-}
-
-.uk-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #04aa6d;
-  cursor: pointer;
-}
-
-.uk-slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #04aa6d;
-  cursor: pointer;
-} */
-
-input[type='range'] {
+.uk-slider__input {
   width: 210px;
   height: 30px;
   overflow: hidden;
   cursor: pointer;
   outline: none;
-}
-input[type='range'] {
   -webkit-appearance: none;
   background: none;
-}
-input[type='range']::-webkit-slider-runnable-track {
-  width: 200px;
-  height: 1px;
-  background: #003d7c;
+  position: absolute;
 }
 
-input[type='range']:nth-child(2)::-webkit-slider-runnable-track {
+.uk-slider__input::-webkit-slider-runnable-track {
+  width: 200px;
+  height: 1px;
+  background: #7c004a;
+}
+
+.uk-slider__input:nth-child(2)::-webkit-slider-runnable-track {
   background: none;
 }
 
-input[type='range']::-webkit-slider-thumb {
+.uk-slider__input::-webkit-slider-thumb {
   position: relative;
   height: 15px;
   width: 15px;
@@ -71,32 +30,26 @@ input[type='range']::-webkit-slider-thumb {
   z-index: 1;
 }
 
-input[type='range']:nth-child(1)::-webkit-slider-thumb {
+.uk-slider__input:nth-child(1)::-webkit-slider-thumb {
   z-index: 2;
 }
 
-.rangeslider {
+.uk-slider {
   position: relative;
   height: 60px;
-  width: 210px;
+  width: 215px;
   display: inline-block;
   margin-top: -5px;
   margin-left: 20px;
 }
-.rangeslider input {
-  position: absolute;
-}
-.rangeslider {
-  position: absolute;
-}
 
-.rangeslider span {
+.uk-slider__range_value {
   position: absolute;
   margin-top: 30px;
   left: 0;
 }
 
-.rangeslider .right {
+.uk-slider__range_value_max {
   position: relative;
   float: right;
   margin-right: -5px;
