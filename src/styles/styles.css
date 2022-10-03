@@ -4,32 +4,43 @@ input[type='range'][orient='vertical'] {
   overflow: hidden;
   cursor: pointer;
   -webkit-appearance: none;
-  width: 215px; /*width of line*/
-  height: 30px;
+  width: 155px; /*height of line*/
   background: none;
-  transform: rotate(90deg);
-  transform-origin: bottom;
-  overflow: hidden;
-  position: absolute;
-}
-
-.uk-slider__input_view_vertical:nth-child(1)::-webkit-slider-thumb {
-  z-index: 2;
-}
-
-input[type='range'][orient='vertical']::-webkit-slider-runnable-track {
-  background: yellow;
-  border: 1px solid black;
-  width: 50px;
+  transform: translateY(60px) rotate(270deg);
+  outline: none;
+  position: absolute; /* if abs then 2 line together but thumb is not visible*/
   z-index: 1;
 }
 
+input[type='range'][orient='vertical']::-webkit-slider-runnable-track {
+  position: relative;
+  background: rgb(14, 193, 213); /*color of line*/
+  border: 4px solid rgb(148, 29, 152); /*border of line*/
+  z-index: 1;
+}
+
+input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-thumb {
+  position: relative;
+  width: 20px;
+  z-index: 3;
+  background: rgb(23, 46, 175);
+  transform: rotate(50deg);
+}
+
 input[type='range']::-webkit-slider-thumb {
+  position: relative;
   -webkit-appearance: none;
   border: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: goldenrod;
-  margin-top: -4px;
+  height: 15px;
+  width: 15px;
+  border-radius: 21%;
+  background: rgb(143, 201, 16);
+  z-index: 3;
+}
+
+input[type='range']:nth-child(2)::-webkit-slider-runnable-track {
+  position: relative;
+  margin-top: 80px; /*for exp*/
+  background: none;
+  z-index: 3;
 }

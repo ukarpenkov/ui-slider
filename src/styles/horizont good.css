@@ -1,4 +1,5 @@
 .uk-slider__input {
+  position: absolute;
   width: 215px; /*width of line*/
   height: 30px;
   overflow: hidden;
@@ -6,7 +7,6 @@
   -webkit-appearance: none;
   /* -webkit-appearance: slider-vertical; */ /*this is for vertical!*/
   background: none; /*background of all elements`*/
-  position: absolute;
 }
 
 .uk-slider__input::-webkit-slider-runnable-track {
