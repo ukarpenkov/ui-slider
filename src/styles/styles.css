@@ -1,33 +1,51 @@
 /*vertical variant*/
+.wrapper {
+  position: absolute;
+}
 .uk-slider__input_view_vertical {
-  position: relative; /* if abs then 2 line together but thumb is not visible*/
-  /* overflow: hidden; */
+  position: absolute; /* if abs then 2 line together but thumb is not visible*/
+  overflow: hidden;
   -webkit-appearance: none;
   width: 155px; /*height of line*/
 
   background: none;
   transform: rotate(270deg);
-
-  height: 40px;
+  display: inline-block;
+  /* height: 40px; */
 }
 
 input[type='range'][orient='vertical'] {
-  position: absolute;
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+input[type='range'][orient='vertical'] {
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  bottom: 15px;
 }
 
 input[type='range'][orient='vertical']:nth-child(2)::-webkit-slider-runnable-track {
   position: relative;
+  display: block;
 
-  background: purple; /*color of line*/
+  background: none; /*color of line*/
   border: 1px solid rgb(148, 29, 152); /*border of line*/
+  width: 100%;
+  height: 100%;
 }
 
 input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-runnable-track {
   position: relative;
+  display: block;
   cursor: pointer;
 
   background: none; /*color of line*/
   border: 1px solid rgb(148, 29, 152); /*border of line*/
+  width: 100%;
 }
 input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-thumb {
   position: relative;
@@ -39,6 +57,7 @@ input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-thumb {
   border-radius: 21%;
   cursor: pointer; /*cursor of slider`*/
   -webkit-appearance: none;
+  z-index: 3;
 }
 input[type='range'][orient='vertical']:nth-child(2)::-webkit-slider-thumb {
   position: relative;
@@ -49,6 +68,12 @@ input[type='range'][orient='vertical']:nth-child(2)::-webkit-slider-thumb {
   border-radius: 21%;
   cursor: pointer; /*cursor of slider`*/
   -webkit-appearance: none;
-  z-index: 2;
-  overflow: hidden;
+  z-index: 4;
+}
+
+.uk-slider__input_view_vertical
+  .uk-slider__input
+  .uk-slider__input_handle_min
+  .js-uk-min {
+  z-index: 1;
 }
