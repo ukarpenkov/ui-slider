@@ -1,46 +1,54 @@
 /*vertical variant*/
-
-input[type='range'][orient='vertical'] {
-  overflow: hidden;
-  cursor: pointer;
+.uk-slider__input_view_vertical {
+  position: relative; /* if abs then 2 line together but thumb is not visible*/
+  /* overflow: hidden; */
   -webkit-appearance: none;
   width: 155px; /*height of line*/
+
   background: none;
-  transform: translateY(60px) rotate(270deg);
-  outline: none;
-  position: absolute; /* if abs then 2 line together but thumb is not visible*/
-  z-index: 1;
+  transform: rotate(270deg);
+
+  height: 40px;
 }
 
-input[type='range'][orient='vertical']::-webkit-slider-runnable-track {
+input[type='range'][orient='vertical'] {
+  position: absolute;
+}
+
+input[type='range'][orient='vertical']:nth-child(2)::-webkit-slider-runnable-track {
   position: relative;
-  background: rgb(14, 193, 213); /*color of line*/
-  border: 4px solid rgb(148, 29, 152); /*border of line*/
-  z-index: 1;
+
+  background: purple; /*color of line*/
+  border: 1px solid rgb(148, 29, 152); /*border of line*/
 }
 
+input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-runnable-track {
+  position: relative;
+  cursor: pointer;
+
+  background: none; /*color of line*/
+  border: 1px solid rgb(148, 29, 152); /*border of line*/
+}
 input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-thumb {
   position: relative;
-  width: 20px;
-  z-index: 3;
-  background: rgb(23, 46, 175);
-  transform: rotate(50deg);
-}
 
-input[type='range']::-webkit-slider-thumb {
-  position: relative;
-  -webkit-appearance: none;
-  border: none;
-  height: 15px;
-  width: 15px;
+  background: rgb(78, 201, 16); /*color of handle*/
+  border: 1px solid black; /*border of handle*/
+  height: 10px; /*width of handle*/
+  width: 10px; /*height of handle*/
   border-radius: 21%;
-  background: rgb(143, 201, 16);
-  z-index: 3;
+  cursor: pointer; /*cursor of slider`*/
+  -webkit-appearance: none;
 }
-
-input[type='range']:nth-child(2)::-webkit-slider-runnable-track {
+input[type='range'][orient='vertical']:nth-child(2)::-webkit-slider-thumb {
   position: relative;
-  margin-top: 80px; /*for exp*/
-  background: none;
-  z-index: 3;
+  background: rgb(16, 201, 186); /*color of handle*/
+  border: 1px solid black; /*border of handle*/
+  height: 10px; /*width of handle*/
+  width: 10px; /*height of handle*/
+  border-radius: 21%;
+  cursor: pointer; /*cursor of slider`*/
+  -webkit-appearance: none;
+  z-index: 2;
+  overflow: hidden;
 }

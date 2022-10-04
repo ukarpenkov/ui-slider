@@ -3,7 +3,6 @@
   width: 215px; /*width of line*/
   height: 30px;
   overflow: hidden;
-  cursor: pointer; /*cursor of slider`*/
   -webkit-appearance: none;
   /* -webkit-appearance: slider-vertical; */ /*this is for vertical!*/
   background: none; /*background of all elements`*/
@@ -23,6 +22,7 @@
   width: 10px; /*width of handle*/
   height: 10px; /*height of handle*/
   -webkit-appearance: none;
+  cursor: pointer; /*cursor of slider`*/
 }
 
 .uk-slider__input:nth-child(1)::-webkit-slider-thumb {
