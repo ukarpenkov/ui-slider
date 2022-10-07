@@ -1,21 +1,26 @@
-.uk-slider__input {
+.uk-slider {
+  position: relative;
+  -webkit-transform: rotate(90deg);
+}
+
+input[type='range'][orient='vertical'] {
   position: absolute;
-  width: 30px; /*width of line*/
+  width: 300px; /*width of line*/
   height: 215px;
   overflow: hidden;
-  -webkit-appearance: slider-vertical;
+  -webkit-appearance: none;
 
   /* -webkit-appearance: slider-vertical; */ /*this is for vertical!*/
   background: none; /*background of all elements`*/
 }
 
-.uk-slider__input::-webkit-slider-runnable-track {
-  -webkit-appearance: none !important;
+input[type='range'][orient='vertical']::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
   height: 5px; /*height of line*/
   background: red; /*color of line*/
 }
 
-.uk-slider__input::-webkit-slider-thumb {
+input[type='range'][orient='vertical']::-webkit-slider-thumb {
   position: relative;
   margin-top: -3px; /*position of handle (automatic depend on height of line on -2 pos)*/
   background: rgb(216, 57, 179); /*color of handle*/
@@ -24,10 +29,11 @@
   width: 10px; /*width of handle*/
   height: 10px; /*height of handle*/
   -webkit-appearance: none;
+
   cursor: pointer; /*cursor of slider`*/
 }
 
-.uk-slider__input:nth-child(1)::-webkit-slider-thumb {
+input[type='range']:nth-child(1)[orient='vertical']::-webkit-slider-thumb {
   z-index: 2;
 }
 
