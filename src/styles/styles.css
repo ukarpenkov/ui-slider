@@ -1,79 +1,53 @@
-/*vertical variant*/
-.wrapper {
+.uk-slider__input {
   position: absolute;
-}
-.uk-slider__input_view_vertical {
-  position: absolute; /* if abs then 2 line together but thumb is not visible*/
+  width: 30px; /*width of line*/
+  height: 215px;
   overflow: hidden;
-  -webkit-appearance: none;
-  width: 155px; /*height of line*/
+  -webkit-appearance: slider-vertical;
 
-  background: none;
-  transform: rotate(270deg);
+  /* -webkit-appearance: slider-vertical; */ /*this is for vertical!*/
+  background: none; /*background of all elements`*/
+}
+
+.uk-slider__input::-webkit-slider-runnable-track {
+  -webkit-appearance: none !important;
+  height: 5px; /*height of line*/
+  background: red; /*color of line*/
+}
+
+.uk-slider__input::-webkit-slider-thumb {
+  position: relative;
+  margin-top: -3px; /*position of handle (automatic depend on height of line on -2 pos)*/
+  background: rgb(216, 57, 179); /*color of handle*/
+  border: 1px solid #19007c; /*border of handle*/
+  border-radius: 1px; /*25 - handle is circle; 0 - square*/
+  width: 10px; /*width of handle*/
+  height: 10px; /*height of handle*/
+  -webkit-appearance: none;
+  cursor: pointer; /*cursor of slider`*/
+}
+
+.uk-slider__input:nth-child(1)::-webkit-slider-thumb {
+  z-index: 2;
+}
+
+.uk-slider {
+  position: relative;
+  height: 40px;
   display: inline-block;
-  /* height: 40px; */
 }
 
-input[type='range'][orient='vertical'] {
+.uk-slider__range_value {
+  position: absolute;
+  margin-top: 25px;
+}
+
+.uk-slider__range_value {
   position: relative;
+  display: inline-block;
+}
+.uk-slider__value_block {
+  width: 215px; /*must be equal of block width*/
   display: flex;
-  height: 100%;
-  width: 100%;
-}
-input[type='range'][orient='vertical'] {
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-top: 0px;
-  margin-right: 0px;
-  bottom: 15px;
-}
-
-input[type='range'][orient='vertical']:nth-child(2)::-webkit-slider-runnable-track {
-  position: relative;
-  display: block;
-
-  background: none; /*color of line*/
-  border: 1px solid rgb(148, 29, 152); /*border of line*/
-  width: 100%;
-  height: 100%;
-}
-
-input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-runnable-track {
-  position: relative;
-  display: block;
-  cursor: pointer;
-
-  background: none; /*color of line*/
-  border: 1px solid rgb(148, 29, 152); /*border of line*/
-  width: 100%;
-}
-input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-thumb {
-  position: relative;
-
-  background: rgb(78, 201, 16); /*color of handle*/
-  border: 1px solid black; /*border of handle*/
-  height: 10px; /*width of handle*/
-  width: 10px; /*height of handle*/
-  border-radius: 21%;
-  cursor: pointer; /*cursor of slider`*/
-  -webkit-appearance: none;
-  z-index: 3;
-}
-input[type='range'][orient='vertical']:nth-child(2)::-webkit-slider-thumb {
-  position: relative;
-  background: rgb(16, 201, 186); /*color of handle*/
-  border: 1px solid black; /*border of handle*/
-  height: 10px; /*width of handle*/
-  width: 10px; /*height of handle*/
-  border-radius: 21%;
-  cursor: pointer; /*cursor of slider`*/
-  -webkit-appearance: none;
-  z-index: 4;
-}
-
-.uk-slider__input_view_vertical
-  .uk-slider__input
-  .uk-slider__input_handle_min
-  .js-uk-min {
-  z-index: 1;
+  justify-content: space-between;
 }

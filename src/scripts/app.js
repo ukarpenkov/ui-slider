@@ -94,5 +94,7 @@ console.log('hella');
         $(range_max).html((maxVal * 1000) + ' €');
     }
 
-    $('.uk-slider__input_view_vertical').on('input', rangeInputChangeEventHandler);
+    $('.uk-slider__input').on('input', rangeInputChangeEventHandler);
+    // .uk-slider__input for horiz
+    //.uk-slider__input_view_vertical
 })()
