@@ -51,39 +51,3 @@
   display: flex;
   justify-content: space-between;
 }
-
-/*vertical variant*/
-
-input[type='range'][orient='vertical'] {
-  position: absolute; /* if abs then 2 line together but thumb is not visible*/
-  overflow: hidden;
-  -webkit-appearance: none;
-  width: 155px; /*height of line*/
-  background: none;
-  transform: rotate(270deg);
-  display: inline-block;
-  height: 30%;
-}
-
-input[type='range'][orient='vertical']::-webkit-slider-runnable-track {
-  background: red;
-  height: 10px;
-}
-
-input[type='range'][orient='vertical']::-webkit-slider-thumb {
-  position: relative;
-  margin-top: -4px;
-  background: rgb(173, 16, 201); /*color of handle*/
-  border: 1px solid black; /*border of handle*/
-  height: 20px; /*width of handle*/
-  width: 20px; /*height of handle*/
-  border-radius: 21%;
-  cursor: pointer; /*cursor of slider`*/
-  -webkit-appearance: none;
-}
-input[type='range'][orient='vertical']:nth-child(1)::-webkit-slider-thumb {
-  z-index: 5 !important;
-}
-input[type='range'][orient='vertical']:nth-child(2)::-webkit-slider-thumb {
-  background: rgb(33, 12, 138); /*color of handle*/
-}
