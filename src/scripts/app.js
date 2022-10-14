@@ -70,13 +70,12 @@ console.log('hella');
 // $('div').ukslider('init').ukslider('changeColor', 'yellow').ukslider('update')
 
 
-(function () {
+(function handleRange() {
 
     function rangeInputChangeEventHandler(e) {
         var minBtn = $(this).parent().find('.js-uk-min');
         var maxBtn = $(this).parent().find('.js-uk-max');
         var range_min = $(this).parent().parent().find('.js-uk-range_min');
-        var range_minI = $(this).parent().parent().find('.js-uk-range_min_i');
         var range_max = $(this).parent().parent().find('.js-uk-range_max');
         var minVal = ($(minBtn).val());
         var maxVal = ($(maxBtn).val());
@@ -87,20 +86,43 @@ console.log('hella');
             $(minBtn).val(maxVal - 3);
         }
         var minVal = parseInt($(minBtn).val());
-        $(range_min).html((minVal * 1000) + ' €');
-        $(range_minI).val((minVal * 1000) + ' €');
+        $(range_min).val((minVal * 1000));
         if (maxVal < minVal + 3) {
             $(maxBtn).val(minVal + 3);
         }
         var maxVal = parseInt($(maxBtn).val());
-        $(range_max).html((maxVal * 1000) + ' €');
+        $(range_max).val((maxVal * 1000));
 
-        $(range_minI).on('blur', () => {
-            minVal = range_minI.val
-        })
+
     }
+
+    function rangeChangeWithInputValue(e) {
+        function minValueChange() {
+            var newMinVal = $(this).val() * 1000;
+            $(".js-uk-range_min").val(newMinVal);
+        }
+        function maxValueChange() {
+            var newMaxVal = $(this).val() * 1000;
+            $(".js-uk-range_max").val(newMaxVal);
+        }
+
+        $('.js-uk-min').on('input', minValueChange);
+        $('.js-uk-range_min').on('input', function () {
+            $('.js-uk-min').val($(this).val() / 1000)
+        });
+
+
+        $('.js-uk-max').on('input', maxValueChange);
+        $('.js-uk-range_max').on('input', function () {
+            $('.js-uk-max').val($(this).val() / 1000)
+        });
+
+    }
+
+    rangeChangeWithInputValue()
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler);
     // .uk-slider__input for horiz
     //.uk-slider__input_view_vertical
 })()
+
