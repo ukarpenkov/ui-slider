@@ -73,24 +73,24 @@ console.log('hella');
 (function handleRange() {
 
     function rangeInputChangeEventHandler(e) {
-        var minBtn = $(this).parent().find('.js-uk-min');
-        var maxBtn = $(this).parent().find('.js-uk-max');
-        var range_min = $(this).parent().parent().find('.js-uk-range_min');
-        var range_max = $(this).parent().parent().find('.js-uk-range_max');
-        var minVal = ($(minBtn).val());
-        var maxVal = ($(maxBtn).val());
+        e.stopPropagation()
+        e.preventDefault()
+        var minBtn = $(this).parent().children('.js-uk-min');
+        var maxBtn = $(this).parent().children('.js-uk-max');
+        var range_min = $(this).parent().children('.js-uk-range_min');
+        var range_max = $(this).parent().children('.js-uk-range_max');
+        var minVal = Number($(minBtn).val());
+        var maxVal = Number($(maxBtn).val());
 
 
 
         if (minVal > maxVal - 3) {
             $(minBtn).val(maxVal - 3);
         }
-        var minVal = parseInt($(minBtn).val());
         $(range_min).val((minVal * 1000));
         if (maxVal < minVal + 3) {
             $(maxBtn).val(minVal + 3);
         }
-        var maxVal = parseInt($(maxBtn).val());
         $(range_max).val((maxVal * 1000));
 
 
@@ -102,6 +102,7 @@ console.log('hella');
             var newMinVal = $(this).val() * 1000;
             minVal = newMinVal
             $(".js-uk-range_min").val(minVal);
+
         }
 
         function maxValueChange() {
@@ -113,20 +114,28 @@ console.log('hella');
         $('.js-uk-min').on('input', minValueChange);
         $('.js-uk-range_min').on('input', function () {
             $('.js-uk-min').val($(this).val() / 1000)
-            if ($(this).val() > maxVal) {
-
-                $('.js-uk-range_min').val(minVal)
-            }
         });
 
         $('.js-uk-max').on('input', maxValueChange);
         $('.js-uk-range_max').on('input', function () {
             $('.js-uk-max').val($(this).val() / 1000)
-            if ($(this).val() < minVal) {
-
-                $('.js-uk-range_max').val(maxVal)
-            }
         });
+
+        $('.js-uk-range_min').blur('input', function () {
+            var min = Number($('.js-uk-range_min').val())
+            var max = Number($('.js-uk-range_max').val())
+            if (min > max) {
+                $('.js-uk-range_min').val(Number($('.js-uk-range_max').val()) - 3000)
+            }
+        })
+        $('.js-uk-range_max').blur(function () {
+            var min = Number($('.js-uk-range_min').val())
+            var max = Number($('.js-uk-range_max').val())
+            if (max < min) {
+                $('.js-uk-range_max').val(Number($('.js-uk-range_min').val()) + 3000)
+
+            }
+        })
     }
 
     rangeChangeWithInputValue()
