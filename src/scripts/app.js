@@ -80,9 +80,6 @@ console.log('hella');
         var range_max = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_max');
         var minVal = Number($(minBtn).val());
         var maxVal = Number($(maxBtn).val());
-
-
-
         if (minVal > maxVal - 3) {
             $(minBtn).val(maxVal - 3);
         }
@@ -96,13 +93,13 @@ console.log('hella');
     }
 
     function rangeChangeWithInputValue(e) {
-        var minInputValue = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_min');
 
+        var minInputValue = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_min');
+        var maxInputValue = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_max');
         function minValueChange() {
-            var newMinVal = $(this).val() * 1000;
+            var newMinVal = minInputValue.val() * 1000;
             minVal = newMinVal
             $(".js-uk-range_min").val(minVal);
-
         }
 
         function maxValueChange() {
@@ -112,7 +109,7 @@ console.log('hella');
         }
 
         $('.js-uk-min').on('input', minValueChange);
-        $('.js-uk-range_min').on('input', function () {
+        $(minInputValue).on('input', function () {
             $('.js-uk-min').val($(this).val() / 1000)
         });
 
@@ -138,7 +135,7 @@ console.log('hella');
         })
     }
 
-    rangeChangeWithInputValue()
+    // rangeChangeWithInputValue()
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler);
     // .uk-slider__input for horiz
