@@ -73,12 +73,11 @@ console.log('hella');
 (function handleRange() {
 
     function rangeInputChangeEventHandler(e) {
-        e.stopPropagation()
-        e.preventDefault()
+
         var minBtn = $(this).parent().children('.js-uk-min');
         var maxBtn = $(this).parent().children('.js-uk-max');
-        var range_min = $(this).parent().children('.js-uk-range_min');
-        var range_max = $(this).parent().children('.js-uk-range_max');
+        var range_min = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_min');
+        var range_max = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_max');
         var minVal = Number($(minBtn).val());
         var maxVal = Number($(maxBtn).val());
 
@@ -97,6 +96,7 @@ console.log('hella');
     }
 
     function rangeChangeWithInputValue(e) {
+        var minInputValue = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_min');
 
         function minValueChange() {
             var newMinVal = $(this).val() * 1000;
