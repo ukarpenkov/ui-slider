@@ -80,17 +80,37 @@ console.log('hella');
         var range_max = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_max');
         var minVal = Number($(minBtn).val());
         var maxVal = Number($(maxBtn).val());
+
         if (minVal > maxVal - 3) {
             $(minBtn).val(maxVal - 3);
         }
+
+        $(range_min).change(function () {
+            $(minBtn).val($(this).val() / 1000)
+            if ($(range_min).val() > $(range_max).val() - 1000) {
+                $(minBtn).val(maxVal - 3);
+                $(range_min).val($(range_max).val() - 1000)
+            }
+        });
         $(range_min).val((minVal * 1000));
+
+
         if (maxVal < minVal + 3) {
             $(maxBtn).val(minVal + 3);
         }
+
+        $(range_max).on('input', function () {
+            $(maxBtn).val($(this).val() / 1000)
+        });
+
         $(range_max).val((maxVal * 1000));
 
 
+
+
     }
+
+
 
     function rangeChangeWithInputValue(e) {
 
@@ -138,6 +158,7 @@ console.log('hella');
     // rangeChangeWithInputValue()
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler);
+
     // .uk-slider__input for horiz
     //.uk-slider__input_view_vertical
 })()
