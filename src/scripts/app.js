@@ -99,8 +99,15 @@ console.log('hella');
             $(maxBtn).val(minVal + 3);
         }
 
-        $(range_max).on('input', function () {
+        $(range_max).change(function () {
+            console.log('its change')
             $(maxBtn).val($(this).val() / 1000)
+            if ($(range_max).val() < $(range_min).val() - 1000) {
+                $(maxBtn).val(maxVal + 3);
+                $(range_max).val(Number($(range_min).val()) + 1000)
+                console.log($(range_min).val())
+                console.log($(range_max).val())
+            }
         });
 
         $(range_max).val((maxVal * 1000));
@@ -111,51 +118,6 @@ console.log('hella');
     }
 
 
-
-    function rangeChangeWithInputValue(e) {
-
-        var minInputValue = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_min');
-        var maxInputValue = $(this).parent().parent().children('.uk-slider__value_block').children('.js-uk-range_max');
-        function minValueChange() {
-            var newMinVal = minInputValue.val() * 1000;
-            minVal = newMinVal
-            $(".js-uk-range_min").val(minVal);
-        }
-
-        function maxValueChange() {
-            var newMaxVal = $(this).val() * 1000;
-            maxVal = newMaxVal
-            $(".js-uk-range_max").val(maxVal);
-        }
-
-        $('.js-uk-min').on('input', minValueChange);
-        $(minInputValue).on('input', function () {
-            $('.js-uk-min').val($(this).val() / 1000)
-        });
-
-        $('.js-uk-max').on('input', maxValueChange);
-        $('.js-uk-range_max').on('input', function () {
-            $('.js-uk-max').val($(this).val() / 1000)
-        });
-
-        $('.js-uk-range_min').blur('input', function () {
-            var min = Number($('.js-uk-range_min').val())
-            var max = Number($('.js-uk-range_max').val())
-            if (min > max) {
-                $('.js-uk-range_min').val(Number($('.js-uk-range_max').val()) - 3000)
-            }
-        })
-        $('.js-uk-range_max').blur(function () {
-            var min = Number($('.js-uk-range_min').val())
-            var max = Number($('.js-uk-range_max').val())
-            if (max < min) {
-                $('.js-uk-range_max').val(Number($('.js-uk-range_min').val()) + 3000)
-
-            }
-        })
-    }
-
-    // rangeChangeWithInputValue()
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler);
 
