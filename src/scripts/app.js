@@ -1,7 +1,7 @@
 import "./import-jquery";
 
 
-console.log('hella');
+
 
 // (function ($) {
 
@@ -85,13 +85,16 @@ console.log('hella');
             $(minBtn).val(maxVal - 3);
         }
 
+
         $(range_min).change(function () {
+            console.log('its change')
             $(minBtn).val($(this).val() / 1000)
             if ($(range_min).val() > $(range_max).val() - 1000) {
                 $(minBtn).val(maxVal - 3);
                 $(range_min).val($(range_max).val() - 1000)
             }
         });
+
         $(range_min).val((minVal * 1000));
 
 
@@ -105,21 +108,17 @@ console.log('hella');
             if ($(range_max).val() < $(range_min).val() - 1000) {
                 $(maxBtn).val(maxVal + 3);
                 $(range_max).val(Number($(range_min).val()) + 1000)
-                console.log($(range_min).val())
-                console.log($(range_max).val())
             }
         });
 
         $(range_max).val((maxVal * 1000));
-
-
-
 
     }
 
 
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler);
+
 
     // .uk-slider__input for horiz
     //.uk-slider__input_view_vertical
