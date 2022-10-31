@@ -87,12 +87,14 @@ import "./import-jquery";
 
 
         $(range_min).change(function () {
-            console.log('its change')
+            $(minBtn).val()
             $(minBtn).val($(this).val() / 1000)
             if ($(range_min).val() > $(range_max).val() - 1000) {
                 $(minBtn).val(maxVal - 3);
                 $(range_min).val($(range_max).val() - 1000)
             }
+
+            console.log($(minBtn).val())
         });
 
         $(range_min).val((minVal * 1000));
