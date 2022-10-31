@@ -85,27 +85,22 @@ import "./import-jquery";
             $(minBtn).val(maxVal - 3);
         }
 
-
         $(range_min).change(function () {
-            $(minBtn).val()
+
             $(minBtn).val($(this).val() / 1000)
             if ($(range_min).val() > $(range_max).val() - 1000) {
                 $(minBtn).val(maxVal - 3);
                 $(range_min).val($(range_max).val() - 1000)
             }
 
-            console.log($(minBtn).val())
         });
 
         $(range_min).val((minVal * 1000));
-
-
         if (maxVal < minVal + 3) {
             $(maxBtn).val(minVal + 3);
         }
 
         $(range_max).change(function () {
-            console.log('its change')
             $(maxBtn).val($(this).val() / 1000)
             if ($(range_max).val() < $(range_min).val() - 1000) {
                 $(maxBtn).val(maxVal + 3);
@@ -117,9 +112,8 @@ import "./import-jquery";
 
     }
 
-
-
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler);
+
 
 
     // .uk-slider__input for horiz
