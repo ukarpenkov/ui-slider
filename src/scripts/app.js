@@ -1,5 +1,8 @@
 import "./import-jquery";
+
+
 initSlider('uk-slider__range_orient_vertical')
+
 function initSlider(orientation) {
     let horizontalSlider = $(`<div class="uk-slider__range ${orientation}"> <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="1" max="100" value="1" orient="vertical" /> <input class="uk-slider__input uk-slider__input_handle_max js-uk-max" name="range_1" type="range" min="1" max="100" value="100" orient="vertical" /> </div> </div> <div class="uk-slider__value_block"> <input type="text" value="1000" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" /> <input type="text" value="100000" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max" /> `)
 
