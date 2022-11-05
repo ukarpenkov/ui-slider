@@ -1,10 +1,24 @@
 import "./import-jquery";
 
+class SliderSettings {
+    constructor(orientation, minValue, maxValue) {
+        this.orientation = orientation
+        this.inputsOrientation = orientation
+        this.minValue = minValue
+        this.maxValue = maxValue
+    }
+}
 
-initSlider('uk-slider__range_orient_vertical')
+let settings = new SliderSettings('vertical', 10, 100)
+
+initSlider(settings)
 
 function initSlider(orientation) {
-    let horizontalSlider = $(`<div class="uk-slider__range ${orientation}"> <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="1" max="100" value="1" orient="vertical" /> <input class="uk-slider__input uk-slider__input_handle_max js-uk-max" name="range_1" type="range" min="1" max="100" value="100" orient="vertical" /> </div> </div> <div class="uk-slider__value_block"> <input type="text" value="1000" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" /> <input type="text" value="100000" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max" /> `)
+    if (settings.orientation === 'vertical') {
+        orientation = 'uk-slider__range_orient_vertical'
+        inputsOrientation = 'uk-slider__value_block_orient_vertical'
+    }
+    let horizontalSlider = $(`<div class="uk-slider__range ${orientation}"> <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="1" orient="vertical" /> <input class="uk-slider__input uk-slider__input_handle_max js-uk-max" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="100" orient="vertical" /> </div> </div> <div class="uk-slider__value_block ${inputsOrientation}"> <input type="text" value="1000" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" /> <input type="text" value="100000" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max" /> `)
 
     let verticalSlider = $('<div class="uk-slider__range uk-slider__range_orient_vertical"> <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="1" max="100" value="1" /> <input class="uk-slider__input uk-slider__input_handle_max js-uk-max" name="range_1" type="range" min="1" max="100" value="100" orient="vertical" /> </div> <div class="uk-slider__value_block uk-slider__value_block_orient_vertical" > <input type="text" value="1000" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" /> <input type="text" value="100000" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max" /> </div>')
 
