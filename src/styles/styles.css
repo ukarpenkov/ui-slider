@@ -37,7 +37,7 @@
   margin-top: -2.5px; /*position of handle (automatic depend on height of line on -2 pos)*/
   background: rgb(216, 57, 179); /*color of handle*/
   border: 1px solid #19007c; /*border of handle*/
-  border-radius: 1px; /*25 - handle is circle; 0 - square*/
+  border-radius: 25px; /*25 - handle is circle; 0 - square*/
   width: 10px; /*width of handle*/
   height: 10px; /*height of handle*/
   -webkit-appearance: none;
@@ -77,4 +77,8 @@
 
 .uk-slider__value_block_orient_vertical .uk-slider__range_value_min {
   margin-top: -3px;
+}
+
+.hidden {
+  display: none;
 }

@@ -1,7 +1,8 @@
 import "./import-jquery";
 
 class SliderSettings {
-    constructor(orientation, minValue, maxValue) {
+    constructor(interval, orientation, minValue, maxValue) {
+        this.interval = interval
         this.orientation = orientation
         this.inputsOrientation = orientation
         this.minValue = minValue
@@ -9,11 +10,18 @@ class SliderSettings {
     }
 }
 
-let settings = new SliderSettings('horizontal', 1, 100)
+let settings1 = new SliderSettings('interval', 'horizontal', 1, 100)
+let settings2 = new SliderSettings('interval', 'vertical', 1, 100)
+let settings3 = new SliderSettings('single', 'horizontal', 1, 100)
 
-initSlider(settings)
+initSlider(".id2", settings1)
+initSlider(".id3", settings2)
+initSlider(".id4", settings3)
 
-function initSlider(orientation) {
+
+function initSlider(wrapper, settings) {
+    let orientation
+    let visible
     if (settings.orientation === 'vertical') {
         orientation = 'uk-slider__range_orient_vertical'
         inputsOrientation = 'uk-slider__value_block_orient_vertical'
@@ -21,12 +29,13 @@ function initSlider(orientation) {
         orientation = ''
         inputsOrientation = ''
     }
-    let horizontalSlider = $(`<div class="uk-slider__range ${orientation}"> <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="1" orient="vertical" /> <input class="uk-slider__input uk-slider__input_handle_max js-uk-max" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="100" orient="vertical" /> </div> </div> <div class="uk-slider__value_block ${inputsOrientation}"> <input type="text" value="${settings.minValue}" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" /> <input type="text" value="${settings.maxValue}" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max" /> `)
+    if (settings.interval === 'single') {
+        visible = 'hidden'
+    }
+    let horizontalSlider = $(`<div class="uk-slider__range ${orientation}"> <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="1" orient="vertical" /> <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${visible}" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="100" orient="vertical" /> </div> </div> <div class="uk-slider__value_block ${inputsOrientation}"> <input type="text" value="${settings.minValue}" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" /> <input type="text" value="${settings.maxValue}" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visible}" />`)
 
-    let verticalSlider = $('<div class="uk-slider__range uk-slider__range_orient_vertical"> <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="1" max="100" value="1" /> <input class="uk-slider__input uk-slider__input_handle_max js-uk-max" name="range_1" type="range" min="1" max="100" value="100" orient="vertical" /> </div> <div class="uk-slider__value_block uk-slider__value_block_orient_vertical" > <input type="text" value="1000" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" /> <input type="text" value="100000" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max" /> </div>')
+    $(wrapper).append(horizontalSlider)
 
-    $('body').append(horizontalSlider)
-    // $('body').append(verticalSlider)
 }
 
 (function handleRange() {
@@ -46,7 +55,7 @@ function initSlider(orientation) {
             $(minBtn).val($(range_min).val() / 1000)
             if ($(range_min).val() > $(range_max).val() - 1000) {
                 $(minBtn).val(maxVal - 3);
-                $(range_min).val($(range_max).val() - 1000)
+                $(range_min).val($(range_max).val())
             }
         });
 
