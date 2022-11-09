@@ -28,7 +28,7 @@
 .uk-slider__input::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   height: 5px; /*height of line*/
-  background: red; /*color of line*/
+  background: rgb(0, 255, 213); /*color of line*/
   border-radius: 10px;
 }
 
