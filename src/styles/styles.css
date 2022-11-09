@@ -27,19 +27,19 @@
 
 .uk-slider__input::-webkit-slider-runnable-track {
   -webkit-appearance: none;
-  height: 5px; /*height of line*/
-  background: rgb(0, 255, 213); /*color of line*/
+  height: 3px; /*height of line*/
+  background: #000000; /*color of line*/
   border-radius: 10px;
 }
 
 .uk-slider__input::-webkit-slider-thumb {
   position: relative;
-  margin-top: -2.5px; /*position of handle (automatic depend on height of line on -2 pos)*/
-  background: rgb(216, 57, 179); /*color of handle*/
-  border: 1px solid #19007c; /*border of handle*/
+  margin-top: -6px; /*position of handle (automatic depend on height of line on -2 pos)*/
+  background: #000000; /*color of handle*/
+  border: 1px solid #000000; /*border of handle*/
   border-radius: 25px; /*25 - handle is circle; 0 - square*/
-  width: 10px; /*width of handle*/
-  height: 10px; /*height of handle*/
+  width: 15px; /*width of handle*/
+  height: 15px; /*height of handle*/
   -webkit-appearance: none;
   cursor: pointer; /*cursor of slider`*/
   transition: 3s;
