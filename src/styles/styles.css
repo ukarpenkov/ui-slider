@@ -82,3 +82,31 @@
 .hidden {
   display: none;
 }
+
+.control-panel {
+  display: flex;
+  width: 500px;
+}
+
+.control-panel__text-inputs {
+  display: grid;
+}
+
+.control-panel__checkbox-inputs {
+  display: grid;
+  margin-left: 20px;
+}
+
+.control-panel__checkbox-input {
+  display: inline-block;
+}
+
+.control-panel__checkbox-describe {
+  display: inline-block;
+}
+
+.control-panel__checkbox-item {
+  display: flex;
+  width: 200px;
+  align-items: flex-start;
+}

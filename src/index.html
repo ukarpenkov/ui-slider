@@ -15,20 +15,55 @@
     <h1>Hello, World!</h1>
     <div class="control-panel">
       <div class="control-panel__text-inputs">
-        <input type="text" placeholder="минимум шкалы" />
-        <input type="text" placeholder="максимум шкалы" />
-        <input type="text" placeholder="шаг шкалы" />
-        <input type="text" placeholder="положение первого бегунка" />
-        <input type="text" placeholder="положение второго бегунка" />
+        <input
+          class="control-panel__text-input"
+          type="text"
+          placeholder="min scale value"
+        />
+        <input
+          class="control-panel__text-input"
+          type="text"
+          placeholder="max scale value"
+        />
+        <input
+          class="control-panel__text-input"
+          type="text"
+          placeholder="scale step"
+        />
+        <input
+          class="control-panel__text-input"
+          type="text"
+          placeholder="first slider position"
+        />
+        <input
+          class="control-panel__text-input"
+          type="text"
+          placeholder="second slider position"
+        />
       </div>
       <div class="control-panel__checkbox-inputs">
-        <input type="checkbox" /> <span>вертикальный/горизонтальный</span>
-        <input type="checkbox" /><span>одиночный/диапазон</span>
-        <input type="checkbox" /><span>прогресс-бар показан/скрыт</span>
-        <input type="checkbox" /><span>шкала показана/скрыта</span>
-        <input type="checkbox" /><span
-          >тултип (число над бегунком) показан/скрыт</span
-        >
+        <div class="control-panel__checkbox-item">
+          <input class="control-panel__checkbox-input" type="checkbox" />
+          <span class="control-panel__checkbox-describe"
+            >vertical/horizontal</span
+          >
+        </div>
+        <div class="control-panel__checkbox-item">
+          <input class="control-panel__checkbox-input" type="checkbox" />
+          <span class="control-panel__checkbox-describe">single/range</span>
+        </div>
+        <div class="control-panel__checkbox-item">
+          <input class="control-panel__checkbox-input" type="checkbox" />
+          <span class="control-panel__checkbox-describe">progress-bar</span>
+        </div>
+        <div class="control-panel__checkbox-item">
+          <input class="control-panel__checkbox-input" type="checkbox" />
+          <span class="control-panel__checkbox-describe">scale</span>
+        </div>
+        <div class="control-panel__checkbox-item">
+          <input class="control-panel__checkbox-input" type="checkbox" />
+          <span class="control-panel__checkbox-describe">tooltip</span>
+        </div>
       </div>
     </div>
 
