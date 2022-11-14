@@ -1,16 +1,8 @@
 import "./import-jquery";
+import SliderSettings from "./slider-settings";
+import initSlider from "./view-init-slider";
+import initToolBar from "./view-init-toolbar";
 
-class SliderSettings {
-    constructor(interval, orientation, minValue, maxValue) {
-
-        this.interval = interval
-        this.orientation = orientation
-        this.inputsOrientation = orientation
-        this.minValue = minValue
-        this.maxValue = maxValue
-    }
-
-}
 
 
 let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
@@ -20,28 +12,12 @@ let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 initSlider(".id2", settings1)
 initSlider(".id3", settings2)
 initSlider(".id4", settings3)
+initToolBar('.id2')
+initToolBar('.id3')
+initToolBar('.id4')
 
 
-function initSlider(wrapper, settings) {
-    let orientation
-    let visible
-    if (settings.orientation === 'vertical') {
-        orientation = 'uk-slider__range_orient_vertical'
-        inputsOrientation = 'uk-slider__value_block_orient_vertical'
-    } else {
-        orientation = ''
-        inputsOrientation = ''
-    }
-    if (settings.interval === 'single') {
-        visible = 'hidden'
-    }
-    let horizontalSlider = $(`<div class="uk-slider__range ${orientation}"> <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1"  type="range" min="${settings.minValue}" max="${settings.maxValue}" value="${settings.minValue}" orient="vertical" /> <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${visible}" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="${settings.maxValue}" orient="vertical" /> </div> </div> <div class="uk-slider__value_block ${inputsOrientation}"> <input type="text" value="${settings.minValue}" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" /> <input type="text" value="${settings.maxValue}" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visible}" />`)
-
-    $(wrapper).append(horizontalSlider)
-}
-
-
-(function handleRange() {
+!(function handleRange() {
     function rangeInputChangeEventHandler(e) {
         var minBtn = $(this).parent().children('.js-uk-min');
         var maxBtn = $(this).parent().children('.js-uk-max');
@@ -75,5 +51,3 @@ function initSlider(wrapper, settings) {
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)
     $('.uk-slider__input').trigger('input')
 })()
-
-
