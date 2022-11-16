@@ -1,3 +1,4 @@
+import destroySlider from "./destroy-slider";
 import "./import-jquery";
 import SliderSettings from "./slider-settings";
 import initSlider from "./view-init-slider";
@@ -51,3 +52,17 @@ initToolBar('.id4')
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)
     $('.uk-slider__input').trigger('input')
 })()
+
+let verticalOrHorizontalCheckbox = $("input[name='verticalOrHorizontal']")
+
+let checkboxFunc = () => {
+    if ($(verticalOrHorizontalCheckbox).is(':checked')) {
+        destroySlider(".id3")
+        initSlider(".id3", settings1)
+    } else {
+        destroySlider(".id3")
+        initSlider(".id3", settings2)
+    }
+}
+
+$(verticalOrHorizontalCheckbox).on('input', checkboxFunc)
