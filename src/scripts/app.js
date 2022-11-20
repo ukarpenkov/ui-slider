@@ -21,8 +21,9 @@ initToolBar('.id4')
 
 
 let verticalOrHorizontalCheckbox = $("input[name='verticalOrHorizontal']")
+let singleOrRangeCheckbox = $("input[name='singleOrRange']")
 
-let checkboxFunc = () => {
+let verticalOrHorizontalCheckboxHandler = () => {
     if ($(verticalOrHorizontalCheckbox).is(':checked')) {
         destroySlider(".id3")
         initSlider(".id3", settings1)
@@ -30,6 +31,20 @@ let checkboxFunc = () => {
         destroySlider(".id3")
         initSlider(".id3", settings2)
     }
+
+
 }
 
-$(verticalOrHorizontalCheckbox).on('input', checkboxFunc)
+let singleOrRangeCheckboxHandler = () => {
+    if ($(singleOrRangeCheckbox).is(':checked')) {
+        destroySlider(".id3")
+        initSlider(".id3", settings1)
+    } else {
+        destroySlider(".id3")
+        initSlider(".id3", settings3)
+    }
+}
+
+
+$(verticalOrHorizontalCheckbox).on('input', verticalOrHorizontalCheckboxHandler)
+$(singleOrRangeCheckbox).on('input', singleOrRangeCheckboxHandler)
