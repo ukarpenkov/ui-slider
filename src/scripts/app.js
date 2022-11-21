@@ -37,11 +37,11 @@ let verticalOrHorizontalCheckboxHandler = () => {
 
 let singleOrRangeCheckboxHandler = () => {
     if ($(singleOrRangeCheckbox).is(':checked')) {
-        destroySlider(".id3")
-        initSlider(".id3", settings1)
+        destroySlider(".id4")
+        initSlider(".id4", settings1)
     } else {
-        destroySlider(".id3")
-        initSlider(".id3", settings3)
+        destroySlider(".id4")
+        initSlider(".id4", settings3)
     }
 }
 
