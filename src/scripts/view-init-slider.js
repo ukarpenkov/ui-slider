@@ -15,6 +15,8 @@ function initSlider(wrapper, settings) {
 
     $(wrapper).append(slider)
 
+    let exportSettings = settings
+
     !(function handleRange() {
         function rangeInputChangeEventHandler(e) {
             var minBtn = $(this).parent().children('.js-uk-min');
@@ -49,6 +51,8 @@ function initSlider(wrapper, settings) {
         $('.uk-slider__input').on('input', rangeInputChangeEventHandler)
         $('.uk-slider__input').trigger('input')
     })()
+
+    return exportSettings
 }
 
 

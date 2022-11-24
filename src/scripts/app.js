@@ -10,7 +10,11 @@ let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
 let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
 let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 
-initSlider(".id2", settings1)
+
+
+let slider1 = initSlider(".id2", settings1)
+
+console.log(slider1.orientation)
 initSlider(".id3", settings2)
 initSlider(".id4", settings3)
 initToolBar('.id2')
@@ -60,16 +64,25 @@ function handleToolBar() {
     // var minPosInput = $(this).parent().children('.js-min-pos');
     // var maxPosInput = $(this).parent().children('.js-max-pos');
 
+
+    // let orientationValue = $(this).prev().prev().children().attr("orient").split(' ').shift().toString()
+    // console.log(orientationValue)
     let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
+    let myW = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().find('uk-slider__range').attr("orient")
+
+
     let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().attr("class").split(' ').shift().toString()
+    // let wrap1 = $(wrap).attr("class").split(' ').shift().toString()
+
+
 
     if ($(verticalOrHorizontalCheckbox).is(':checked')) {
+        destroySlider(`.${wrap}`)
+        initSlider(`.${wrap}`, settings2)
 
-        destroySlider(wrap)
-        console.log(wrap)
-
-
-        // initSlider(wrapper, settings2)
+    } else {
+        destroySlider(`.${wrap}`)
+        initSlider(`.${wrap}`, settings1)
     }
 
 
