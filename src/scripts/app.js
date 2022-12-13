@@ -10,19 +10,13 @@ let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
 let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
 let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 
-
-
 let slider1 = initSlider(".id2", settings1)
-
-console.log(slider1.orientation)
-initSlider(".id3", settings2)
-initSlider(".id4", settings3)
-initToolBar('.id2')
-initToolBar('.id3')
-initToolBar('.id4')
-
-
-
+console.log(slider1)
+let slider2 = initSlider(".id3", settings2)
+let slider3 = initSlider(".id4", settings3)
+initToolBar('.js-page-item1')
+initToolBar('.js-page-item2')
+initToolBar('.js-page-item3')
 
 
 // let verticalOrHorizontalCheckbox = $("input[name='verticalOrHorizontal']")
@@ -58,6 +52,7 @@ initToolBar('.id4')
 
 
 function handleToolBar() {
+
     // var minScaleInput = $(this).parent().children('.js-min-scale');
     // var maxScaleInput = $(this).parent().children('.js-max-scale');
     // var scaleStepInput = $(this).parent().children('.js-scale-step');
@@ -68,24 +63,37 @@ function handleToolBar() {
     // let orientationValue = $(this).prev().prev().children().attr("orient").split(' ').shift().toString()
     // console.log(orientationValue)
     let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
-    let myW = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().find('uk-slider__range').attr("orient")
+    let singleOrRangeCheckbox = $(this).find("input[name='singleOrRange']")
+    let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children()
+    let wrapClass = $(wrap).attr("class").split(' ').shift().toString()
+    let slider = $(wrap).children().attr("class").split(' ').toString()
+    console.log(slider)
 
 
-    let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().attr("class").split(' ').shift().toString()
-    // let wrap1 = $(wrap).attr("class").split(' ').shift().toString()
+    // if ($(verticalOrHorizontalCheckbox).is(':checked')) {
+    //     destroySlider(`.${wrapClass}`)
+    //     initSlider(`.${wrapClass}`, { slider1, orientation: 'vertical' })
 
+    // }
+    // if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
+    //     destroySlider(`.${wrapClass}`)
+    //     initSlider(`.${wrapClass}`, { slider1, orientation: 'horizontal' })
+    // }
 
-
-    if ($(verticalOrHorizontalCheckbox).is(':checked')) {
-        destroySlider(`.${wrap}`)
-        initSlider(`.${wrap}`, settings2)
-
-    } else {
-        destroySlider(`.${wrap}`)
-        initSlider(`.${wrap}`, settings1)
-    }
-
+    // if ($(singleOrRangeCheckbox).is(':checked')) {
+    //     destroySlider(`.${wrapClass}`)
+    //     initSlider(`.${wrapClass}`, { slider1, interval: 'interval' })
+    // }
+    // if (!$(singleOrRangeCheckbox).is(':checked')) {
+    //     destroySlider(`.${wrapClass}`)
+    //     initSlider(`.${wrapClass}`, { slider1, interval: 'single' })
+    // }
 
 }
 
+
+
 $('.control-panel').on('input', handleToolBar)
+
+
+
