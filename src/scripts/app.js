@@ -11,7 +11,7 @@ let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
 let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 
 let slider1 = initSlider(".id2", settings1)
-console.log(slider1)
+
 let slider2 = initSlider(".id3", settings2)
 let slider3 = initSlider(".id4", settings3)
 initToolBar('.js-page-item1')
@@ -65,33 +65,50 @@ function handleToolBar() {
     let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
     let singleOrRangeCheckbox = $(this).find("input[name='singleOrRange']")
     let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children()
-    let wrapClass = $(wrap).attr("class").split(' ').shift().toString()
-    let slider = $(wrap).children().attr("class").split(' ').toString()
-    console.log(slider)
+    let slider = ($(wrap).children())[0]
+    let valueBlock = ($(wrap).children())[1]
+    let sliderClassNames = $(wrap).children().attr("class").split(' ')
+    let secondSlider = ($(slider).children())[1]
+    let secondSliderClassNames = $(secondSlider).attr("class").split(' ')
+    let secondValueBlock = ($(valueBlock).children())[1]
+
+    console.log(secondSliderClassNames)
 
 
-    // if ($(verticalOrHorizontalCheckbox).is(':checked')) {
-    //     destroySlider(`.${wrapClass}`)
-    //     initSlider(`.${wrapClass}`, { slider1, orientation: 'vertical' })
 
-    // }
-    // if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
-    //     destroySlider(`.${wrapClass}`)
-    //     initSlider(`.${wrapClass}`, { slider1, orientation: 'horizontal' })
-    // }
 
-    // if ($(singleOrRangeCheckbox).is(':checked')) {
-    //     destroySlider(`.${wrapClass}`)
-    //     initSlider(`.${wrapClass}`, { slider1, interval: 'interval' })
-    // }
-    // if (!$(singleOrRangeCheckbox).is(':checked')) {
-    //     destroySlider(`.${wrapClass}`)
-    //     initSlider(`.${wrapClass}`, { slider1, interval: 'single' })
-    // }
+    if ($(verticalOrHorizontalCheckbox).is(':checked')) {
+        if (sliderClassNames[1] === '') {
+            $(slider).addClass('uk-slider__range_orient_vertical')
+            $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
+
+        } else {
+            $(slider).toggleClass('uk-slider__range_orient_vertical')
+            $(valueBlock).toggleClass('uk-slider__value_block_orient_vertical')
+        }
+        if (sliderClassNames[1] === 'uk-slider__range_orient_vertical') {
+            $(slider).removeClass('uk-slider__range_orient_vertical')
+            $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+        }
+
+    }
+    if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
+        $(slider).removeClass('uk-slider__range_orient_vertical')
+        $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+    }
+
+    if ($(singleOrRangeCheckbox).is(':checked')) {
+        if (secondSliderClassNames[secondSliderClassNames.length - 1] === 'undefined') {
+            $(secondSlider).addClass('hidden')
+            $(secondValueBlock).addClass('hidden')
+        } else {
+            $(secondSlider).toggleClass('hidden')
+            $(secondValueBlock).toggleClass('hidden')
+        }
+    }
+
 
 }
-
-
 
 $('.control-panel').on('input', handleToolBar)
 
