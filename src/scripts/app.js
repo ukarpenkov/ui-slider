@@ -19,36 +19,59 @@ initToolBar('.js-page-item2')
 initToolBar('.js-page-item3')
 
 
-// let verticalOrHorizontalCheckbox = $("input[name='verticalOrHorizontal']")
-// let singleOrRangeCheckbox = $("input[name='singleOrRange']")
+let toolBarHandlers = {
+    verticalOrHorizontalChanger: function changeOrientation() {
+        console.log('work')
+        let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
+        let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children()
+        let slider = ($(wrap).children())[0]
+        let valueBlock = ($(wrap).children())[1]
+        let sliderClassNames = $(wrap).children().attr("class").split(' ')
+        if ($(verticalOrHorizontalCheckbox).is(':checked')) {
+            if (sliderClassNames[1] === '') {
+                $(slider).addClass('uk-slider__range_orient_vertical')
+                $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
 
-// let verticalOrHorizontalCheckboxHandler = () => {
+            } else {
+                $(slider).toggleClass('uk-slider__range_orient_vertical')
+                $(valueBlock).toggleClass('uk-slider__value_block_orient_vertical')
+            }
+            if (sliderClassNames[1] === 'uk-slider__range_orient_vertical') {
+                $(slider).removeClass('uk-slider__range_orient_vertical')
+                $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+            }
+        }
 
-//     if ($(verticalOrHorizontalCheckbox).is(':checked')) {
-//         destroySlider(".id3")
-//         initSlider(".id3", settings1)
-//     } else {
-//         destroySlider(".id3")
-//         initSlider(".id3", settings2)
-//     }
+        if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
+            $(slider).removeClass('uk-slider__range_orient_vertical')
+            $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+        }
+    },
+
+    singleRangeChanger: function changeSingleOrRange() {
+        let singleOrRangeCheckbox = $(this).find("input[name='singleOrRange']")
+        let wrap = $(singleOrRangeCheckbox).parent().parent().parent().parent().children()
+        console.log(wrap)
+        let slider = ($(wrap).children())[0]
+        let valueBlock = ($(wrap).children())[1]
+        let secondSlider = ($(slider).children())[1]
+        let secondSliderClassNames = $(secondSlider).attr("class").split(' ')
+        let secondValueBlock = ($(valueBlock).children())[1]
+
+        if ($(singleOrRangeCheckbox).is(':checked')) {
+            if (secondSliderClassNames[secondSliderClassNames.length - 1] === 'undefined') {
+                $(secondSlider).addClass('hidden')
+                $(secondValueBlock).addClass('hidden')
+            } else {
+                $(secondSlider).toggleClass('hidden')
+                $(secondValueBlock).toggleClass('hidden')
+            }
+        }
 
 
-// }
+    }
+}
 
-// let singleOrRangeCheckboxHandler = () => {
-
-//     if ($(singleOrRangeCheckbox).is(':checked')) {
-//         destroySlider(".id4")
-//         initSlider(".id4", settings1)
-//     } else {
-//         destroySlider(".id4")
-//         initSlider(".id4", settings3)
-//     }
-// }
-
-
-// $(verticalOrHorizontalCheckbox).on('input', verticalOrHorizontalCheckboxHandler)
-// $(singleOrRangeCheckbox).on('input', singleOrRangeCheckboxHandler)
 
 
 function handleToolBar() {
@@ -64,6 +87,8 @@ function handleToolBar() {
     // console.log(orientationValue)
     let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
     let singleOrRangeCheckbox = $(this).find("input[name='singleOrRange']")
+    let progressBarCheckbox = $(this).find("input[name='progressBar']")
+    let scaleCheckbox = $(this).find("input[name='scaleRange']")
     let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children()
     let slider = ($(wrap).children())[0]
     let valueBlock = ($(wrap).children())[1]
@@ -71,10 +96,6 @@ function handleToolBar() {
     let secondSlider = ($(slider).children())[1]
     let secondSliderClassNames = $(secondSlider).attr("class").split(' ')
     let secondValueBlock = ($(valueBlock).children())[1]
-
-    console.log(secondSliderClassNames)
-
-
 
 
     if ($(verticalOrHorizontalCheckbox).is(':checked')) {
@@ -90,8 +111,8 @@ function handleToolBar() {
             $(slider).removeClass('uk-slider__range_orient_vertical')
             $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
         }
-
     }
+
     if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
         $(slider).removeClass('uk-slider__range_orient_vertical')
         $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
@@ -108,9 +129,27 @@ function handleToolBar() {
     }
 
 
+    if ($(progressBarCheckbox).is(':checked')) {
+        $(valueBlock).addClass('hidden')
+    }
+    if (!$(progressBarCheckbox).is(':checked')) {
+        $(valueBlock).removeClass('hidden')
+    }
+
+    if ($(scaleCheckbox).is(':checked')) {
+        $(slider).addClass('hidden')
+    }
+    if (!$(scaleCheckbox).is(':checked')) {
+        $(slider).removeClass('hidden')
+    }
+
+
+
+
 }
 
-$('.control-panel').on('input', handleToolBar)
+$('.control-panel').on('change', toolBarHandlers.verticalOrHorizontalChanger)
+$('.control-panel').on('change', toolBarHandlers.singleRangeChanger)
 
 
 
