@@ -129,11 +129,22 @@
 
 .control-panel__checkbox-inputs {
   display: grid;
-  margin-left: 20px;
+  margin-left: 50px;
 }
 
 .control-panel__checkbox-input {
   display: inline-block;
+  transform: scale(1.8);
+  opacity: 0.9;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.control-panel__label {
+  margin-left: 10px;
+  margin-top: 8px;
+  font-size: 20px;
+  color: #484b4e;
 }
 
 .control-panel__checkbox-describe {
