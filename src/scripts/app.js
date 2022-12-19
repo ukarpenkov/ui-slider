@@ -3,8 +3,12 @@ import SliderSettings from "./slider-settings";
 import initSlider from "./view-init-slider";
 import initToolBar from "./view-init-toolbar";
 import destroySlider from "./destroy-slider";
+import { createStore } from "../createStore";
+import { rootReducer } from "../rootReducer";
 
+const store = createStore(rootReducer, {
 
+})
 
 let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
 let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
@@ -20,6 +24,9 @@ initToolBar('.js-page-item3')
 
 
 let toolBarHandlers = {
+
+
+
     verticalOrHorizontalChanger: function changeOrientation() {
         console.log('work')
         let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
@@ -28,20 +35,13 @@ let toolBarHandlers = {
         let valueBlock = ($(wrap).children())[1]
         let sliderClassNames = $(wrap).children().attr("class").split(' ')
         if ($(verticalOrHorizontalCheckbox).is(':checked')) {
-            if (sliderClassNames[1] === '') {
-                $(slider).addClass('uk-slider__range_orient_vertical')
-                $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
-
-            } else {
-                $(slider).toggleClass('uk-slider__range_orient_vertical')
-                $(valueBlock).toggleClass('uk-slider__value_block_orient_vertical')
-            }
-            if (sliderClassNames[1] === 'uk-slider__range_orient_vertical') {
-                $(slider).removeClass('uk-slider__range_orient_vertical')
-                $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
-            }
+            $(slider).addClass('uk-slider__range_orient_vertical')
+            $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
         }
-
+        else {
+            $(slider).removeClass('uk-slider__range_orient_vertical')
+            $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+        }
         if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
             $(slider).removeClass('uk-slider__range_orient_vertical')
             $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
@@ -59,16 +59,40 @@ let toolBarHandlers = {
         let secondValueBlock = ($(valueBlock).children())[1]
 
         if ($(singleOrRangeCheckbox).is(':checked')) {
-            if (secondSliderClassNames[secondSliderClassNames.length - 1] === 'undefined') {
-                $(secondSlider).addClass('hidden')
-                $(secondValueBlock).addClass('hidden')
-            } else {
-                $(secondSlider).toggleClass('hidden')
-                $(secondValueBlock).toggleClass('hidden')
-            }
+
+            $(secondSlider).addClass('hidden')
+            $(secondValueBlock).addClass('hidden')
+
+        } else {
+            $(secondSlider).removeClass('hidden')
+            $(secondValueBlock).removeClass('hidden')
         }
+    },
 
+    viewProgressBar: function changeVisibleProgressBar() {
+        let progressBarCheckbox = $(this).find("input[name='progressBar']")
+        let wrap = $(progressBarCheckbox).parent().parent().parent().parent().children()
+        let valueBlock = ($(wrap).children())[1]
 
+        if ($(progressBarCheckbox).is(':checked')) {
+            $(valueBlock).addClass('hidden')
+        }
+        else {
+            $(valueBlock).removeClass('hidden')
+        }
+    },
+
+    viewScale: function changeVisibleSlider() {
+        let scaleCheckbox = $(this).find("input[name='scaleRange']")
+        let wrap = $(scaleCheckbox).parent().parent().parent().parent().children()
+        let slider = ($(wrap).children())[0]
+
+        if ($(scaleCheckbox).is(':checked')) {
+            $(slider).addClass('hidden')
+        }
+        else {
+            $(slider).removeClass('hidden')
+        }
     }
 }
 
@@ -150,6 +174,8 @@ function handleToolBar() {
 
 $('.control-panel').on('change', toolBarHandlers.verticalOrHorizontalChanger)
 $('.control-panel').on('change', toolBarHandlers.singleRangeChanger)
+$('.control-panel').on('change', toolBarHandlers.viewProgressBar)
+$('.control-panel').on('change', toolBarHandlers.viewScale)
 
 
 
