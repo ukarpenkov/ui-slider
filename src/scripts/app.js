@@ -24,9 +24,6 @@ initToolBar('.js-page-item3')
 
 
 let toolBarHandlers = {
-
-
-
     verticalOrHorizontalChanger: function changeOrientation() {
         console.log('work')
         let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
@@ -93,7 +90,26 @@ let toolBarHandlers = {
         else {
             $(slider).removeClass('hidden')
         }
-    }
+    },
+
+    minScaleValue: function changeMinScale() {
+        let minScaleInput = $(this).find("input[name='minScale']")
+        let minScaleValue = $(minScaleInput).val()
+        let wrap = $(minScaleInput).parent().parent().parent().children()
+        let valueBlock = (($(wrap).children().children())[2])
+        let minBtn = (($(wrap).children().children())[0])
+        $(valueBlock).val(minScaleValue)
+        $(minBtn).val(minScaleValue)
+    },
+    maxScaleValue: function changeMaxScale() {
+        let minScaleInput = $(this).find("input[name='minScale']")
+        let minScaleValue = $(minScaleInput).val()
+        let wrap = $(minScaleInput).parent().parent().parent().children()
+        let valueBlock = (($(wrap).children().children())[2])
+        let minBtn = (($(wrap).children().children())[0])
+        $(valueBlock).val(minScaleValue)
+        $(minBtn).val(minScaleValue)
+    },
 }
 
 
@@ -166,16 +182,13 @@ function handleToolBar() {
     if (!$(scaleCheckbox).is(':checked')) {
         $(slider).removeClass('hidden')
     }
-
-
-
-
 }
 
 $('.control-panel').on('change', toolBarHandlers.verticalOrHorizontalChanger)
 $('.control-panel').on('change', toolBarHandlers.singleRangeChanger)
 $('.control-panel').on('change', toolBarHandlers.viewProgressBar)
 $('.control-panel').on('change', toolBarHandlers.viewScale)
+$('.control-panel').on('change', toolBarHandlers.minScaleValue)
 
 
 
