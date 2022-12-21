@@ -25,12 +25,10 @@ initToolBar('.js-page-item3')
 
 let toolBarHandlers = {
     verticalOrHorizontalChanger: function changeOrientation() {
-        console.log('work')
         let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
         let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children()
         let slider = ($(wrap).children())[0]
         let valueBlock = ($(wrap).children())[1]
-        let sliderClassNames = $(wrap).children().attr("class").split(' ')
         if ($(verticalOrHorizontalCheckbox).is(':checked')) {
             $(slider).addClass('uk-slider__range_orient_vertical')
             $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
@@ -48,11 +46,9 @@ let toolBarHandlers = {
     singleRangeChanger: function changeSingleOrRange() {
         let singleOrRangeCheckbox = $(this).find("input[name='singleOrRange']")
         let wrap = $(singleOrRangeCheckbox).parent().parent().parent().parent().children()
-        console.log(wrap)
         let slider = ($(wrap).children())[0]
         let valueBlock = ($(wrap).children())[1]
         let secondSlider = ($(slider).children())[1]
-        let secondSliderClassNames = $(secondSlider).attr("class").split(' ')
         let secondValueBlock = ($(valueBlock).children())[1]
 
         if ($(singleOrRangeCheckbox).is(':checked')) {
@@ -91,7 +87,9 @@ let toolBarHandlers = {
             $(slider).removeClass('hidden')
         }
     },
+}
 
+let textInputsHandlers = {
     minScaleValue: function changeMinScale() {
         let minScaleInput = $(this).find("input[name='minScale']")
         let minScaleValue = $(minScaleInput).val()
@@ -100,95 +98,36 @@ let toolBarHandlers = {
         let minBtn = (($(wrap).children().children())[0])
         $(valueBlock).val(minScaleValue)
         $(minBtn).val(minScaleValue)
+
     },
     maxScaleValue: function changeMaxScale() {
-        let minScaleInput = $(this).find("input[name='minScale']")
-        let minScaleValue = $(minScaleInput).val()
-        let wrap = $(minScaleInput).parent().parent().parent().children()
-        let valueBlock = (($(wrap).children().children())[2])
-        let minBtn = (($(wrap).children().children())[0])
-        $(valueBlock).val(minScaleValue)
-        $(minBtn).val(minScaleValue)
+        let maxScaleInput = $(this).find("input[name='maxScale']")
+        let maxScaleValue = $(maxScaleInput).val()
+        let wrap = $(maxScaleInput).parent().parent().parent().children()
+        let valueBlock = (($(wrap).children().children())[3])
+        let maxBtn = (($(wrap).children().children())[1])
+        $(valueBlock).val(maxScaleValue)
+        $(maxBtn).val(maxScaleValue)
     },
-}
+    scaleStepValue: function changeScaleStep() {
+        let scaleStepInput = $(this).find("input[name='scaleStep']")
+        let wrap = $(scaleStepInput).parent().parent().parent().children()
+        let slider = ($(wrap).children())[0]
+        let minSlider = ($(slider).children())[0]
+        let sliderStep = $(minSlider).attr('step')
+        console.log(minSlider, sliderStep)
+        $(minSlider).attr('step', scaleStepInput.val())
 
-
-
-function handleToolBar() {
-
-    // var minScaleInput = $(this).parent().children('.js-min-scale');
-    // var maxScaleInput = $(this).parent().children('.js-max-scale');
-    // var scaleStepInput = $(this).parent().children('.js-scale-step');
-    // var minPosInput = $(this).parent().children('.js-min-pos');
-    // var maxPosInput = $(this).parent().children('.js-max-pos');
-
-
-    // let orientationValue = $(this).prev().prev().children().attr("orient").split(' ').shift().toString()
-    // console.log(orientationValue)
-    let verticalOrHorizontalCheckbox = $(this).find("input[name='verticalOrHorizontal']");
-    let singleOrRangeCheckbox = $(this).find("input[name='singleOrRange']")
-    let progressBarCheckbox = $(this).find("input[name='progressBar']")
-    let scaleCheckbox = $(this).find("input[name='scaleRange']")
-    let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children()
-    let slider = ($(wrap).children())[0]
-    let valueBlock = ($(wrap).children())[1]
-    let sliderClassNames = $(wrap).children().attr("class").split(' ')
-    let secondSlider = ($(slider).children())[1]
-    let secondSliderClassNames = $(secondSlider).attr("class").split(' ')
-    let secondValueBlock = ($(valueBlock).children())[1]
-
-
-    if ($(verticalOrHorizontalCheckbox).is(':checked')) {
-        if (sliderClassNames[1] === '') {
-            $(slider).addClass('uk-slider__range_orient_vertical')
-            $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
-
-        } else {
-            $(slider).toggleClass('uk-slider__range_orient_vertical')
-            $(valueBlock).toggleClass('uk-slider__value_block_orient_vertical')
-        }
-        if (sliderClassNames[1] === 'uk-slider__range_orient_vertical') {
-            $(slider).removeClass('uk-slider__range_orient_vertical')
-            $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
-        }
-    }
-
-    if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
-        $(slider).removeClass('uk-slider__range_orient_vertical')
-        $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
-    }
-
-    if ($(singleOrRangeCheckbox).is(':checked')) {
-        if (secondSliderClassNames[secondSliderClassNames.length - 1] === 'undefined') {
-            $(secondSlider).addClass('hidden')
-            $(secondValueBlock).addClass('hidden')
-        } else {
-            $(secondSlider).toggleClass('hidden')
-            $(secondValueBlock).toggleClass('hidden')
-        }
-    }
-
-
-    if ($(progressBarCheckbox).is(':checked')) {
-        $(valueBlock).addClass('hidden')
-    }
-    if (!$(progressBarCheckbox).is(':checked')) {
-        $(valueBlock).removeClass('hidden')
-    }
-
-    if ($(scaleCheckbox).is(':checked')) {
-        $(slider).addClass('hidden')
-    }
-    if (!$(scaleCheckbox).is(':checked')) {
-        $(slider).removeClass('hidden')
-    }
+    },
 }
 
 $('.control-panel').on('change', toolBarHandlers.verticalOrHorizontalChanger)
 $('.control-panel').on('change', toolBarHandlers.singleRangeChanger)
 $('.control-panel').on('change', toolBarHandlers.viewProgressBar)
 $('.control-panel').on('change', toolBarHandlers.viewScale)
-$('.control-panel').on('change', toolBarHandlers.minScaleValue)
+$('.control-panel').on('change', textInputsHandlers.minScaleValue)
+$('.control-panel').on('change', textInputsHandlers.maxScaleValue)
+$('.control-panel').on('change', textInputsHandlers.scaleStepValue)
 
 
 
