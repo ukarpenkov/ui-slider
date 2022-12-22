@@ -5,8 +5,8 @@ function initToolBar(wrapper) {
     <input class="control-panel__text-input js-min-scale" type="text" placeholder="min scale value" name="minScale"/>
     <input class="control-panel__text-input js-max-scale" type="text" placeholder="max scale value" name="maxScale" />
     <input class="control-panel__text-input js-scale-step" type="text" placeholder="scale step" name="scaleStep"/>
-    <input class="control-panel__text-input js-min-pos" type="text" placeholder="first slider position" />
-    <input class="control-panel__text-input js-max-pos" type="text" placeholder="second slider position" />
+    <input class="control-panel__text-input js-min-pos" type="text" placeholder="first slider position" name="minPosition"/>
+    <input class="control-panel__text-input js-max-pos" type="text" placeholder="second slider position" name="maxPosition"/>
     </div>
     <div class="control-panel__checkbox-inputs">
     <div class="control-panel__checkbox-item">

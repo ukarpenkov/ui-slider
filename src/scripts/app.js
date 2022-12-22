@@ -5,6 +5,7 @@ import initToolBar from "./view-init-toolbar";
 import destroySlider from "./destroy-slider";
 import { createStore } from "../createStore";
 import { rootReducer } from "../rootReducer";
+import { changeMaxPos, changeMaxScale, changeMinPos, changeMinScale, changeOrientation, changeScaleStep, changeSingleOrRange, changeVisibleProgressBar, changeVisibleSlider } from "./toolbar-handlers";
 
 const store = createStore(rootReducer, {
 
@@ -89,45 +90,20 @@ let toolBarHandlers = {
     },
 }
 
-let textInputsHandlers = {
-    minScaleValue: function changeMinScale() {
-        let minScaleInput = $(this).find("input[name='minScale']")
-        let minScaleValue = $(minScaleInput).val()
-        let wrap = $(minScaleInput).parent().parent().parent().children()
-        let valueBlock = (($(wrap).children().children())[2])
-        let minBtn = (($(wrap).children().children())[0])
-        $(valueBlock).val(minScaleValue)
-        $(minBtn).val(minScaleValue)
 
-    },
-    maxScaleValue: function changeMaxScale() {
-        let maxScaleInput = $(this).find("input[name='maxScale']")
-        let maxScaleValue = $(maxScaleInput).val()
-        let wrap = $(maxScaleInput).parent().parent().parent().children()
-        let valueBlock = (($(wrap).children().children())[3])
-        let maxBtn = (($(wrap).children().children())[1])
-        $(valueBlock).val(maxScaleValue)
-        $(maxBtn).val(maxScaleValue)
-    },
-    scaleStepValue: function changeScaleStep() {
-        let scaleStepInput = $(this).find("input[name='scaleStep']")
-        let wrap = $(scaleStepInput).parent().parent().parent().children()
-        let slider = ($(wrap).children())[0]
-        let minSlider = ($(slider).children())[0]
-        let sliderStep = $(minSlider).attr('step')
-        console.log(minSlider, sliderStep)
-        $(minSlider).attr('step', scaleStepInput.val())
+$("input[name='minScale']").on('change', changeMinScale)
+$("input[name='maxScale']").on('change', changeMaxScale)
+$("input[name='minPosition']").on('change', changeMinPos)
+$("input[name='maxPosition']").on('change', changeMaxPos)
+$("input[name='scaleStep']").on('change', changeScaleStep)
 
-    },
-}
 
-$('.control-panel').on('change', toolBarHandlers.verticalOrHorizontalChanger)
-$('.control-panel').on('change', toolBarHandlers.singleRangeChanger)
-$('.control-panel').on('change', toolBarHandlers.viewProgressBar)
-$('.control-panel').on('change', toolBarHandlers.viewScale)
-$('.control-panel').on('change', textInputsHandlers.minScaleValue)
-$('.control-panel').on('change', textInputsHandlers.maxScaleValue)
-$('.control-panel').on('change', textInputsHandlers.scaleStepValue)
+$("input[name='verticalOrHorizontal']").on('change', changeOrientation)
+$("input[name='singleOrRange']").on('change', changeSingleOrRange)
+$("input[name='progressBar']").on('change', changeVisibleProgressBar)
+$("input[name='scaleRange']").on('change', changeVisibleSlider)
+
+
 
 
 
