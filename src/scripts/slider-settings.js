@@ -1,4 +1,3 @@
-
 class SliderSettings {
     constructor(interval, orientation, minValue, maxValue) {
         this.interval = interval

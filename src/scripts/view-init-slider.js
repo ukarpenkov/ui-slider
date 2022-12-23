@@ -65,5 +65,4 @@ function initSlider(wrapper, settings) {
     return exportSettings
 }
 
-
 export default initSlider

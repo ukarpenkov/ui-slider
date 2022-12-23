@@ -2,11 +2,11 @@ function initToolBar(wrapper) {
     let toolBar = $(`
     <div class="control-panel"> 
     <div class="control-panel__text-inputs">
-    <input class="control-panel__text-input js-min-scale" type="text" placeholder="min scale value" name="minScale"/>
-    <input class="control-panel__text-input js-max-scale" type="text" placeholder="max scale value" name="maxScale" />
-    <input class="control-panel__text-input js-scale-step" type="text" placeholder="scale step" name="scaleStep"/>
-    <input class="control-panel__text-input js-min-pos" type="text" placeholder="first slider position" name="minPosition"/>
-    <input class="control-panel__text-input js-max-pos" type="text" placeholder="second slider position" name="maxPosition"/>
+    <input class="control-panel__text-input js-min-scale" type="number" placeholder="min scale value" name="minScale"/>
+    <input class="control-panel__text-input js-max-scale" type="number" placeholder="max scale value" name="maxScale" />
+    <input class="control-panel__text-input js-scale-step" type="number" placeholder="scale step" name="scaleStep"/>
+    <input class="control-panel__text-input js-min-pos" type="number" placeholder="first slider position" name="minPosition"/>
+    <input class="control-panel__text-input js-max-pos" type="number" placeholder="second slider position" name="maxPosition"/>
     </div>
     <div class="control-panel__checkbox-inputs">
     <div class="control-panel__checkbox-item">
@@ -24,10 +24,6 @@ function initToolBar(wrapper) {
     <div class="control-panel__checkbox-item">
     <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
     <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
-    </div>
-    <div class="control-panel__checkbox-item">
-    <input class="control-panel__checkbox-input" type="checkbox" name='toolTip' />
-    <label for="toolTip" data-onlabel="on" data-offlabel="off" class="control-panel__label">tooltip</label>
     </div>
     </div>
     </div>`)
