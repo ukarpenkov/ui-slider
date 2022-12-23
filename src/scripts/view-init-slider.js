@@ -1,6 +1,7 @@
 function initSlider(wrapper, settings) {
     let orientation
     let visible
+    let inputsOrientation
     if (settings.orientation === 'vertical') {
         orientation = 'uk-slider__range_orient_vertical'
         inputsOrientation = 'uk-slider__value_block_orient_vertical'

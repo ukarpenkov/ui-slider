@@ -8,10 +8,9 @@ let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
 let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
 let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 
-let slider1 = initSlider(".id2", settings1)
-
-let slider2 = initSlider(".id3", settings2)
-let slider3 = initSlider(".id4", settings3)
+initSlider(".id2", settings1)
+initSlider(".id3", settings2)
+initSlider(".id4", settings3)
 
 initToolBar('.js-page-item1')
 initToolBar('.js-page-item2')
