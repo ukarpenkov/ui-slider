@@ -179,5 +179,33 @@ label {
   width: 100%;
   height: 300px;
   margin-top: 50px;
-  display: flex;
+}
+
+@media (min-device-width: 320px) and (max-device-width: 950px) {
+  .uk-slider__input::-webkit-slider-thumb {
+    position: relative;
+    margin-top: -14px; /*position of handle (automatic depend on height of line on -2 pos)*/
+    background: #000000; /*color of handle*/
+    border: 1px solid #000000; /*border of handle*/
+    border-radius: 25px; /*25 - handle is circle; 0 - square*/
+    width: 30px; /*width of handle*/
+    height: 30px; /*height of handle*/
+    -webkit-appearance: none;
+    cursor: pointer; /*cursor of slider`*/
+    transition: 3s;
+  }
+
+  .uk-slider__value_block_orient_vertical {
+    height: 300px;
+    align-content: space-between;
+    margin-left: 27px;
+    display: grid;
+  }
+
+  .page-item {
+    display: grid;
+    width: 100%;
+    height: 800px;
+    margin-top: 50px;
+  }
 }
