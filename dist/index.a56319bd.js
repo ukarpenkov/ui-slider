@@ -560,7 +560,7 @@ $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleO
 $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
 $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
 
-},{"./import-jquery":"b8jIZ","./slider-settings":"eoF3h","./view-init-slider":"a5UpW","./view-init-toolbar":"fR6aM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./toolbar-handlers":"2QdLx"}],"b8jIZ":[function(require,module,exports) {
+},{"./import-jquery":"b8jIZ","./slider-settings":"gznSp","./view-init-slider":"a5UpW","./view-init-toolbar":"fR6aM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./toolbar-handlers":"cBPKI"}],"b8jIZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7356,7 +7356,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"eoF3h":[function(require,module,exports) {
+},{}],"gznSp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class SliderSettings {
@@ -7468,7 +7468,7 @@ function initToolBar(wrapper) {
 }
 exports.default = initToolBar;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2QdLx":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7482,29 +7482,31 @@ parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgr
 parcelHelpers.export(exports, "changeVisibleSlider", ()=>changeVisibleSlider);
 function changeMinScale() {
     let minScaleInput = $(this);
-    let minScaleValue = $(minScaleInput).val();
+    let minScaleValue = Number($(minScaleInput).val());
     let wrap = $(minScaleInput).parent().parent().parent().children();
     let slider1 = $(wrap).children().children()[0];
     let slider2 = $(wrap).children().children()[1];
     let valueBlock = $(wrap).children().children()[2];
+    let currentValue = Number($(valueBlock).val());
     $(slider1).attr("min", minScaleValue);
     $(slider2).attr("min", minScaleValue);
-    $(valueBlock).val() < minScaleValue && $(valueBlock).val(minScaleValue);
+    currentValue < minScaleValue && $(valueBlock).val(minScaleValue);
 }
 function changeMaxScale() {
     let maxScaleInput = $(this);
-    let maxScaleValue = $(maxScaleInput).val();
+    let maxScaleValue = Number($(maxScaleInput).val());
     let wrap = $(maxScaleInput).parent().parent().parent().children();
     let slider1 = $(wrap).children().children()[0];
     let slider2 = $(wrap).children().children()[1];
     let valueBlock = $(wrap).children().children()[3];
+    let currentValue = Number($(valueBlock).val());
     $(slider1).attr("max", maxScaleValue);
     $(slider2).attr("max", maxScaleValue);
-    $(valueBlock).val() > maxScaleValue && $(valueBlock).val(maxScaleValue);
+    currentValue > maxScaleValue && $(valueBlock).val(maxScaleValue);
 }
 function changeMinPos() {
     let minPositionInput = $(this);
-    let minPosValue = $(minPositionInput).val();
+    let minPosValue = Number($(minPositionInput).val());
     let wrap = $(minPositionInput).parent().parent().parent().children();
     let valueBlock = $(wrap).children().children()[2];
     let minBtn = $(wrap).children().children()[0];
@@ -7513,7 +7515,7 @@ function changeMinPos() {
 }
 function changeMaxPos() {
     let maxPositionInput = $(this);
-    let maxPosValue = $(maxPositionInput).val();
+    let maxPosValue = Number($(maxPositionInput).val());
     let wrap = $(maxPositionInput).parent().parent().parent().children();
     let valueBlock = $(wrap).children().children()[3];
     let maxBtn = $(wrap).children().children()[1];
@@ -7522,12 +7524,11 @@ function changeMaxPos() {
 }
 function changeScaleStep() {
     let scaleStepInput = $(this);
+    let scaleStepInputValue = Number(scaleStepInput.val());
     let wrap = $(scaleStepInput).parent().parent().parent().children();
     let slider = $(wrap).children()[0];
     let minSlider = $(slider).children()[0];
-    let sliderStep = $(minSlider).attr("step");
-    console.log(minSlider, sliderStep);
-    $(minSlider).attr("step", scaleStepInput.val());
+    $(minSlider).attr("step", scaleStepInputValue);
 }
 function changeOrientation() {
     let verticalOrHorizontalCheckbox = $(this);
