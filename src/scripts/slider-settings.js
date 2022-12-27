@@ -8,4 +8,5 @@ class SliderSettings {
     }
 }
 
+
 export default SliderSettings
