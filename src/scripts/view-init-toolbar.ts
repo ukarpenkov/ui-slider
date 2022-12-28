@@ -1,5 +1,5 @@
-function initToolBar(wrapper) {
-    let toolBar = $(`
+function initToolBar(wrapper: string): void {
+  let toolBar: JQuery<HTMLElement> = $(`
     <div class="control-panel"> 
     <div class="control-panel__text-inputs">
     <input class="control-panel__text-input js-min-scale" type="number" placeholder="min scale value" name="minScale"/>
@@ -28,8 +28,7 @@ function initToolBar(wrapper) {
     </div>
     </div>`)
 
-    $(wrapper).append(toolBar)
+  $(wrapper).append(toolBar)
 }
-
 
 export default initToolBar

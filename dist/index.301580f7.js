@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"8rGNb":[function(require,module,exports) {
+})({"jVJxO":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "cf6eb48aa56319bd";
+module.bundle.HMR_BUNDLE_ID = "fd20d312301580f7";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -531,7 +531,7 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"bAabt":[function(require,module,exports) {
+},{}],"lAnY0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _importJquery = require("./import-jquery");
 var _sliderSettings = require("./slider-settings");
@@ -560,7 +560,7 @@ $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleO
 $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
 $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
 
-},{"./import-jquery":"b8jIZ","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./toolbar-handlers":"cBPKI"}],"b8jIZ":[function(require,module,exports) {
+},{"./import-jquery":"b8jIZ","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b8jIZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7577,6 +7577,6 @@ function changeVisibleSlider() {
     else $(slider).removeClass("hidden");
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8rGNb","bAabt"], "bAabt", "parcelRequirec06f")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
-//# sourceMappingURL=index.a56319bd.js.map
+//# sourceMappingURL=index.301580f7.js.map

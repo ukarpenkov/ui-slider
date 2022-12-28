@@ -1,16 +1,26 @@
-import "./import-jquery";
-import SliderSettings from "./slider-settings";
-import initSlider from "./view-init-slider";
-import initToolBar from "./view-init-toolbar";
-import { changeMaxPos, changeMaxScale, changeMinPos, changeMinScale, changeOrientation, changeScaleStep, changeSingleOrRange, changeVisibleProgressBar, changeVisibleSlider } from "./toolbar-handlers";
+import './import-jquery'
+import SliderSettings from './slider-settings'
+import initSlider from './view-init-slider'
+import initToolBar from './view-init-toolbar'
+import {
+  changeMaxPos,
+  changeMaxScale,
+  changeMinPos,
+  changeMinScale,
+  changeOrientation,
+  changeScaleStep,
+  changeSingleOrRange,
+  changeVisibleProgressBar,
+  changeVisibleSlider,
+} from './toolbar-handlers'
 
 let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
 let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
 let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 
-initSlider(".id2", settings1)
-initSlider(".id3", settings2)
-initSlider(".id4", settings3)
+initSlider('.id2', settings1)
+initSlider('.id3', settings2)
+initSlider('.id4', settings3)
 
 initToolBar('.js-page-item1')
 initToolBar('.js-page-item2')
@@ -26,8 +36,3 @@ $("input[name='verticalOrHorizontal']").on('change', changeOrientation)
 $("input[name='singleOrRange']").on('change', changeSingleOrRange)
 $("input[name='progressBar']").on('change', changeVisibleProgressBar)
 $("input[name='scaleRange']").on('change', changeVisibleSlider)
-
-
-
-
-
