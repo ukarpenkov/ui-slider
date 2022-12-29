@@ -560,7 +560,7 @@ $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleO
 $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
 $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
 
-},{"./import-jquery":"b8jIZ","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b8jIZ":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
