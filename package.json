@@ -17,6 +17,7 @@
   "devDependencies": {
     "@parcel/compressor-brotli": "^2.7.0",
     "@parcel/compressor-gzip": "^2.7.0",
+    "@types/jquery": "^3.5.14",
     "parcel": "^2.7.0"
   }
 }
