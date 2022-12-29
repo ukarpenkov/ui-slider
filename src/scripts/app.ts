@@ -36,3 +36,14 @@ $("input[name='verticalOrHorizontal']").on('change', changeOrientation)
 $("input[name='singleOrRange']").on('change', changeSingleOrRange)
 $("input[name='progressBar']").on('change', changeVisibleProgressBar)
 $("input[name='scaleRange']").on('change', changeVisibleSlider)
+
+let verticalCheckedCheckbox: jQuery<HTMLElement> = $(
+  'input[name="verticalOrHorizontal"]'
+)[1]
+verticalCheckedCheckbox.checked = true
+
+let singleCheckedCheckbox: jQuery<HTMLElement> = $(
+  "input[name='singleOrRange']"
+)[2]
+
+singleCheckedCheckbox.checked = true

@@ -559,6 +559,10 @@ $("input[name='verticalOrHorizontal']").on("change", (0, _toolbarHandlers.change
 $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleOrRange));
 $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
 $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
+let verticalCheckedCheckbox = $('input[name="verticalOrHorizontal"]')[1];
+verticalCheckedCheckbox.checked = true;
+let singleCheckedCheckbox = $("input[name='singleOrRange']")[2];
+singleCheckedCheckbox.checked = true;
 
 },{"./import-jquery":"kmOly","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
