@@ -90,7 +90,7 @@ input, label {
 }
 
 .control-panel {
-  width: 400px;
+  width: 456px;
   justify-content: flex-end;
   align-items: baseline;
   margin-left: 600px;
@@ -199,7 +199,7 @@ input, label {
 
   .page-item {
     width: 100%;
-    height: 800px;
+    height: 300px;
     margin-top: 50px;
     display: grid;
   }

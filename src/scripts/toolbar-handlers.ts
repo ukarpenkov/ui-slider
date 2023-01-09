@@ -42,7 +42,16 @@ export function changeMinPos(): void {
     .children()
   let valueBlock: HTMLElement = $(wrap).children().children()[2]
   let minBtn: HTMLElement = $(wrap).children().children()[0]
+  let maxBtn: HTMLElement = $(wrap).children().children()[1]
   $(valueBlock).val(minPosValue)
+  if ($(valueBlock).val() > $(maxBtn).val()) {
+    $(valueBlock).val($(maxBtn).val())
+    $(minPositionInput).val($(maxBtn).val())
+  }
+  if ($(valueBlock).val() < 0) {
+    $(valueBlock).val(1)
+    $(minPositionInput).val(1)
+  }
   $(minBtn).val(minPosValue)
 }
 
@@ -55,8 +64,18 @@ export function changeMaxPos(): void {
     .parent()
     .children()
   let valueBlock: HTMLElement = $(wrap).children().children()[3]
+  let minBtn: HTMLElement = $(wrap).children().children()[0]
   let maxBtn: HTMLElement = $(wrap).children().children()[1]
   $(valueBlock).val(maxPosValue)
+  if ($(valueBlock).val() < $(minBtn).val()) {
+    $(valueBlock).val($(minBtn).val())
+    $(maxPositionInput).val($(minBtn).val())
+  }
+  if ($(valueBlock).val() < 0) {
+    $(valueBlock).val(1)
+    $(minPositionInput).val(1)
+  }
+
   $(maxBtn).val(maxPosValue)
 }
 
