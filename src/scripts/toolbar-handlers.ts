@@ -47,6 +47,7 @@ export function changeMinPos(): void {
   if ($(valueBlock).val() > $(maxBtn).val()) {
     $(valueBlock).val($(maxBtn).val())
     $(minPositionInput).val($(maxBtn).val())
+    $(minBtn).val($(maxBtn).val())
   }
   if ($(valueBlock).val() < 0) {
     $(valueBlock).val(1)
@@ -66,16 +67,23 @@ export function changeMaxPos(): void {
   let valueBlock: HTMLElement = $(wrap).children().children()[3]
   let minBtn: HTMLElement = $(wrap).children().children()[0]
   let maxBtn: HTMLElement = $(wrap).children().children()[1]
-  $(valueBlock).val(maxPosValue)
+  let maxValue = Number($(wrap).find('.js-uk-max').attr('value'))
   if ($(valueBlock).val() < $(minBtn).val()) {
     $(valueBlock).val($(minBtn).val())
     $(maxPositionInput).val($(minBtn).val())
+    $(maxBtn).val($(minBtn).val())
   }
-  if ($(valueBlock).val() < 0) {
+  if ($(maxPositionInput).val() < 0) {
     $(valueBlock).val(1)
-    $(minPositionInput).val(1)
+    maxPosValue = 1
+    $(maxPositionInput).val(1)
   }
-
+  if ($(maxPositionInput).val() > maxValue) {
+    $(valueBlock).val(maxValue)
+    maxPosValue = maxValue
+    $(maxPositionInput).val(maxValue)
+  }
+  $(valueBlock).val(maxPosValue)
   $(maxBtn).val(maxPosValue)
 }
 
