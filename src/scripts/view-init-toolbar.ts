@@ -2,11 +2,11 @@ function initToolBar(wrapper: string): void {
   let toolBar: JQuery<HTMLElement> = $(`
     <div class="control-panel"> 
     <div class="control-panel__text-inputs">
-    <input class="control-panel__text-input js-min-scale" type="number" placeholder="min scale value" name="minScale"/>
-    <input class="control-panel__text-input js-max-scale" type="number" placeholder="max scale value" name="maxScale" />
-    <input class="control-panel__text-input js-scale-step" type="number" placeholder="scale step" name="scaleStep"/>
-    <input class="control-panel__text-input js-min-pos" type="number" placeholder="first slider position" name="minPosition"/>
-    <input class="control-panel__text-input js-max-pos" type="number" placeholder="second slider position" name="maxPosition"/>
+    <input class="control-panel__text-input js-min-scale" type="number" min=0 placeholder="min scale value" name="minScale"/>
+    <input class="control-panel__text-input js-max-scale" type="number" min=0 placeholder="max scale value" name="maxScale" />
+    <input class="control-panel__text-input js-scale-step" type="number" min=0 placeholder="scale step" name="scaleStep"/>
+    <input class="control-panel__text-input js-min-pos" type="number" min=0 placeholder="first slider position" name="minPosition"/>
+    <input class="control-panel__text-input js-max-pos" type="number" min=0 placeholder="second slider position" name="maxPosition"/>
     </div>
     <div class="control-panel__checkbox-inputs">
     <div class="control-panel__checkbox-item">

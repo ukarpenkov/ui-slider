@@ -1,6 +1,7 @@
 export function changeMinScale(): void {
   let minScaleInput: JQuery<object> = $(this)
   let minScaleValue: number = Number($(minScaleInput).val())
+  let maxScaleInput: number = $(minScaleInput).next()
   let wrap: JQuery<object> = $(minScaleInput)
     .parent()
     .parent()
@@ -10,12 +11,18 @@ export function changeMinScale(): void {
   let slider2: HTMLElement = $(wrap).children().children()[1]
   let valueBlock: HTMLElement = $(wrap).children().children()[2]
   let currentValue: number = Number($(valueBlock).val())
-  console.log($(minScaleInput).next().attr('max'))
-  // if (minScaleValue > $(minScaleInput).next().val()) {
-  //   minScaleValue = 0
-  //   minScaleInput.val(0)
-  //   console.log('Миниальное значение не может быть выше максимального')
-  // }
+  let maxBtn: HTMLElement = $(wrap).children().children()[1]
+  let minBtn: HTMLElement = $(wrap).children().children()[0]
+  if (minScaleValue < 0) {
+    minScaleValue = 0
+    $(minScaleInput).val(0)
+  }
+  $(maxScaleInput).val($(maxBtn).val())
+  if (minScaleValue > maxScaleInput.val()) {
+    minScaleValue = maxScaleInput.val() - 3
+    $(minScaleInput).val(maxScaleInput.val() - 3)
+  }
+
   $(slider1).attr('min', minScaleValue)
   $(slider2).attr('min', minScaleValue)
   currentValue < minScaleValue ? $(valueBlock).val(minScaleValue) : null
@@ -33,8 +40,10 @@ export function changeMaxScale(): void {
   let slider2: HTMLElement = $(wrap).children().children()[1]
   let valueBlock: HTMLElement = $(wrap).children().children()[3]
   let currentValue: number = Number($(valueBlock).val())
-  if (maxScaleValue > $(minScaleInput).prev().val()) {
-    maxScaleValue = currentValue
+  //work with this но с мин значением
+  if (maxScaleValue < 0) {
+    $(maxScaleInput).val(100)
+    $(valueBlock).val(100)
   }
   $(slider1).attr('max', maxScaleValue)
   $(slider2).attr('max', maxScaleValue)

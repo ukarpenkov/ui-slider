@@ -7396,8 +7396,8 @@ function initSlider(wrapper, settings) {
         max="${settings.maxValue}" value="${settings.maxValue}" orient="vertical" step="1"/>
         </div>
         <div class="uk-slider__value_block ${inputsOrientation}">
-        <input type="text" value="${settings.minValue}" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-        <input type="text" value="${settings.maxValue}" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visible}" />
+        <input type="number" value="${settings.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+        <input type="number" value="${settings.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visible}" />
         </div>
         `);
     $(wrapper).append(slider);
@@ -7410,20 +7410,20 @@ function initSlider(wrapper, settings) {
             var range_max = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_max");
             var minVal = Number($(minBtn).val());
             var maxVal = Number($(maxBtn).val());
-            if (minVal > maxVal - 3) $(minBtn).val(maxVal - 3);
+            if (minVal > maxVal - 1) $(minBtn).val(maxVal);
             $(range_min).change(function() {
                 $(minBtn).val(Number($(this).val()) / 1);
                 if (Number($(range_min).val()) > Number($(range_max).val()) - 1) {
-                    $(minBtn).val(maxVal - 3);
+                    $(minBtn).val(maxVal - 1);
                     $(range_min).val(Number($(range_max).val()));
                 }
             });
             $(range_min).val(minVal * 1);
-            if (maxVal < minVal + 3) $(maxBtn).val(minVal + 3);
+            if (maxVal < minVal + 1) $(maxBtn).val(minVal + 1);
             $(range_max).change(function() {
                 $(maxBtn).val(Number($(this).val()) / 1);
                 if (Number($(range_max).val()) < Number($(range_min).val()) - 1) {
-                    $(maxBtn).val(maxVal + 3);
+                    $(maxBtn).val(maxVal + 1);
                     $(range_max).val(Number($(range_min).val()));
                 }
             });
@@ -7443,11 +7443,11 @@ function initToolBar(wrapper) {
     let toolBar = $(`
     <div class="control-panel"> 
     <div class="control-panel__text-inputs">
-    <input class="control-panel__text-input js-min-scale" type="number" placeholder="min scale value" name="minScale"/>
-    <input class="control-panel__text-input js-max-scale" type="number" placeholder="max scale value" name="maxScale" />
-    <input class="control-panel__text-input js-scale-step" type="number" placeholder="scale step" name="scaleStep"/>
-    <input class="control-panel__text-input js-min-pos" type="number" placeholder="first slider position" name="minPosition"/>
-    <input class="control-panel__text-input js-max-pos" type="number" placeholder="second slider position" name="maxPosition"/>
+    <input class="control-panel__text-input js-min-scale" type="number" min=0 placeholder="min scale value" name="minScale"/>
+    <input class="control-panel__text-input js-max-scale" type="number" min=0 placeholder="max scale value" name="maxScale" />
+    <input class="control-panel__text-input js-scale-step" type="number" min=0 placeholder="scale step" name="scaleStep"/>
+    <input class="control-panel__text-input js-min-pos" type="number" min=0 placeholder="first slider position" name="minPosition"/>
+    <input class="control-panel__text-input js-max-pos" type="number" min=0 placeholder="second slider position" name="maxPosition"/>
     </div>
     <div class="control-panel__checkbox-inputs">
     <div class="control-panel__checkbox-item">
@@ -7485,19 +7485,25 @@ parcelHelpers.export(exports, "changeSingleOrRange", ()=>changeSingleOrRange);
 parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgressBar);
 parcelHelpers.export(exports, "changeVisibleSlider", ()=>changeVisibleSlider);
 function changeMinScale() {
-    let minScaleInput1 = $(this);
-    let minScaleValue = Number($(minScaleInput1).val());
-    let wrap = $(minScaleInput1).parent().parent().parent().children();
+    let minScaleInput = $(this);
+    let minScaleValue = Number($(minScaleInput).val());
+    let maxScaleInput = $(minScaleInput).next();
+    let wrap = $(minScaleInput).parent().parent().parent().children();
     let slider1 = $(wrap).children().children()[0];
     let slider2 = $(wrap).children().children()[1];
     let valueBlock = $(wrap).children().children()[2];
     let currentValue = Number($(valueBlock).val());
-    console.log($(minScaleInput1).next().attr("max"));
-    // if (minScaleValue > $(minScaleInput).next().val()) {
-    //   minScaleValue = 0
-    //   minScaleInput.val(0)
-    //   console.log('Миниальное значение не может быть выше максимального')
-    // }
+    let maxBtn = $(wrap).children().children()[1];
+    let minBtn = $(wrap).children().children()[0];
+    if (minScaleValue < 0) {
+        minScaleValue = 0;
+        $(minScaleInput).val(0);
+    }
+    $(maxScaleInput).val($(maxBtn).val());
+    if (minScaleValue > maxScaleInput.val()) {
+        minScaleValue = maxScaleInput.val() - 3;
+        $(minScaleInput).val(maxScaleInput.val() - 3);
+    }
     $(slider1).attr("min", minScaleValue);
     $(slider2).attr("min", minScaleValue);
     currentValue < minScaleValue && $(valueBlock).val(minScaleValue);
@@ -7510,7 +7516,11 @@ function changeMaxScale() {
     let slider2 = $(wrap).children().children()[1];
     let valueBlock = $(wrap).children().children()[3];
     let currentValue = Number($(valueBlock).val());
-    if (maxScaleValue > $(minScaleInput).prev().val()) maxScaleValue = currentValue;
+    //work with this но с мин значением
+    if (maxScaleValue < 0) {
+        $(maxScaleInput).val(100);
+        $(valueBlock).val(100);
+    }
     $(slider1).attr("max", maxScaleValue);
     $(slider2).attr("max", maxScaleValue);
     currentValue > maxScaleValue && $(valueBlock).val(maxScaleValue);

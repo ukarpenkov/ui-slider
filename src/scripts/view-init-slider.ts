@@ -26,8 +26,8 @@ function initSlider(wrapper: string, settings: Settings): Settings {
         max="${settings.maxValue}" value="${settings.maxValue}" orient="vertical" step="1"/>
         </div>
         <div class="uk-slider__value_block ${inputsOrientation}">
-        <input type="text" value="${settings.minValue}" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-        <input type="text" value="${settings.maxValue}" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visible}" />
+        <input type="number" value="${settings.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+        <input type="number" value="${settings.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visible}" />
         </div>
         `)
 
@@ -51,24 +51,24 @@ function initSlider(wrapper: string, settings: Settings): Settings {
         .children('.js-uk-range_max')
       var minVal: number = Number($(minBtn).val())
       var maxVal: number = Number($(maxBtn).val())
-      if (minVal > maxVal - 3) {
-        $(minBtn).val(maxVal - 3)
+      if (minVal > maxVal - 1) {
+        $(minBtn).val(maxVal)
       }
       $(range_min).change(function () {
         $(minBtn).val(Number($(this).val()) / 1)
         if (Number($(range_min).val()) > Number($(range_max).val()) - 1) {
-          $(minBtn).val(maxVal - 3)
+          $(minBtn).val(maxVal - 1)
           $(range_min).val(Number($(range_max).val()))
         }
       })
       $(range_min).val(minVal * 1)
-      if (maxVal < minVal + 3) {
-        $(maxBtn).val(minVal + 3)
+      if (maxVal < minVal + 1) {
+        $(maxBtn).val(minVal + 1)
       }
       $(range_max).change(function () {
         $(maxBtn).val(Number($(this).val()) / 1)
         if (Number($(range_max).val()) < Number($(range_min).val()) - 1) {
-          $(maxBtn).val(maxVal + 3)
+          $(maxBtn).val(maxVal + 1)
           $(range_max).val(Number($(range_min).val()))
         }
       })
