@@ -52,11 +52,6 @@ input, label {
   z-index: 2;
 }
 
-.uk-slider__range_value {
-  display: inline-block;
-  position: relative;
-}
-
 .uk-slider__value_block {
   width: 305px;
   justify-content: space-between;
@@ -74,11 +69,14 @@ input, label {
 }
 
 .uk-slider__range_value {
-  width: 50px;
+  width: 60px;
+  text-overflow: ellipsis;
   background: none;
   border: none;
   margin-top: 10px;
   font-size: 20px;
+  display: inline-block;
+  position: relative;
 }
 
 .uk-slider__value_block_orient_vertical .uk-slider__range_value_min {

@@ -60,10 +60,6 @@ label {
   z-index: 2;
 }
 
-.uk-slider__range_value {
-  position: relative;
-  display: inline-block;
-}
 .uk-slider__value_block {
   width: 305px; /*must be equal of block width*/
   display: flex;
@@ -81,11 +77,14 @@ label {
 }
 
 .uk-slider__range_value {
-  width: 50px;
+  width: 60px;
   background: none;
   border: none;
   font-size: 20px;
   margin-top: 10px;
+  position: relative;
+  display: inline-block;
+  text-overflow: ellipsis;
 }
 
 .uk-slider__value_block_orient_vertical .uk-slider__range_value_min {

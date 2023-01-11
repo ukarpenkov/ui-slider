@@ -7485,13 +7485,19 @@ parcelHelpers.export(exports, "changeSingleOrRange", ()=>changeSingleOrRange);
 parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgressBar);
 parcelHelpers.export(exports, "changeVisibleSlider", ()=>changeVisibleSlider);
 function changeMinScale() {
-    let minScaleInput = $(this);
-    let minScaleValue = Number($(minScaleInput).val());
-    let wrap = $(minScaleInput).parent().parent().parent().children();
+    let minScaleInput1 = $(this);
+    let minScaleValue = Number($(minScaleInput1).val());
+    let wrap = $(minScaleInput1).parent().parent().parent().children();
     let slider1 = $(wrap).children().children()[0];
     let slider2 = $(wrap).children().children()[1];
     let valueBlock = $(wrap).children().children()[2];
     let currentValue = Number($(valueBlock).val());
+    console.log($(minScaleInput1).next().attr("max"));
+    // if (minScaleValue > $(minScaleInput).next().val()) {
+    //   minScaleValue = 0
+    //   minScaleInput.val(0)
+    //   console.log('Миниальное значение не может быть выше максимального')
+    // }
     $(slider1).attr("min", minScaleValue);
     $(slider2).attr("min", minScaleValue);
     currentValue < minScaleValue && $(valueBlock).val(minScaleValue);
@@ -7504,6 +7510,7 @@ function changeMaxScale() {
     let slider2 = $(wrap).children().children()[1];
     let valueBlock = $(wrap).children().children()[3];
     let currentValue = Number($(valueBlock).val());
+    if (maxScaleValue > $(minScaleInput).prev().val()) maxScaleValue = currentValue;
     $(slider1).attr("max", maxScaleValue);
     $(slider2).attr("max", maxScaleValue);
     currentValue > maxScaleValue && $(valueBlock).val(maxScaleValue);
