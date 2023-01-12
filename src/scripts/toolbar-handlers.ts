@@ -13,7 +13,6 @@ export function changeMinScale(event): void {
   let valueBlock: HTMLElement = $(wrap).children().children()[2]
   let currentValue: number = Number($(valueBlock).val())
   let maxBtn: HTMLElement = $(wrap).children().children()[1]
-
   if (minScaleValue < 0) {
     minScaleValue = 0
     $(minScaleInput).val(0)
