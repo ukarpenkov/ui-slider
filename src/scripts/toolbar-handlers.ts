@@ -50,7 +50,6 @@ export function changeMaxScale(): void {
     $(minBtn).val(maxScaleValue - 5)
   }
   if (maxScaleValue < $(minValueBlock).val()) {
-    let minValue = Number($(minValueBlock).val())
     minValue = maxScaleValue - 5
     $(minValueBlock).val(maxScaleValue - 5)
   }
