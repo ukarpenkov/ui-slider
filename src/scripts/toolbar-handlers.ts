@@ -1,7 +1,8 @@
-export function changeMinScale(): void {
+export function changeMinScale(event): void {
   let minScaleInput: JQuery<object> = $(this)
   let minScaleValue: number = Number($(minScaleInput).val())
-  let maxScaleInput: number = $(minScaleInput).next()
+  let maxScaleInput: JQuery<object> = $(minScaleInput).next()
+
   let wrap: JQuery<object> = $(minScaleInput)
     .parent()
     .parent()
@@ -12,7 +13,7 @@ export function changeMinScale(): void {
   let valueBlock: HTMLElement = $(wrap).children().children()[2]
   let currentValue: number = Number($(valueBlock).val())
   let maxBtn: HTMLElement = $(wrap).children().children()[1]
-  let minBtn: HTMLElement = $(wrap).children().children()[0]
+
   if (minScaleValue < 0) {
     minScaleValue = 0
     $(minScaleInput).val(0)
@@ -22,7 +23,6 @@ export function changeMinScale(): void {
     minScaleValue = maxScaleInput.val() - 3
     $(minScaleInput).val(maxScaleInput.val() - 3)
   }
-
   $(slider1).attr('min', minScaleValue)
   $(slider2).attr('min', minScaleValue)
   currentValue < minScaleValue ? $(valueBlock).val(minScaleValue) : null
@@ -31,6 +31,7 @@ export function changeMinScale(): void {
 export function changeMaxScale(): void {
   let maxScaleInput: JQuery<object> = $(this)
   let maxScaleValue: number = Number($(maxScaleInput).val())
+  let minScaleInput: JQuery<object> = $(maxScaleInput).prev()
   let wrap: JQuery<object> = $(maxScaleInput)
     .parent()
     .parent()
@@ -39,12 +40,27 @@ export function changeMaxScale(): void {
   let slider1: HTMLElement = $(wrap).children().children()[0]
   let slider2: HTMLElement = $(wrap).children().children()[1]
   let valueBlock: HTMLElement = $(wrap).children().children()[3]
+  let minValueBlock: HTMLElement = $(wrap).children().children()[2]
   let currentValue: number = Number($(valueBlock).val())
-  //work with this но с мин значением
+  let minBtn: HTMLElement = $(wrap).children().children()[0]
   if (maxScaleValue < 0) {
-    $(maxScaleInput).val(100)
-    $(valueBlock).val(100)
+    maxScaleValue = 5
+    maxScaleInput.val(5)
+    $(minScaleInput).val(maxScaleValue - 5)
+    $(minBtn).val(maxScaleValue - 5)
   }
+  if (maxScaleValue < $(minValueBlock).val()) {
+    let minValue = Number($(minValueBlock).val())
+    minValue = maxScaleValue - 5
+    $(minValueBlock).val(maxScaleValue - 5)
+  }
+  if ($(minScaleInput).val()) {
+    if (maxScaleValue < $(minScaleInput).val()) {
+      maxScaleValue = Number($(minScaleInput).val()) + 5
+      maxScaleInput.val(Number($(minScaleInput).val()) + 5)
+    }
+  }
+
   $(slider1).attr('max', maxScaleValue)
   $(slider2).attr('max', maxScaleValue)
   currentValue > maxScaleValue ? $(valueBlock).val(maxScaleValue) : null
@@ -115,7 +131,9 @@ export function changeScaleStep(): void {
     .children()
   let slider: HTMLElement = $(wrap).children()[0]
   let minSlider: HTMLElement = $(slider).children()[0]
+  let maxSlider: HTMLElement = $(slider).children()[1]
   $(minSlider).attr('step', scaleStepInputValue)
+  $(maxSlider).attr('step', scaleStepInputValue)
 }
 
 export function changeOrientation(): void {

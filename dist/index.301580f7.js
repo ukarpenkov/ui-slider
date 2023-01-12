@@ -7484,7 +7484,7 @@ parcelHelpers.export(exports, "changeOrientation", ()=>changeOrientation);
 parcelHelpers.export(exports, "changeSingleOrRange", ()=>changeSingleOrRange);
 parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgressBar);
 parcelHelpers.export(exports, "changeVisibleSlider", ()=>changeVisibleSlider);
-function changeMinScale() {
+function changeMinScale(event) {
     let minScaleInput = $(this);
     let minScaleValue = Number($(minScaleInput).val());
     let maxScaleInput = $(minScaleInput).next();
@@ -7494,7 +7494,6 @@ function changeMinScale() {
     let valueBlock = $(wrap).children().children()[2];
     let currentValue = Number($(valueBlock).val());
     let maxBtn = $(wrap).children().children()[1];
-    let minBtn = $(wrap).children().children()[0];
     if (minScaleValue < 0) {
         minScaleValue = 0;
         $(minScaleInput).val(0);
@@ -7511,15 +7510,30 @@ function changeMinScale() {
 function changeMaxScale() {
     let maxScaleInput = $(this);
     let maxScaleValue = Number($(maxScaleInput).val());
+    let minScaleInput = $(maxScaleInput).prev();
     let wrap = $(maxScaleInput).parent().parent().parent().children();
     let slider1 = $(wrap).children().children()[0];
     let slider2 = $(wrap).children().children()[1];
     let valueBlock = $(wrap).children().children()[3];
+    let minValueBlock = $(wrap).children().children()[2];
     let currentValue = Number($(valueBlock).val());
-    //work with this но с мин значением
+    let minBtn = $(wrap).children().children()[0];
     if (maxScaleValue < 0) {
-        $(maxScaleInput).val(100);
-        $(valueBlock).val(100);
+        maxScaleValue = 5;
+        maxScaleInput.val(5);
+        $(minScaleInput).val(maxScaleValue - 5);
+        $(minBtn).val(maxScaleValue - 5);
+    }
+    if (maxScaleValue < $(minValueBlock).val()) {
+        let minValue = Number($(minValueBlock).val());
+        minValue = maxScaleValue - 5;
+        $(minValueBlock).val(maxScaleValue - 5);
+    }
+    if ($(minScaleInput).val()) {
+        if (maxScaleValue < $(minScaleInput).val()) {
+            maxScaleValue = Number($(minScaleInput).val()) + 5;
+            maxScaleInput.val(Number($(minScaleInput).val()) + 5);
+        }
     }
     $(slider1).attr("max", maxScaleValue);
     $(slider2).attr("max", maxScaleValue);
@@ -7576,7 +7590,9 @@ function changeScaleStep() {
     let wrap = $(scaleStepInput).parent().parent().parent().children();
     let slider = $(wrap).children()[0];
     let minSlider = $(slider).children()[0];
+    let maxSlider = $(slider).children()[1];
     $(minSlider).attr("step", scaleStepInputValue);
+    $(maxSlider).attr("step", scaleStepInputValue);
 }
 function changeOrientation() {
     let verticalOrHorizontalCheckbox = $(this);
