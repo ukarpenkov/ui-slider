@@ -1,8 +1,7 @@
-export function changeMinScale(event): void {
+export function changeMinScale(): void {
   let minScaleInput: JQuery<object> = $(this)
   let minScaleValue: number = Number($(minScaleInput).val())
   let maxScaleInput: JQuery<object> = $(minScaleInput).next()
-
   let wrap: JQuery<object> = $(minScaleInput)
     .parent()
     .parent()

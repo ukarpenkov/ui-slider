@@ -7484,7 +7484,7 @@ parcelHelpers.export(exports, "changeOrientation", ()=>changeOrientation);
 parcelHelpers.export(exports, "changeSingleOrRange", ()=>changeSingleOrRange);
 parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgressBar);
 parcelHelpers.export(exports, "changeVisibleSlider", ()=>changeVisibleSlider);
-function changeMinScale(event) {
+function changeMinScale() {
     let minScaleInput = $(this);
     let minScaleValue = Number($(minScaleInput).val());
     let maxScaleInput = $(minScaleInput).next();
