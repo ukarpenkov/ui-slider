@@ -56,19 +56,19 @@ function initSlider(wrapper: string, settings: Settings): Settings {
       }
       $(range_min).change(function () {
         $(minBtn).val(Number($(this).val()) / 1)
-        if (Number($(range_min).val()) > Number($(range_max).val()) - 1) {
-          $(minBtn).val(maxVal - 1)
+        if (Number($(range_min).val()) > Number($(range_max).val())) {
+          $(minBtn).val(maxVal)
           $(range_min).val(Number($(range_max).val()))
         }
       })
       $(range_min).val(minVal * 1)
-      if (maxVal < minVal + 1) {
-        $(maxBtn).val(minVal + 1)
+      if (maxVal < minVal) {
+        $(maxBtn).val(minVal)
       }
       $(range_max).change(function () {
         $(maxBtn).val(Number($(this).val()) / 1)
-        if (Number($(range_max).val()) < Number($(range_min).val()) - 1) {
-          $(maxBtn).val(maxVal + 1)
+        if (Number($(range_max).val()) < Number($(range_min).val())) {
+          $(maxBtn).val(maxVal)
           $(range_max).val(Number($(range_min).val()))
         }
       })

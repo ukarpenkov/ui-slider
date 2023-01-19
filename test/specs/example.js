@@ -1,3 +1,4 @@
+const { minInputValueChanger } = require('./../functions/minInputValue')
 
 
 describe('Test case', () => {
@@ -5,21 +6,11 @@ describe('Test case', () => {
         await browser.url('http://localhost:1234/')
         await expect(browser).toHaveTitleContaining('ui-slider')
     })
-    it('change min pos to 10', async () => {
-        await browser.url('http://localhost:1234/')
-        const wrapper = await $('.id2')
-        const body = await $('body')
-        const minValueSliderInput = await wrapper.$('.js-uk-range_min')
-        const minBtn = await wrapper.$('.js-uk-min')
-        await minValueSliderInput.setValue(10)
-        // await browser.pause(3000)
-        await body.click()
-        await browser.pause(3000)
-
-
-        const minBtnValue = await minBtn.getValue()
-        const minValueSliderInputVal = await minValueSliderInput.getValue()
-        console.log('оооооооооооооооОООООООООООООООООООООООООООООООПППП', minBtnValue == minValueSliderInputVal)
-        ExpectedConditions.numberOfElementsToBe(minBtnValue, 100)
+    it('значение поля ввода слайдера равно значению положения указателя на слайдере, если ввести значение большее возмжного, то оно будет равно макимально возможному для данного слайдера', async () => {
+        await minInputValueChanger(10, '.id2', true)
+        await minInputValueChanger(50, '.id3', true)
+        await minInputValueChanger(800, '.id4', true)
+        await minInputValueChanger(50, '.id2', false)
+        await minInputValueChanger(66, '.id3', false)
     })
 })
