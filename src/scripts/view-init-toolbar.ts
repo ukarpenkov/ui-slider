@@ -14,7 +14,7 @@ function initToolBar(wrapper: string): void {
     <label for="verticalOrHorizontal" data-onlabel="on" data-offlabel="off" class="control-panel__label">vertical/horizontal</label>
     </div>
     <div class="control-panel__checkbox-item">
-    <input class="control-panel__checkbox-input" type="checkbox" name='singleOrRange'/>
+    <input class="control-panel__checkbox-input js-single-or-range" type="checkbox" name='singleOrRange'/>
     <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
     </div>
     <div class="control-panel__checkbox-item">

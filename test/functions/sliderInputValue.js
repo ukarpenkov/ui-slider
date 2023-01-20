@@ -1,7 +1,7 @@
-var minInputValueChanger = async function (value, sliderWrapper, minValue) {
+var inputValueChanger = async function (value, sliderWrapper, isMin) {
     let inputValueClassName = '.js-uk-range_min'
     let btnClassName = '.js-uk-min'
-    if (minValue === false) {
+    if (isMin === false) {
         inputValueClassName = '.js-uk-range_max'
         btnClassName = '.js-uk-max'
     }
@@ -13,10 +13,9 @@ var minInputValueChanger = async function (value, sliderWrapper, minValue) {
     await body.click()
     const btnValue = await btn.getValue()
     const sliderInputValueVal = await sliderInputValue.getValue()
-    await browser.pause(2000)
     if (btnValue !== sliderInputValueVal) {
-        throw new Error('Значения не равны!')
+        throw new Error('Значение input и положение слайдера не равны!')
     }
 }
 
-module.exports = { minInputValueChanger }
+module.exports = { inputValueChanger }
