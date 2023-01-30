@@ -23,8 +23,6 @@ describe('Slider test case', () => {
     it('изменение положения слайдера при клике на чекбокс', async () => {
         await checkboxChanger('.js-page-item1')
         await checkboxChanger('.js-page-item2')
-
-
     })
 })
 

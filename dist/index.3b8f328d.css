@@ -3,7 +3,9 @@ input, label {
 }
 
 .slider-wrapper {
+  width: 50%;
   margin-left: 40px;
+  position: relative;
 }
 
 .uk-slider {
@@ -13,16 +15,20 @@ input, label {
 }
 
 .uk-slider__range {
+  width: 50%;
   margin-left: 10px;
   position: absolute;
 }
 
 .uk-slider__range_orient_vertical {
+  position: relative;
+  top: 32%;
+  right: 24%;
   -webkit-transform: rotate(90deg);
 }
 
 .uk-slider__input {
-  width: 300px;
+  width: 100%;
   -webkit-appearance: none;
   background: none;
   position: absolute;
@@ -53,7 +59,7 @@ input, label {
 }
 
 .uk-slider__value_block {
-  width: 305px;
+  width: 53%;
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 8px;
@@ -62,10 +68,13 @@ input, label {
 }
 
 .uk-slider__value_block_orient_vertical {
-  height: 300px;
+  height: 100%;
   align-content: space-between;
   margin-left: 13px;
   display: grid;
+  position: relative;
+  bottom: 20%;
+  right: -2%;
 }
 
 .uk-slider__range_value {
@@ -161,15 +170,16 @@ input, label {
 }
 
 .slider-page {
+  width: 100%;
   height: 100%;
-  align-content: space-around;
+  grid-gap: 90%;
+  align-content: space-between;
   justify-items: center;
   display: grid;
 }
 
 .page-item {
   width: 100%;
-  height: 300px;
   margin-top: 50px;
   display: flex;
 }
