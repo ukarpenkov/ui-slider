@@ -171,10 +171,10 @@ export function changeSingleOrRange(): void {
 
   if ($(singleOrRangeCheckbox).is(':checked')) {
     $(secondSlider).addClass('hidden')
-    $(secondValueBlock).addClass('hidden')
+    $(secondValueBlock).addClass('no-vis')
   } else {
     $(secondSlider).removeClass('hidden')
-    $(secondValueBlock).removeClass('hidden')
+    $(secondValueBlock).removeClass('no-vis')
   }
 }
 

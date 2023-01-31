@@ -7,7 +7,7 @@ label {
 }
 
 .slider-wrapper {
-  width: 50%;
+  width: 40%;
   margin-left: 40px;
   position: relative;
 }
@@ -72,13 +72,17 @@ label {
 }
 
 .uk-slider__value_block_orient_vertical {
+  position: absolute;
   height: 100%;
-  bottom: 20%;
-  right: -2%;
-  position: relative;
+  width: 100%;
   align-content: space-between;
-  margin-left: 13px;
   display: grid;
+  grid-gap: 250%;
+  bottom: 53%;
+  position: relative;
+  bottom: 120%;
+  left: 2%;
+  align-items: center;
 }
 
 .uk-slider__range_value {
@@ -98,6 +102,10 @@ label {
 
 .hidden {
   display: none;
+}
+
+.no-vis {
+  visibility: hidden;
 }
 
 .control-panel {
@@ -177,11 +185,13 @@ label {
   align-content: space-between;
   justify-items: center;
   display: grid;
-  grid-gap: 90%;
+  grid-gap: 100%;
+  padding-top: 10%;
 }
 
 .page-item {
   width: 100%;
+  height: 100%;
   margin-top: 50px;
   display: flex;
 }
