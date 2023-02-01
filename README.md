@@ -6,13 +6,13 @@
 
 ## Как воспользоваться данным слайдером
 
-1. Склонируйте себе в папку [данный репозиторий](https://github.com/ukarpenkov/ui-slider)
+1. Клонируйте себе в папку [данный репозиторий](https://github.com/ukarpenkov/ui-slider)
 2. Перенесите в свой проект следующие файлы и папки
    - package.json;
-   - папку styles;
-   - папку scripts;
-3. в папке проекта создайте папку src;
-4. в папке src index.html с базовой разметкой:
+   - папку 'styles';
+   - папку 'scripts';
+3. в папке проекта создайте папку 'src';
+4. в папке 'src' создайте 'index.html' с базовой разметкой:
    ```
    <div class="slider-page">
      <div class="page-item js-page-item1">
@@ -30,7 +30,7 @@
    ```
    <link rel="stylesheet" href="styles/styles.css" />;
    ```
-6. подключите .ts файл:
+6. подключите '.ts' файл:
    ```
    <script type="module" src="scripts/app.ts"></script>;
    ```
@@ -39,7 +39,7 @@
    ```
      initSlider('.id2', settings1)
    ```
-9. для настройки типа слайдера измените параметы объекта
+9. для настройки типа слайдера измените параметры объекта
 
 ```
 let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
@@ -51,4 +51,10 @@ let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
 - 'horizontal' / 'vertical';
 - начальное и конечное значение слайдера.
 
-11. запустите проект командой npm parcel src/index.html
+11. запустите проект командой 'npm parcel src/index.html'
+
+12. для использования автотестов скопируйте себе в корневую папку проекта папку 'tests'
+
+13. запустите тесты командой 'wdio run ./wdio.conf.js'
+
+## Архитектура приложения
