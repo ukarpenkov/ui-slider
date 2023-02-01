@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "jquery": "^3.6.1"
+    "jquery": "^3.6.1",
+    "mermaid": "^9.3.0"
   },
   "name": "ui-slider",
   "version": "1.0.0",
