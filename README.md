@@ -13,6 +13,7 @@
    - папку scripts;
    - в папке проекта создайте папку src;
    - в папке src index.html с базовой разметкой:
+   ```
    <div class="slider-page">
      <div class="page-item js-page-item1">
        <div class="id2 slider-wrapper"></div>
@@ -23,17 +24,27 @@
      <div class="page-item js-page-item3">
        <div class="id4 slider-wrapper"></div>
      </div>
-   </div>;
+   </div>
+   ```
+   ;
    - подключите стили:
+   ```
    <link rel="stylesheet" href="styles/styles.css" />;
+   ```
    - подключите ts файл:
+   ```
    <script type="module" src="scripts/app.ts"></script>;
+   ```
    - установите зависимости командой npm i;
    - при изменении классов необходимо изменить инициализацию слайдера в app.ts
+   ```
      initSlider('.id2', settings1)
-     для настройки типа слайдера измените параметы объекта
-     let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
-     возможные опции:
-     - 'interval' / 'single';
-     - 'horizontal' / 'vertical';
-     - начальное и конечное значение слайдера.
+   ```
+   для настройки типа слайдера измените параметы объекта
+   ```
+   let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
+   ```
+   возможные опции:
+   - 'interval' / 'single';
+   - 'horizontal' / 'vertical';
+   - начальное и конечное значение слайдера.
