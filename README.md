@@ -11,8 +11,8 @@
    - package.json;
    - папку styles;
    - папку scripts;
-   - в папке проекта создайте папку src;
-   - в папке src index.html с базовой разметкой:
+3. в папке проекта создайте папку src;
+4. в папке src index.html с базовой разметкой:
    ```
    <div class="slider-page">
      <div class="page-item js-page-item1">
@@ -26,25 +26,29 @@
      </div>
    </div>
    ```
-   ;
-   - подключите стили:
+5. подключите стили:
    ```
    <link rel="stylesheet" href="styles/styles.css" />;
    ```
-   - подключите ts файл:
+6. подключите .ts файл:
    ```
    <script type="module" src="scripts/app.ts"></script>;
    ```
-   - установите зависимости командой npm i;
-   - при изменении классов необходимо изменить инициализацию слайдера в app.ts
+7. установите зависимости командой npm i;
+8. при изменении классов необходимо изменить инициализацию слайдера в app.ts
    ```
      initSlider('.id2', settings1)
    ```
-   для настройки типа слайдера измените параметы объекта
-   ```
-   let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
-   ```
-   возможные опции:
-   - 'interval' / 'single';
-   - 'horizontal' / 'vertical';
-   - начальное и конечное значение слайдера.
+9. для настройки типа слайдера измените параметы объекта
+
+```
+let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
+```
+
+10. возможные опции для слайдера:
+
+- 'interval' / 'single';
+- 'horizontal' / 'vertical';
+- начальное и конечное значение слайдера.
+
+11. запустите проект командой npm parcel src/index.html
