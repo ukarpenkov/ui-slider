@@ -2,8 +2,6 @@
 
 ## [GITHUB PAGES LINK](https://ukarpenkov.github.io/ui-slider/dist/)
 
-## [APP UML diagram](https://viewer.diagrams.net/index.html?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#G1Ox9ASGbxKiB7AVY_K0LVlEeC8Fwm2Tb8)
-
 ## Как воспользоваться данным слайдером
 
 1. Клонируйте себе в папку [данный репозиторий](https://github.com/ukarpenkov/ui-slider)
@@ -58,3 +56,34 @@ let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
 13. запустите тесты командой 'wdio run ./wdio.conf.js'
 
 ## Архитектура приложения
+
+## [APP UML diagram](https://viewer.diagrams.net/index.html?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#G1Ox9ASGbxKiB7AVY_K0LVlEeC8Fwm2Tb8)
+
+Функция инициализации слайдера (initSlider) имеет 2 аргумента wrapper и settings.
+При вызове данной функции нужно указать два параметра:
+
+1. в какой контейнер поместить слайдер;
+2. какой тип слайдера будет выведен на страницу.
+
+В классе SliderSettings описаны все свойства для слайдера,
+эти свойства могут принимать следующие значения:
+
+- interval: 'interval' / 'single';
+- orientation: 'horizontal' / 'vertical';
+- minValue: минимально возможное значение слайдера;
+- maxValue: минимально возможное значение слайдера.
+
+Вся логика работы слайдера "зашита" в функцию initSlider посредством вызова IFFE handleRange.
+
+Файл "app.ts" служит примером для использования слайдера.
+Там создаются изначальные настройки слайдера с помощью
+new SliderSettings.
+
+Пример:
+
+```
+let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
+```
+
+Выше приведена настройка для слайдера с двумя "ручками", со
+значениями от 1 до 200, с горизонтальной ориентацией.
