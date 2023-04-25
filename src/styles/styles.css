@@ -1,3 +1,7 @@
+body {
+  user-select: none;
+}
+
 input {
   font-family: monospace;
 }
