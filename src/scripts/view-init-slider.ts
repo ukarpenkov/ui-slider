@@ -21,6 +21,7 @@ function initSlider(wrapper: string, settings: Settings): Settings {
     display = 'hidden'
     visibility = 'no-vis'
   }
+
   let slider: JQuery<HTMLElement> = $(`
         <div class="uk-slider__range ${orientation}">
         <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="${settings.minValue}" orient="vertical" step="1"/>
@@ -38,7 +39,7 @@ function initSlider(wrapper: string, settings: Settings): Settings {
   let exportSettings = settings
 
   ;(function handleRange(): void {
-    function rangeInputChangeEventHandler(e): void {
+    function rangeInputChangeEventHandler(): void {
       var minBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-min')
       var maxBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-max')
       var range_min: JQuery<HTMLElement> = $(this)

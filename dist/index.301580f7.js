@@ -7407,7 +7407,7 @@ function initSlider(wrapper, settings) {
     $(wrapper).append(slider);
     let exportSettings = settings;
     (function handleRange() {
-        function rangeInputChangeEventHandler(e) {
+        function rangeInputChangeEventHandler() {
             var minBtn = $(this).parent().children(".js-uk-min");
             var maxBtn = $(this).parent().children(".js-uk-max");
             var range_min = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_min");

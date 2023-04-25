@@ -40,6 +40,7 @@ $("input[name='scaleRange']").on('change', changeVisibleSlider)
 let verticalCheckedCheckbox: jQuery<HTMLElement> = $(
   'input[name="verticalOrHorizontal"]'
 )[1]
+
 verticalCheckedCheckbox.checked = true
 
 let singleCheckedCheckbox: jQuery<HTMLElement> = $(
