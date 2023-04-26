@@ -7549,7 +7549,6 @@ function changeMinPos() {
     let valueBlock = $(wrap).children().children()[2];
     let minBtn = $(wrap).children().children()[0];
     let maxBtn = $(wrap).children().children()[1];
-    $(valueBlock).val(minPosValue);
     if ($(valueBlock).val() > $(maxBtn).val()) {
         $(valueBlock).val($(maxBtn).val());
         $(minPositionInput).val($(maxBtn).val());
@@ -7560,6 +7559,7 @@ function changeMinPos() {
         $(minPositionInput).val(1);
     }
     $(minBtn).val(minPosValue);
+    $(valueBlock).val(minPosValue);
 }
 function changeMaxPos() {
     let maxPositionInput = $(this);
@@ -7584,8 +7584,8 @@ function changeMaxPos() {
         maxPosValue = maxValue;
         $(maxPositionInput).val(maxValue);
     }
-    $(valueBlock).val(maxPosValue);
     $(maxBtn).val(maxPosValue);
+    $(valueBlock).val(maxPosValue);
 }
 function changeScaleStep() {
     let scaleStepInput = $(this);

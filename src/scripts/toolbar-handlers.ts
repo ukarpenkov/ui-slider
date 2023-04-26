@@ -74,7 +74,6 @@ export function changeMinPos(): void {
   let valueBlock: HTMLElement = $(wrap).children().children()[2]
   let minBtn: HTMLElement = $(wrap).children().children()[0]
   let maxBtn: HTMLElement = $(wrap).children().children()[1]
-  $(valueBlock).val(minPosValue)
   if ($(valueBlock).val() > $(maxBtn).val()) {
     $(valueBlock).val($(maxBtn).val())
     $(minPositionInput).val($(maxBtn).val())
@@ -85,6 +84,7 @@ export function changeMinPos(): void {
     $(minPositionInput).val(1)
   }
   $(minBtn).val(minPosValue)
+  $(valueBlock).val(minPosValue)
 }
 
 export function changeMaxPos(): void {
@@ -114,8 +114,8 @@ export function changeMaxPos(): void {
     maxPosValue = maxValue
     $(maxPositionInput).val(maxValue)
   }
-  $(valueBlock).val(maxPosValue)
   $(maxBtn).val(maxPosValue)
+  $(valueBlock).val(maxPosValue)
 }
 
 export function changeScaleStep(): void {
