@@ -7544,9 +7544,15 @@ function changeMaxScale() {
 }
 function changeMinPos() {
     let minPositionInput = $(this);
+    $(minPositionInput).css({
+        "background-color": "red"
+    });
     let minPosValue = Number($(minPositionInput).val());
     let wrap = $(minPositionInput).parent().parent().parent().children();
     let valueBlock = $(wrap).children().children()[2];
+    $(valueBlock).css({
+        "background-color": "red"
+    });
     let minBtn = $(wrap).children().children()[0];
     let maxBtn = $(wrap).children().children()[1];
     if ($(valueBlock).val() > $(maxBtn).val()) {
@@ -7558,34 +7564,38 @@ function changeMinPos() {
         $(valueBlock).val(1);
         $(minPositionInput).val(1);
     }
-    $(minBtn).val(minPosValue);
+    $(minBtn).val(Number(minPosValue));
     $(valueBlock).val(minPosValue);
+    $(minPositionInput).val(Number($(minBtn).val()));
 }
 function changeMaxPos() {
     let maxPositionInput = $(this);
     let maxPosValue = Number($(maxPositionInput).val());
     let wrap = $(maxPositionInput).parent().parent().parent().children();
     let valueBlock = $(wrap).children().children()[3];
+    let valueBlockVal = Number($(valueBlock).val());
     let minBtn = $(wrap).children().children()[0];
+    let minBtnValue = Number($(minBtn).val());
     let maxBtn = $(wrap).children().children()[1];
     let maxValue = Number($(wrap).find(".js-uk-max").attr("value"));
-    if ($(valueBlock).val() < $(minBtn).val()) {
-        $(valueBlock).val($(minBtn).val());
-        $(maxPositionInput).val($(minBtn).val());
-        $(maxBtn).val($(minBtn).val());
+    if (valueBlockVal < minBtnValue) {
+        $(valueBlock).val(minBtnValue);
+        $(maxPositionInput).val(minBtnValue);
+        $(maxBtn).val(minBtnValue);
     }
-    if ($(maxPositionInput).val() < 0) {
+    if (maxPosValue <= 0) {
         $(valueBlock).val(1);
         maxPosValue = 1;
         $(maxPositionInput).val(1);
     }
-    if ($(maxPositionInput).val() > maxValue) {
+    if (maxPosValue > maxValue) {
         $(valueBlock).val(maxValue);
         maxPosValue = maxValue;
         $(maxPositionInput).val(maxValue);
     }
     $(maxBtn).val(maxPosValue);
     $(valueBlock).val(maxPosValue);
+    $(maxPositionInput).val(Number($(maxBtn).val()));
 }
 function changeScaleStep() {
     let scaleStepInput = $(this);
