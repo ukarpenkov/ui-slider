@@ -7544,25 +7544,26 @@ function changeMaxScale() {
 }
 function changeMinPos() {
     let minPositionInput = $(this);
-    $(minPositionInput).css({
-        "background-color": "red"
-    });
     let minPosValue = Number($(minPositionInput).val());
     let wrap = $(minPositionInput).parent().parent().parent().children();
     let valueBlock = $(wrap).children().children()[2];
-    $(valueBlock).css({
-        "background-color": "red"
-    });
     let minBtn = $(wrap).children().children()[0];
+    let minBtnValue = Number($(minBtn).val());
     let maxBtn = $(wrap).children().children()[1];
-    if ($(valueBlock).val() > $(maxBtn).val()) {
-        $(valueBlock).val($(maxBtn).val());
-        $(minPositionInput).val($(maxBtn).val());
-        $(minBtn).val($(maxBtn).val());
+    let maxBtnValue = Number($(maxBtn).val());
+    console.log(maxBtnValue);
+    console.log(minPosValue);
+    if (minPosValue > maxBtnValue) {
+        $(minPositionInput).val(minBtnValue);
+        $(valueBlock).val(maxBtnValue - 1);
+        $(minPositionInput).val(maxBtnValue - 1);
+        $(minBtn).val(maxBtnValue - 1);
+        return;
     }
-    if ($(valueBlock).val() < 0) {
+    if (minPosValue < 0) {
         $(valueBlock).val(1);
         $(minPositionInput).val(1);
+        return;
     }
     $(minBtn).val(Number(minPosValue));
     $(valueBlock).val(minPosValue);
@@ -7577,6 +7578,7 @@ function changeMaxPos() {
     let minBtn = $(wrap).children().children()[0];
     let minBtnValue = Number($(minBtn).val());
     let maxBtn = $(wrap).children().children()[1];
+    let maxBtnValue = Number($(maxBtn).val());
     let maxValue = Number($(wrap).find(".js-uk-max").attr("value"));
     if (valueBlockVal < minBtnValue) {
         $(valueBlock).val(minBtnValue);
@@ -7588,10 +7590,12 @@ function changeMaxPos() {
         maxPosValue = 1;
         $(maxPositionInput).val(1);
     }
-    if (maxPosValue > maxValue) {
-        $(valueBlock).val(maxValue);
-        maxPosValue = maxValue;
-        $(maxPositionInput).val(maxValue);
+    if (maxPosValue < minBtnValue) {
+        $(maxPositionInput).val(maxBtnValue);
+        $(valueBlock).val(minBtnValue + 1);
+        $(maxPositionInput).val(minBtnValue + 1);
+        $(maxBtn).val(minBtnValue + 1);
+        return;
     }
     $(maxBtn).val(maxPosValue);
     $(valueBlock).val(maxPosValue);
