@@ -7498,14 +7498,17 @@ function changeMinScale() {
     let valueBlock = $(wrap).children().children()[2];
     let currentValue = Number($(valueBlock).val());
     let maxBtn = $(wrap).children().children()[1];
+    let maxBtnValue = Number($(maxBtn).val());
+    $(maxScaleInput).val(maxBtnValue);
+    let maxScaleValue = Number($(maxScaleInput).val());
     if (minScaleValue < 0) {
         minScaleValue = 0;
         $(minScaleInput).val(0);
     }
-    $(maxScaleInput).val($(maxBtn).val());
-    if (minScaleValue > maxScaleInput.val()) {
-        minScaleValue = maxScaleInput.val() - 3;
-        $(minScaleInput).val(maxScaleInput.val() - 3);
+    $(maxScaleInput).val(maxBtnValue);
+    if (minScaleValue > maxScaleValue) {
+        minScaleValue = maxScaleValue - 3;
+        $(minScaleInput).val(maxScaleValue - 3);
     }
     $(slider1).attr("min", minScaleValue);
     $(slider2).attr("min", minScaleValue);
@@ -7522,20 +7525,19 @@ function changeMaxScale() {
     let minValueBlock = $(wrap).children().children()[2];
     let currentValue = Number($(valueBlock).val());
     let minBtn = $(wrap).children().children()[0];
+    let minBtnValue = Number($(minBtn).val());
+    $(minScaleInput).val(minBtnValue);
+    let minScaleValue = Number($(minScaleInput).val());
     if (maxScaleValue < 0) {
-        maxScaleValue = 5;
-        maxScaleInput.val(5);
-        $(minScaleInput).val(maxScaleValue - 5);
-        $(minBtn).val(maxScaleValue - 5);
+        maxScaleValue = 3;
+        maxScaleInput.val(3);
+        $(minScaleInput).val(maxScaleValue - 3);
+        $(minBtn).val(maxScaleValue - 3);
     }
-    if (maxScaleValue < $(minValueBlock).val()) {
-        minValue = maxScaleValue - 5;
-        $(minValueBlock).val(maxScaleValue - 5);
-    }
-    if ($(minScaleInput).val()) {
-        if (maxScaleValue < $(minScaleInput).val()) {
-            maxScaleValue = Number($(minScaleInput).val()) + 5;
-            maxScaleInput.val(Number($(minScaleInput).val()) + 5);
+    if (minScaleValue) {
+        if (maxScaleValue < minScaleValue) {
+            maxScaleValue = minScaleValue + 3;
+            maxScaleInput.val(minScaleValue + 3);
         }
     }
     $(slider1).attr("max", maxScaleValue);
