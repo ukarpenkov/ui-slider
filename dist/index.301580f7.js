@@ -7553,8 +7553,6 @@ function changeMinPos() {
     let minBtnValue = Number($(minBtn).val());
     let maxBtn = $(wrap).children().children()[1];
     let maxBtnValue = Number($(maxBtn).val());
-    console.log(maxBtnValue);
-    console.log(minPosValue);
     if (minPosValue > maxBtnValue) {
         $(minPositionInput).val(minBtnValue);
         $(valueBlock).val(maxBtnValue - 1);
@@ -7581,7 +7579,6 @@ function changeMaxPos() {
     let minBtnValue = Number($(minBtn).val());
     let maxBtn = $(wrap).children().children()[1];
     let maxBtnValue = Number($(maxBtn).val());
-    let maxValue = Number($(wrap).find(".js-uk-max").attr("value"));
     if (valueBlockVal < minBtnValue) {
         $(valueBlock).val(minBtnValue);
         $(maxPositionInput).val(minBtnValue);
