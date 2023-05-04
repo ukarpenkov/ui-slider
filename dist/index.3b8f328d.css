@@ -29,18 +29,17 @@ input, label {
   position: relative;
   top: 32%;
   right: 24%;
-  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .uk-slider__input {
   width: 100%;
-  -webkit-appearance: none;
-  background: none;
+  appearance: none;
   position: absolute;
 }
 
 .uk-slider__input::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
+  appearance: none;
   height: 3px;
   background: #7b7777;
   border-radius: 10px;
@@ -49,7 +48,7 @@ input, label {
 .uk-slider__input::-webkit-slider-thumb {
   width: 15px;
   height: 15px;
-  -webkit-appearance: none;
+  appearance: none;
   cursor: pointer;
   background: #000;
   border: 1px solid #000;
@@ -66,7 +65,6 @@ input, label {
 .uk-slider__value_block {
   width: 53%;
   justify-content: space-between;
-  align-items: flex-start;
   margin-top: 8px;
   margin-left: 22px;
   display: flex;
@@ -86,13 +84,9 @@ input, label {
 
 .uk-slider__range_value {
   width: 60px;
-  text-overflow: ellipsis;
-  background: none;
   border: none;
   margin-top: 10px;
   font-size: 20px;
-  display: inline-block;
-  position: relative;
 }
 
 .uk-slider__value_block_orient_vertical .uk-slider__range_value_min {
@@ -108,32 +102,19 @@ input, label {
 }
 
 .control-panel {
-  width: 456px;
-  justify-content: flex-end;
   align-items: baseline;
   margin-left: 600px;
-  margin-right: 0;
   display: flex;
   position: absolute;
-}
-
-.control-panel__text-inputs {
-  display: grid;
 }
 
 .control-panel__text-input {
   width: 100%;
   height: calc(1.25rem + 1px);
-  color: #212529;
-  background-color: #ffffffd1;
-  background-clip: padding-box;
   border: 1px solid #bdbdbd;
   border-radius: .25rem;
   padding: .375rem .75rem;
   font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   display: block;
 }
 
@@ -152,14 +133,11 @@ input, label {
 
 .control-panel__checkbox-inputs {
   margin-left: 50px;
-  display: grid;
 }
 
 .control-panel__checkbox-input {
-  opacity: .9;
   cursor: pointer;
   margin-top: 10px;
-  display: inline-block;
   transform: scale(1.8);
 }
 
@@ -175,23 +153,16 @@ input, label {
 }
 
 .control-panel__checkbox-item {
-  width: 200px;
-  align-items: center;
   display: flex;
 }
 
 .slider-page {
-  width: 100%;
-  height: 100%;
   grid-gap: 100%;
-  align-content: space-between;
-  justify-items: center;
   padding-top: 10%;
   display: grid;
 }
 
 .page-item {
-  width: 100%;
   height: 100%;
   margin-top: 50px;
   display: flex;
@@ -201,7 +172,7 @@ input, label {
   .uk-slider__input::-webkit-slider-thumb {
     width: 30px;
     height: 30px;
-    -webkit-appearance: none;
+    appearance: none;
     cursor: pointer;
     background: #000;
     border: 1px solid #000;
