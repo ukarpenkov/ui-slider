@@ -1,4 +1,5 @@
 var inputValueChanger = async function (value, sliderWrapper, isMin) {
+    await browser.pause(3000)
     let inputValueClassName = '.js-uk-range_min'
     let btnClassName = '.js-uk-min'
     if (isMin === false) {

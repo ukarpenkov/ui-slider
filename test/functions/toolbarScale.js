@@ -1,4 +1,5 @@
 var scaleChange = async function (value, wrapClass, isMin) {
+    await browser.pause(3000)
     let sliderInputClass = '.js-uk-range_min'
     let minScaleInputClass = ".js-min-scale"
     if (isMin === false) {
