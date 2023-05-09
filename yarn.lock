@@ -1098,7 +1098,7 @@
     split2 "^4.1.0"
     stream-buffers "^3.0.2"
 
-"@wdio/logger@^8.0.0", "@wdio/logger@8.1.0":
+"@wdio/logger@^8.1.0", "@wdio/logger@8.1.0":
   version "8.1.0"
   resolved "https://registry.npmjs.org/@wdio/logger/-/logger-8.1.0.tgz"
   integrity sha512-QRC5b7FF4JIYUCqggnVA0sZ80TwIUFN9JyBSbuGuMxaSLSLujSo7WfuSrnQXVvsRbnJ16wWwJWYigfLkxOW86Q==
@@ -1579,9 +1579,9 @@ camelcase@^6.0.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001370:
-  version "1.0.30001393"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001393.tgz"
-  integrity sha512-N/od11RX+Gsk+1qY/jbPa0R6zJupEa0lxeBG598EbrtblxVCTJsQwbRBm6+V+rxpc5lHKdsXb9RY83cZIPLseA==
+  version "1.0.30001486"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001486.tgz"
+  integrity sha512-uv7/gXuHi10Whlj0pp5q/tsK/32J2QSqVRKQhs2j8VsDCjgyruAh/eEXHF822VqO9yT6iZKw3nRwZRSPBE9OQg==
 
 chalk@^1.1.3:
   version "1.1.3"
@@ -1666,10 +1666,10 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.npmjs.org/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromedriver@*, chromedriver@^109.0.0:
-  version "109.0.0"
-  resolved "https://registry.npmjs.org/chromedriver/-/chromedriver-109.0.0.tgz"
-  integrity sha512-jdmBq11IUwfThLFiygGTZ89qbROSQI4bICQjvOVQy2Bqr1LwC+MFkhwyZp3YG99eehQbZuTlQmmfCZBfpewTNA==
+chromedriver@*, chromedriver@^113.0.0:
+  version "113.0.0"
+  resolved "https://registry.npmjs.org/chromedriver/-/chromedriver-113.0.0.tgz"
+  integrity sha512-UnQlt2kPicYXVNHPzy9HfcWvEbKJjjKAEaatdcnP/lCIRwuSoZFVLH0HVDAGdbraXp3dNVhfE2Qx7gw8TnHnPw==
   dependencies:
     "@testim/chrome-version" "^1.1.3"
     axios "^1.2.1"
@@ -5458,12 +5458,12 @@ wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-wdio-chromedriver-service@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.npmjs.org/wdio-chromedriver-service/-/wdio-chromedriver-service-8.0.1.tgz"
-  integrity sha512-nLjJmUBlng8RtnTM/ZJt1rzwAY1QqsMZbmNDxX7/AuSZEu88URTjjUhGPHY0d9al33GSiVoF606P0QSQT6B1ag==
+wdio-chromedriver-service@^8.1.1:
+  version "8.1.1"
+  resolved "https://registry.npmjs.org/wdio-chromedriver-service/-/wdio-chromedriver-service-8.1.1.tgz"
+  integrity sha512-pN3GiOkTIMnalfq4PJAHdX95pDp1orHnTY8W1fIbd6ok81ba97UjerTgS7lUDRUh1p0MAm35Ww0uc0/9wzB7SA==
   dependencies:
-    "@wdio/logger" "^8.0.0"
+    "@wdio/logger" "^8.1.0"
     fs-extra "^11.1.0"
     split2 "^4.1.0"
     tcp-port-used "^1.0.2"
