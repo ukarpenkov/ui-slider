@@ -13,3 +13,6 @@ const createMyStore = (reducer) => {
 
   return { getState, dispatch, subscribe }
 }
+
+console.log('first')
+console.log('first')
