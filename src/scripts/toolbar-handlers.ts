@@ -158,9 +158,11 @@ export function changeOrientation(): void {
   if ($(verticalOrHorizontalCheckbox).is(':checked')) {
     $(slider).addClass('uk-slider__range_orient_vertical')
     $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
+    console.log('orient vert')
   } else {
     $(slider).removeClass('uk-slider__range_orient_vertical')
     $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+    console.log('orient hor')
   }
   if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
     $(slider).removeClass('uk-slider__range_orient_vertical')

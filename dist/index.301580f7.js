@@ -541,9 +541,17 @@ var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 var _viewInitToolbar = require("./view-init-toolbar");
 var _viewInitToolbarDefault = parcelHelpers.interopDefault(_viewInitToolbar);
 var _toolbarHandlers = require("./toolbar-handlers");
+var _store = require("./model/store");
 let settings1 = new (0, _sliderSettingsDefault.default)("interval", "horizontal", 1, 200);
 let settings2 = new (0, _sliderSettingsDefault.default)("interval", "vertical", 1, 300);
 let settings3 = new (0, _sliderSettingsDefault.default)("single", "horizontal", 1, 1000);
+(0, _store.store).dispatch({
+    type: "ADD_SLIDER"
+});
+(0, _store.store).dispatch({
+    type: "ADD_SLIDER"
+});
+console.log((0, _store.store).getState());
 (0, _viewInitSliderDefault.default)(".id2", settings1);
 (0, _viewInitSliderDefault.default)(".id3", settings2);
 (0, _viewInitSliderDefault.default)(".id4", settings3);
@@ -564,7 +572,7 @@ verticalCheckedCheckbox.checked = true;
 let singleCheckedCheckbox = $("input[name='singleOrRange']")[2];
 singleCheckedCheckbox.checked = true;
 
-},{"./import-jquery":"kmOly","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/store":"gl3Yi"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7618,9 +7626,11 @@ function changeOrientation() {
     if ($(verticalOrHorizontalCheckbox).is(":checked")) {
         $(slider).addClass("uk-slider__range_orient_vertical");
         $(valueBlock).addClass("uk-slider__value_block_orient_vertical");
+        console.log("orient vert");
     } else {
         $(slider).removeClass("uk-slider__range_orient_vertical");
         $(valueBlock).removeClass("uk-slider__value_block_orient_vertical");
+        console.log("orient hor");
     }
     if (!$(verticalOrHorizontalCheckbox).is(":checked")) {
         $(slider).removeClass("uk-slider__range_orient_vertical");
@@ -7655,6 +7665,51 @@ function changeVisibleSlider() {
     let slider = $(wrap).children()[0];
     if ($(scaleCheckbox).is(":checked")) $(slider).addClass("hidden");
     else $(slider).removeClass("hidden");
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gl3Yi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "store", ()=>store);
+var _reducer = require("./reducer");
+function createStore(reducer, initialState) {
+    let state = initialState;
+    return {
+        dispatch: (action)=>{
+            state = reducer(state, action);
+        },
+        getState: ()=>state
+    };
+}
+const initialSlider = [];
+const store = createStore((0, _reducer.reducer), initialSlider);
+
+},{"./reducer":"1G2Wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1G2Wt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "reducer", ()=>reducer);
+function reducer(state, action) {
+    switch(action.type){
+        case "ADD_SLIDER":
+            return [
+                ...state,
+                {
+                    interval: "interval",
+                    orientation: "horizontal",
+                    minValue: 0,
+                    maxValue: 100
+                }, 
+            ];
+        // case 'VERTICAL_ORIENTANTION':
+        //   return state.map((slider) => {
+        //     if (slider.id === action.id) {
+        //       return { ...todo, completed: !todo.completed }
+        //     }
+        //     return todo
+        //   })
+        default:
+            return state;
+    }
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")

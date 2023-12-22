@@ -13,10 +13,20 @@ import {
   changeVisibleProgressBar,
   changeVisibleSlider,
 } from './toolbar-handlers'
+import { store } from './model/store'
 
 let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
 let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
 let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
+
+store.dispatch({
+  type: 'ADD_SLIDER',
+})
+store.dispatch({
+  type: 'ADD_SLIDER',
+})
+
+console.log(store.getState())
 
 initSlider('.id2', settings1)
 initSlider('.id3', settings2)
