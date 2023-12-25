@@ -21,9 +21,19 @@ let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 
 store.dispatch({
   type: 'ADD_SLIDER',
+  id: 'id2',
+  interval: 'single',
+  orientation: 'horizontal',
+  minValue: 1,
+  maxValue: 20,
 })
 store.dispatch({
   type: 'ADD_SLIDER',
+  id: 'id3',
+  interval: 'single',
+  orientation: 'horizontal',
+  minValue: 1,
+  maxValue: 20,
 })
 
 console.log(store.getState())

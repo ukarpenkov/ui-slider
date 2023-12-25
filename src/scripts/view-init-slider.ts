@@ -53,6 +53,7 @@ function initSlider(wrapper: string, settings: Settings): Settings {
         .children('.uk-slider__value_block')
         .children('.js-uk-range_max')
       var minVal: number = Number($(minBtn).val())
+
       var maxVal: number = Number($(maxBtn).val())
       if (minVal > maxVal - 1) {
         $(minBtn).val(maxVal)

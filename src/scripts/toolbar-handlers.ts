@@ -1,3 +1,5 @@
+import { store } from './model/store'
+
 export function changeMinScale(): void {
   let minScaleInput: JQuery<object> = $(this)
   let minScaleValue: number = Number($(minScaleInput).val())
@@ -154,14 +156,29 @@ export function changeOrientation(): void {
     .parent()
     .children()
   let slider: HTMLElement = $(wrap).children()[0]
+
+  let sliderId = $(slider).parent().attr('class').split(' ')[0]
   let valueBlock: HTMLElement = $(wrap).children()[1]
   if ($(verticalOrHorizontalCheckbox).is(':checked')) {
+    console.log(sliderId)
     $(slider).addClass('uk-slider__range_orient_vertical')
     $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
+    //reducer code
+    store.dispatch({
+      type: 'VERTICAL_ORIENTANTION',
+      id: sliderId,
+    })
+    //end of reducer code
     console.log('orient vert')
   } else {
     $(slider).removeClass('uk-slider__range_orient_vertical')
     $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+    //reducer code
+    store.dispatch({
+      type: 'HORIZONTAL_ORIENTANTION',
+      id: 1,
+    })
+    //end of reducer code
     console.log('orient hor')
   }
   if (!$(verticalOrHorizontalCheckbox).is(':checked')) {

@@ -1,22 +1,34 @@
+import { store } from './store'
+
 export function reducer(state, action) {
   switch (action.type) {
     case 'ADD_SLIDER':
       return [
         ...state,
         {
-          interval: 'interval',
-          orientation: 'horizontal',
-          minValue: 0,
-          maxValue: 100,
+          id: action.id,
+          interval: action.interval,
+          orientation: action.orientation,
+          minValue: action.minValue,
+          maxValue: action.maxValue,
         },
       ]
-    // case 'VERTICAL_ORIENTANTION':
-    //   return state.map((slider) => {
-    //     if (slider.id === action.id) {
-    //       return { ...todo, completed: !todo.completed }
-    //     }
-    //     return todo
-    //   })
+    case 'VERTICAL_ORIENTANTION':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, orientation: 'vertical' }
+        }
+        console.log(store.getState())
+        return slider
+      })
+    case 'HORIZONTAL_ORIENTANTION':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, orientation: 'horizontal' }
+        }
+        console.log(store.getState())
+        return slider
+      })
     default:
       return state
   }

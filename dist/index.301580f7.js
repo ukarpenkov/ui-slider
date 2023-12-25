@@ -546,10 +546,20 @@ let settings1 = new (0, _sliderSettingsDefault.default)("interval", "horizontal"
 let settings2 = new (0, _sliderSettingsDefault.default)("interval", "vertical", 1, 300);
 let settings3 = new (0, _sliderSettingsDefault.default)("single", "horizontal", 1, 1000);
 (0, _store.store).dispatch({
-    type: "ADD_SLIDER"
+    type: "ADD_SLIDER",
+    id: "id2",
+    interval: "single",
+    orientation: "horizontal",
+    minValue: 1,
+    maxValue: 20
 });
 (0, _store.store).dispatch({
-    type: "ADD_SLIDER"
+    type: "ADD_SLIDER",
+    id: "id3",
+    interval: "single",
+    orientation: "horizontal",
+    minValue: 1,
+    maxValue: 20
 });
 console.log((0, _store.store).getState());
 (0, _viewInitSliderDefault.default)(".id2", settings1);
@@ -572,7 +582,7 @@ verticalCheckedCheckbox.checked = true;
 let singleCheckedCheckbox = $("input[name='singleOrRange']")[2];
 singleCheckedCheckbox.checked = true;
 
-},{"./import-jquery":"kmOly","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/store":"gl3Yi"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7496,6 +7506,7 @@ parcelHelpers.export(exports, "changeOrientation", ()=>changeOrientation);
 parcelHelpers.export(exports, "changeSingleOrRange", ()=>changeSingleOrRange);
 parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgressBar);
 parcelHelpers.export(exports, "changeVisibleSlider", ()=>changeVisibleSlider);
+var _store = require("./model/store");
 function changeMinScale() {
     let minScaleInput = $(this);
     let minScaleValue = Number($(minScaleInput).val());
@@ -7622,14 +7633,28 @@ function changeOrientation() {
     let verticalOrHorizontalCheckbox = $(this);
     let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children();
     let slider = $(wrap).children()[0];
+    let sliderId = $(slider).parent().attr("class").split(" ")[0];
     let valueBlock = $(wrap).children()[1];
     if ($(verticalOrHorizontalCheckbox).is(":checked")) {
+        console.log(sliderId);
         $(slider).addClass("uk-slider__range_orient_vertical");
         $(valueBlock).addClass("uk-slider__value_block_orient_vertical");
+        //reducer code
+        (0, _store.store).dispatch({
+            type: "VERTICAL_ORIENTANTION",
+            id: sliderId
+        });
+        //end of reducer code
         console.log("orient vert");
     } else {
         $(slider).removeClass("uk-slider__range_orient_vertical");
         $(valueBlock).removeClass("uk-slider__value_block_orient_vertical");
+        //reducer code
+        (0, _store.store).dispatch({
+            type: "HORIZONTAL_ORIENTANTION",
+            id: 1
+        });
+        //end of reducer code
         console.log("orient hor");
     }
     if (!$(verticalOrHorizontalCheckbox).is(":checked")) {
@@ -7667,7 +7692,7 @@ function changeVisibleSlider() {
     else $(slider).removeClass("hidden");
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gl3Yi":[function(require,module,exports) {
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gl3Yi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "store", ()=>store);
@@ -7688,30 +7713,43 @@ const store = createStore((0, _reducer.reducer), initialSlider);
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "reducer", ()=>reducer);
+var _store = require("./store");
 function reducer(state, action) {
     switch(action.type){
         case "ADD_SLIDER":
             return [
                 ...state,
                 {
-                    interval: "interval",
-                    orientation: "horizontal",
-                    minValue: 0,
-                    maxValue: 100
+                    id: action.id,
+                    interval: action.interval,
+                    orientation: action.orientation,
+                    minValue: action.minValue,
+                    maxValue: action.maxValue
                 }, 
             ];
-        // case 'VERTICAL_ORIENTANTION':
-        //   return state.map((slider) => {
-        //     if (slider.id === action.id) {
-        //       return { ...todo, completed: !todo.completed }
-        //     }
-        //     return todo
-        //   })
+        case "VERTICAL_ORIENTANTION":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    orientation: "vertical"
+                };
+                console.log((0, _store.store).getState());
+                return slider;
+            });
+        case "HORIZONTAL_ORIENTANTION":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    orientation: "horizontal"
+                };
+                console.log((0, _store.store).getState());
+                return slider;
+            });
         default:
             return state;
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./store":"gl3Yi"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map
