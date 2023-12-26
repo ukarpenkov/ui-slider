@@ -1,3 +1,5 @@
+import { store } from './model/store'
+
 type Settings = {
   minValue: number
   maxValue: number
@@ -21,19 +23,32 @@ function initSlider(wrapper: string, settings: Settings): Settings {
     display = 'hidden'
     visibility = 'no-vis'
   }
-
+  //СТАРЫЙ КОД БЕЗ СТОРА
+  // let slider: JQuery<HTMLElement> = $(`
+  //       <div class="uk-slider__range ${orientation}">
+  //       <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="${settings.minValue}" orient="vertical" step="1"/>
+  //       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${settings.minValue}"
+  //       max="${settings.maxValue}" value="${settings.maxValue}" orient="vertical" step="1"/>
+  //       </div>
+  //       <div class="uk-slider__value_block ${inputsOrientation}">
+  //       <input type="number" value="${settings.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+  //       <input type="number" value="${settings.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
+  //       </div>
+  //       `)
+  //СТАРЫЙ КОД БЕЗ СТОРА
+  let state = store.getState()
+  console.log('state', state[0])
   let slider: JQuery<HTMLElement> = $(`
-        <div class="uk-slider__range ${orientation}">
-        <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="${settings.minValue}" orient="vertical" step="1"/>
-        <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${settings.minValue}"
-        max="${settings.maxValue}" value="${settings.maxValue}" orient="vertical" step="1"/>
-        </div>
-        <div class="uk-slider__value_block ${inputsOrientation}">
-        <input type="number" value="${settings.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-        <input type="number" value="${settings.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
-        </div>
-        `)
-
+  <div class="uk-slider__range ${state[0].orientation}">
+  <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${state[0].minValue}" max="${state[0].maxValue}" value="${state[0].minValue}" orient="vertical" step="1"/>
+  <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${settings.minValue}"
+  max="${state[0].maxValue}" value="${state[0].maxValue}" orient="vertical" step="1"/>
+  </div>
+  <div class="uk-slider__value_block ${state[0].orientation}">
+  <input type="number" value="${state[0].minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+  <input type="number" value="${state[0].maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
+  </div>
+  `)
   $(wrapper).append(slider)
 
   let exportSettings = settings
