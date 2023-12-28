@@ -38,9 +38,9 @@ store.dispatch({
 
 console.log(store.getState())
 
-initSlider('.id2', settings1)
-initSlider('.id3', settings2)
-initSlider('.id4', settings3)
+initSlider('.id2', null)
+initSlider('.id3', null)
+initSlider('.id4', null)
 
 initToolBar('.js-page-item1')
 initToolBar('.js-page-item2')

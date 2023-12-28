@@ -562,9 +562,9 @@ let settings3 = new (0, _sliderSettingsDefault.default)("single", "horizontal", 
     maxValue: 20
 });
 console.log((0, _store.store).getState());
-(0, _viewInitSliderDefault.default)(".id2", settings1);
-(0, _viewInitSliderDefault.default)(".id3", settings2);
-(0, _viewInitSliderDefault.default)(".id4", settings3);
+(0, _viewInitSliderDefault.default)(".id2", null);
+(0, _viewInitSliderDefault.default)(".id3", null);
+(0, _viewInitSliderDefault.default)(".id4", null);
 (0, _viewInitToolbarDefault.default)(".js-page-item1");
 (0, _viewInitToolbarDefault.default)(".js-page-item2");
 (0, _viewInitToolbarDefault.default)(".js-page-item3");
@@ -582,7 +582,7 @@ verticalCheckedCheckbox.checked = true;
 let singleCheckedCheckbox = $("input[name='singleOrRange']")[2];
 singleCheckedCheckbox.checked = true;
 
-},{"./import-jquery":"kmOly","./slider-settings":"gznSp","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./slider-settings":"gznSp"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7378,21 +7378,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"gznSp":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-class SliderSettings {
-    constructor(interval, orientation, minValue, maxValue){
-        this.interval = interval;
-        this.orientation = orientation;
-        this.inputsOrientation = orientation;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-    }
-}
-exports.default = SliderSettings;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8JR3W":[function(require,module,exports) {
+},{}],"8JR3W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _store = require("./model/store");
@@ -7426,19 +7412,33 @@ function initSlider(wrapper, settings) {
     //       `)
     //СТАРЫЙ КОД БЕЗ СТОРА
     let state = (0, _store.store).getState();
-    console.log("state", state[0]);
-    let slider = $(`
-  <div class="uk-slider__range ${state[0].orientation}">
-  <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${state[0].minValue}" max="${state[0].maxValue}" value="${state[0].minValue}" orient="vertical" step="1"/>
-  <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${settings.minValue}"
-  max="${state[0].maxValue}" value="${state[0].maxValue}" orient="vertical" step="1"/>
+    let sliderRendering = (data)=>{
+        return data.map((item)=>{
+            return $(`
+  <div class="uk-slider__range ${item.orientation}">
+  <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minValue}" max="${item.maxValue}" value="${item.minValue}" orient="vertical" step="1"/>
+  <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${item.minValue}"
+  max="${item.maxValue}" value="${item.maxValue}" orient="vertical" step="1"/>
   </div>
-  <div class="uk-slider__value_block ${state[0].orientation}">
-  <input type="number" value="${state[0].minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-  <input type="number" value="${state[0].maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
+  <div class="uk-slider__value_block ${item.orientation}">
+  <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+  <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
   </div>
   `);
-    $(wrapper).append(slider);
+        });
+    };
+    // let slider: JQuery<HTMLElement> = $(`
+    // <div class="uk-slider__range ${state[0].orientation}">
+    // <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${state[0].minValue}" max="${state[0].maxValue}" value="${state[0].minValue}" orient="vertical" step="1"/>
+    // <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${settings.minValue}"
+    // max="${state[0].maxValue}" value="${state[0].maxValue}" orient="vertical" step="1"/>
+    // </div>
+    // <div class="uk-slider__value_block ${state[0].orientation}">
+    // <input type="number" value="${state[0].minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+    // <input type="number" value="${state[0].maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
+    // </div>
+    // `)
+    $(wrapper).append(sliderRendering(state));
     let exportSettings = settings;
     (function handleRange() {
         function rangeInputChangeEventHandler() {
@@ -7766,6 +7766,20 @@ function changeVisibleSlider() {
     else $(slider).removeClass("hidden");
 }
 
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gznSp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class SliderSettings {
+    constructor(interval, orientation, minValue, maxValue){
+        this.interval = interval;
+        this.orientation = orientation;
+        this.inputsOrientation = orientation;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+    }
+}
+exports.default = SliderSettings;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map
