@@ -15,14 +15,14 @@ import {
 } from './toolbar-handlers'
 import { store } from './model/store'
 
-let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
-let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
-let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
+// let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
+// let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
+// let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 
 store.dispatch({
   type: 'ADD_SLIDER',
   id: 'id2',
-  interval: 'single',
+  interval: 'interval',
   orientation: 'horizontal',
   minValue: 1,
   maxValue: 20,
@@ -31,16 +31,24 @@ store.dispatch({
   type: 'ADD_SLIDER',
   id: 'id3',
   interval: 'single',
-  orientation: 'horizontal',
+  orientation: 'vertical',
   minValue: 1,
   maxValue: 20,
+})
+store.dispatch({
+  type: 'ADD_SLIDER',
+  id: 'id4',
+  interval: 'single',
+  orientation: 'vertical',
+  minValue: 1,
+  maxValue: 100,
 })
 
 console.log(store.getState())
 
-initSlider('.id2', null)
-initSlider('.id3', null)
-initSlider('.id4', null)
+initSlider('.id2')
+// initSlider('.id3', null)
+// initSlider('.id4', null)
 
 initToolBar('.js-page-item1')
 initToolBar('.js-page-item2')

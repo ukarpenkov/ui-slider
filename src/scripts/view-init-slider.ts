@@ -7,22 +7,23 @@ type Settings = {
   interval: string
 }
 
-function initSlider(wrapper: string, settings) {
+function initSlider(wrapper: string) {
+  let state = store.getState()
   let orientation: string
   let display: string = ''
   let visibility: string = ''
   let inputsOrientation: string
-  if (settings.orientation === 'vertical') {
-    orientation = 'uk-slider__range_orient_vertical'
-    inputsOrientation = 'uk-slider__value_block_orient_vertical'
-  } else {
-    orientation = ''
-    inputsOrientation = ''
-  }
-  if (settings.interval === 'single') {
-    display = 'hidden'
-    visibility = 'no-vis'
-  }
+  // if (settings.orientation === 'vertical') {
+  //   orientation = 'uk-slider__range_orient_vertical'
+  //   inputsOrientation = 'uk-slider__value_block_orient_vertical'
+  // } else {
+  //   orientation = ''
+  //   inputsOrientation = ''
+  // }
+  // if (settings.interval === 'single') {
+  //   display = 'hidden'
+  //   visibility = 'no-vis'
+  // }
   //СТАРЫЙ КОД БЕЗ СТОРА
   // let slider: JQuery<HTMLElement> = $(`
   //       <div class="uk-slider__range ${orientation}">
@@ -36,19 +37,36 @@ function initSlider(wrapper: string, settings) {
   //       </div>
   //       `)
   //СТАРЫЙ КОД БЕЗ СТОРА
-  let state = store.getState()
 
   let sliderRendering = (data) => {
     return data.map((item) => {
       return $(`
-  <div class="uk-slider__range ${item.orientation}">
-  <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minValue}" max="${item.maxValue}" value="${item.minValue}" orient="vertical" step="1"/>
-  <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${item.minValue}"
+  <div class="uk-slider__range ${
+    item.orientation === 'vertical' ? 'uk-slider__range_orient_vertical' : ''
+  }">
+  <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${
+    item.minValue
+  }" max="${item.maxValue}" value="${
+        item.minValue
+      }" orient="vertical" step="1"/>
+  <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${
+    item.interval === 'single' ? 'hidden' : ''
+  }" name="range_1" type="range" min="${item.minValue}"
   max="${item.maxValue}" value="${item.maxValue}" orient="vertical" step="1"/>
   </div>
-  <div class="uk-slider__value_block ${item.orientation}">
-  <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-  <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
+  <div class="uk-slider__value_block ${
+    item.orientation === 'vertical'
+      ? 'uk-slider__value_block_orient_vertical'
+      : ''
+  }">
+  <input type="number" value="${
+    item.minValue
+  }" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+  <input type="number" value="${
+    item.maxValue
+  }" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${
+        item.interval === 'single' ? 'no-vis' : ''
+      }" />
   </div>
   `)
     })
@@ -67,8 +85,7 @@ function initSlider(wrapper: string, settings) {
   // `)
   $(wrapper).append(sliderRendering(state))
 
-  let exportSettings = settings
-
+  // let exportSettings = settings
   ;(function handleRange(): void {
     function rangeInputChangeEventHandler(): void {
       var minBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-min')
@@ -113,7 +130,7 @@ function initSlider(wrapper: string, settings) {
     $('.uk-slider__input').trigger('input')
   })()
 
-  return exportSettings
+  // return exportSettings
 }
 
 export default initSlider
