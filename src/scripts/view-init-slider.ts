@@ -41,33 +41,39 @@ function initSlider(wrapper: string) {
   let sliderRendering = (data) => {
     return data.map((item) => {
       return $(`
-  <div class="uk-slider__range ${
-    item.orientation === 'vertical' ? 'uk-slider__range_orient_vertical' : ''
-  }">
-  <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${
-    item.minValue
-  }" max="${item.maxValue}" value="${
+    <div class="${item.id} slider-wrapper">  
+      <div class="uk-slider__range ${
+        item.orientation === 'vertical'
+          ? 'uk-slider__range_orient_vertical'
+          : ''
+      }">
+      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${
+        item.minValue
+      }" max="${item.maxValue}" value="${
         item.minValue
       }" orient="vertical" step="1"/>
-  <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${
-    item.interval === 'single' ? 'hidden' : ''
-  }" name="range_1" type="range" min="${item.minValue}"
-  max="${item.maxValue}" value="${item.maxValue}" orient="vertical" step="1"/>
-  </div>
-  <div class="uk-slider__value_block ${
-    item.orientation === 'vertical'
-      ? 'uk-slider__value_block_orient_vertical'
-      : ''
-  }">
-  <input type="number" value="${
-    item.minValue
-  }" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-  <input type="number" value="${
-    item.maxValue
-  }" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${
+      <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${
+        item.interval === 'single' ? 'hidden' : ''
+      }" name="range_1" type="range" min="${item.minValue}"
+      max="${item.maxValue}" value="${
+        item.maxValue
+      }" orient="vertical" step="1"/>
+      </div>
+      <div class="uk-slider__value_block ${
+        item.orientation === 'vertical'
+          ? 'uk-slider__value_block_orient_vertical'
+          : ''
+      }">
+      <input type="number" value="${
+        item.minValue
+      }" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+      <input type="number" value="${
+        item.maxValue
+      }" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${
         item.interval === 'single' ? 'no-vis' : ''
       }" />
-  </div>
+      </div>
+    </div>
   `)
     })
   }

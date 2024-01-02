@@ -46,7 +46,8 @@ store.dispatch({
 
 console.log(store.getState())
 
-initSlider('.id2')
+initSlider('.slider-page')
+// initSlider('.id3')
 // initSlider('.id3', null)
 // initSlider('.id4', null)
 
