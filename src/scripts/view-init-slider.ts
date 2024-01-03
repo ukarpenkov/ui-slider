@@ -90,8 +90,6 @@ function initSlider(wrapper: string) {
   // </div>
   // `)
   $(wrapper).append(sliderRendering(state))
-
-  // let exportSettings = settings
   ;(function handleRange(): void {
     function rangeInputChangeEventHandler(): void {
       var minBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-min')
@@ -131,7 +129,15 @@ function initSlider(wrapper: string) {
         }
       })
       $(range_max).val(maxVal * 1)
+      console.log(maxVal)
+      store.dispatch({
+        type: 'CHANGE_MIN_VAL',
+        id: 'id2',
+        payload: minVal,
+      })
+      console.log(minVal)
     }
+
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)
     $('.uk-slider__input').trigger('input')
   })()

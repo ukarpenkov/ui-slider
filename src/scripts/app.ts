@@ -51,9 +51,9 @@ initSlider('.slider-page')
 // initSlider('.id3', null)
 // initSlider('.id4', null)
 
-initToolBar('.js-page-item1')
-initToolBar('.js-page-item2')
-initToolBar('.js-page-item3')
+initToolBar('.id2')
+initToolBar('.id3')
+initToolBar('.id4')
 
 $("input[name='minScale']").on('change', changeMinScale)
 $("input[name='maxScale']").on('change', changeMaxScale)

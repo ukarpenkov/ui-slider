@@ -29,6 +29,14 @@ export function reducer(state, action) {
         console.log(store.getState())
         return slider
       })
+    case 'CHANGE_MIN_VAL':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, minValue: action.payload }
+        }
+        console.log(store.getState())
+        return slider
+      })
     default:
       return state
   }
