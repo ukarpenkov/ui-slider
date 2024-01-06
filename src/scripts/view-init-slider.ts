@@ -116,6 +116,12 @@ function initSlider(wrapper: string) {
           $(minBtn).val(maxVal)
           $(range_min).val(Number($(range_max).val()))
         }
+        store.dispatch({
+          type: 'CHANGE_MIN_VAL',
+          id: 'id2',
+          payload: minVal,
+        })
+        console.log(store.getState())
       })
       $(range_min).val(minVal * 1)
       if (maxVal < minVal) {
@@ -127,15 +133,14 @@ function initSlider(wrapper: string) {
           $(maxBtn).val(maxVal)
           $(range_max).val(Number($(range_min).val()))
         }
+        store.dispatch({
+          type: 'CHANGE_MAX_VAL',
+          id: 'id2',
+          payload: maxVal,
+        })
+        console.log(store.getState())
       })
       $(range_max).val(maxVal * 1)
-      console.log(maxVal)
-      store.dispatch({
-        type: 'CHANGE_MIN_VAL',
-        id: 'id2',
-        payload: minVal,
-      })
-      console.log(minVal)
     }
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)

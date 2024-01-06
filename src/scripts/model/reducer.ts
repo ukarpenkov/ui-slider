@@ -18,7 +18,7 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, orientation: 'vertical' }
         }
-        console.log(store.getState())
+
         return slider
       })
     case 'HORIZONTAL_ORIENTANTION':
@@ -26,7 +26,7 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, orientation: 'horizontal' }
         }
-        console.log(store.getState())
+
         return slider
       })
     case 'CHANGE_MIN_VAL':
@@ -34,7 +34,14 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, minValue: action.payload }
         }
-        console.log(store.getState())
+
+        return slider
+      })
+    case 'CHANGE_MAX_VAL':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, maxValue: action.payload }
+        }
         return slider
       })
     default:

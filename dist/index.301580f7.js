@@ -7463,6 +7463,12 @@ function initSlider(wrapper) {
                     $(minBtn).val(maxVal);
                     $(range_min).val(Number($(range_max).val()));
                 }
+                (0, _store.store).dispatch({
+                    type: "CHANGE_MIN_VAL",
+                    id: "id2",
+                    payload: minVal
+                });
+                console.log((0, _store.store).getState());
             });
             $(range_min).val(minVal * 1);
             if (maxVal < minVal) $(maxBtn).val(minVal);
@@ -7472,15 +7478,14 @@ function initSlider(wrapper) {
                     $(maxBtn).val(maxVal);
                     $(range_max).val(Number($(range_min).val()));
                 }
+                (0, _store.store).dispatch({
+                    type: "CHANGE_MAX_VAL",
+                    id: "id2",
+                    payload: maxVal
+                });
+                console.log((0, _store.store).getState());
             });
             $(range_max).val(maxVal * 1);
-            console.log(maxVal);
-            (0, _store.store).dispatch({
-                type: "CHANGE_MIN_VAL",
-                id: "id2",
-                payload: minVal
-            });
-            console.log(minVal);
         }
         $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
         $(".uk-slider__input").trigger("input");
@@ -7510,7 +7515,6 @@ const store = createStore((0, _reducer.reducer), initialSlider);
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "reducer", ()=>reducer);
-var _store = require("./store");
 function reducer(state, action) {
     switch(action.type){
         case "ADD_SLIDER":
@@ -7530,7 +7534,6 @@ function reducer(state, action) {
                     ...slider,
                     orientation: "vertical"
                 };
-                console.log((0, _store.store).getState());
                 return slider;
             });
         case "HORIZONTAL_ORIENTANTION":
@@ -7539,7 +7542,6 @@ function reducer(state, action) {
                     ...slider,
                     orientation: "horizontal"
                 };
-                console.log((0, _store.store).getState());
                 return slider;
             });
         case "CHANGE_MIN_VAL":
@@ -7548,7 +7550,14 @@ function reducer(state, action) {
                     ...slider,
                     minValue: action.payload
                 };
-                console.log((0, _store.store).getState());
+                return slider;
+            });
+        case "CHANGE_MAX_VAL":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    maxValue: action.payload
+                };
                 return slider;
             });
         default:
@@ -7556,7 +7565,7 @@ function reducer(state, action) {
     }
 }
 
-},{"./store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2C3S4":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2C3S4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function initToolBar(wrapper) {
