@@ -105,23 +105,34 @@ function initSlider(wrapper: string) {
         .children('.uk-slider__value_block')
         .children('.js-uk-range_max')
       var minVal: number = Number($(minBtn).val())
-
       var maxVal: number = Number($(maxBtn).val())
+      let sliderId = $(range_min).parent().parent()[0].classList[0]
+
       if (minVal > maxVal - 1) {
         $(minBtn).val(maxVal)
       }
       $(range_min).change(function () {
         $(minBtn).val(Number($(this).val()) / 1)
+        store.dispatch({
+          type: 'CHANGE_MIN_VAL',
+          id: sliderId,
+          payload: minVal,
+        })
+
         if (Number($(range_min).val()) > Number($(range_max).val())) {
           $(minBtn).val(maxVal)
           $(range_min).val(Number($(range_max).val()))
+          store.dispatch({
+            type: 'CHANGE_MIN_VAL',
+            id: sliderId,
+            payload: minVal,
+          })
         }
         store.dispatch({
           type: 'CHANGE_MIN_VAL',
-          id: 'id2',
+          id: sliderId,
           payload: minVal,
         })
-        console.log(store.getState())
       })
       $(range_min).val(minVal * 1)
       if (maxVal < minVal) {
@@ -135,12 +146,23 @@ function initSlider(wrapper: string) {
         }
         store.dispatch({
           type: 'CHANGE_MAX_VAL',
-          id: 'id2',
+          id: sliderId,
           payload: maxVal,
         })
         console.log(store.getState())
       })
       $(range_max).val(maxVal * 1)
+      store.dispatch({
+        type: 'CHANGE_MIN_VAL',
+        id: sliderId,
+        payload: minVal,
+      })
+      store.dispatch({
+        type: 'CHANGE_MAX_VAL',
+        id: sliderId,
+        payload: maxVal,
+      })
+      console.log(store.getState())
     }
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)

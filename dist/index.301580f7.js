@@ -7456,19 +7456,29 @@ function initSlider(wrapper) {
             var range_max = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_max");
             var minVal = Number($(minBtn).val());
             var maxVal = Number($(maxBtn).val());
+            let sliderId = $(range_min).parent().parent()[0].classList[0];
             if (minVal > maxVal - 1) $(minBtn).val(maxVal);
             $(range_min).change(function() {
                 $(minBtn).val(Number($(this).val()) / 1);
+                (0, _store.store).dispatch({
+                    type: "CHANGE_MIN_VAL",
+                    id: sliderId,
+                    payload: minVal
+                });
                 if (Number($(range_min).val()) > Number($(range_max).val())) {
                     $(minBtn).val(maxVal);
                     $(range_min).val(Number($(range_max).val()));
+                    (0, _store.store).dispatch({
+                        type: "CHANGE_MIN_VAL",
+                        id: sliderId,
+                        payload: minVal
+                    });
                 }
                 (0, _store.store).dispatch({
                     type: "CHANGE_MIN_VAL",
-                    id: "id2",
+                    id: sliderId,
                     payload: minVal
                 });
-                console.log((0, _store.store).getState());
             });
             $(range_min).val(minVal * 1);
             if (maxVal < minVal) $(maxBtn).val(minVal);
@@ -7480,12 +7490,23 @@ function initSlider(wrapper) {
                 }
                 (0, _store.store).dispatch({
                     type: "CHANGE_MAX_VAL",
-                    id: "id2",
+                    id: sliderId,
                     payload: maxVal
                 });
                 console.log((0, _store.store).getState());
             });
             $(range_max).val(maxVal * 1);
+            (0, _store.store).dispatch({
+                type: "CHANGE_MIN_VAL",
+                id: sliderId,
+                payload: minVal
+            });
+            (0, _store.store).dispatch({
+                type: "CHANGE_MAX_VAL",
+                id: sliderId,
+                payload: maxVal
+            });
+            console.log((0, _store.store).getState());
         }
         $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
         $(".uk-slider__input").trigger("input");
