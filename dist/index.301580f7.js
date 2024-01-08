@@ -7459,11 +7459,12 @@ function initSlider(wrapper) {
             let sliderId = $(range_min).parent().parent()[0].classList[0];
             if (minVal > maxVal - 1) $(minBtn).val(maxVal);
             $(range_min).change(function() {
-                $(minBtn).val(Number($(this).val()) / 1);
+                let currentValue = Number($(this).val()) / 1;
+                $(minBtn).val(currentValue);
                 (0, _store.store).dispatch({
                     type: "CHANGE_MIN_VAL",
                     id: sliderId,
-                    payload: minVal
+                    payload: currentValue
                 });
                 if (Number($(range_min).val()) > Number($(range_max).val())) {
                     $(minBtn).val(maxVal);
@@ -7471,19 +7472,16 @@ function initSlider(wrapper) {
                     (0, _store.store).dispatch({
                         type: "CHANGE_MIN_VAL",
                         id: sliderId,
-                        payload: minVal
+                        payload: currentValue
                     });
                 }
-                (0, _store.store).dispatch({
-                    type: "CHANGE_MIN_VAL",
-                    id: sliderId,
-                    payload: minVal
-                });
+                console.log(sliderId, (0, _store.store).getState());
             });
             $(range_min).val(minVal * 1);
             if (maxVal < minVal) $(maxBtn).val(minVal);
             $(range_max).change(function() {
-                $(maxBtn).val(Number($(this).val()) / 1);
+                let currentValue = Number($(this).val()) / 1;
+                $(maxBtn).val(currentValue);
                 if (Number($(range_max).val()) < Number($(range_min).val())) {
                     $(maxBtn).val(maxVal);
                     $(range_max).val(Number($(range_min).val()));
@@ -7491,7 +7489,7 @@ function initSlider(wrapper) {
                 (0, _store.store).dispatch({
                     type: "CHANGE_MAX_VAL",
                     id: sliderId,
-                    payload: maxVal
+                    payload: currentValue
                 });
                 console.log((0, _store.store).getState());
             });
