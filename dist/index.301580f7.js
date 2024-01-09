@@ -569,9 +569,6 @@ var _store = require("./model/store");
 });
 console.log((0, _store.store).getState());
 (0, _viewInitSliderDefault.default)(".slider-page");
-// initSlider('.id3')
-// initSlider('.id3', null)
-// initSlider('.id4', null)
 (0, _viewInitToolbarDefault.default)(".id2");
 (0, _viewInitToolbarDefault.default)(".id3");
 (0, _viewInitToolbarDefault.default)(".id4");
@@ -589,7 +586,7 @@ verticalCheckedCheckbox.checked = true;
 let singleCheckedCheckbox = $("input[name='singleOrRange']")[2];
 singleCheckedCheckbox.checked = true;
 
-},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./toolbar-handlers":"cBPKI"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7633,6 +7630,7 @@ parcelHelpers.export(exports, "changeSingleOrRange", ()=>changeSingleOrRange);
 parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgressBar);
 parcelHelpers.export(exports, "changeVisibleSlider", ()=>changeVisibleSlider);
 var _store = require("./model/store");
+var _updateSliders = require("./updateSliders");
 function changeMinScale() {
     let minScaleInput = $(this);
     let minScaleValue = Number($(minScaleInput).val());
@@ -7778,7 +7776,7 @@ function changeOrientation() {
         //reducer code
         (0, _store.store).dispatch({
             type: "HORIZONTAL_ORIENTANTION",
-            id: 1
+            id: sliderId
         });
         //end of reducer code
         console.log("orient hor");
@@ -7787,6 +7785,8 @@ function changeOrientation() {
         $(slider).removeClass("uk-slider__range_orient_vertical");
         $(valueBlock).removeClass("uk-slider__value_block_orient_vertical");
     }
+    console.log((0, _store.store).getState());
+    (0, _updateSliders.updateSliders)();
 }
 function changeSingleOrRange() {
     let singleOrRangeCheckbox = $(this);
@@ -7818,6 +7818,22 @@ function changeVisibleSlider() {
     else $(slider).removeClass("hidden");
 }
 
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./updateSliders":"anlKZ"}],"anlKZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "updateSliders", ()=>updateSliders);
+var _viewInitSlider = require("./view-init-slider");
+var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
+var _viewInitToolbar = require("./view-init-toolbar");
+var _viewInitToolbarDefault = parcelHelpers.interopDefault(_viewInitToolbar);
+const updateSliders = ()=>{
+    $(".slider-page").empty();
+    (0, _viewInitSliderDefault.default)(".slider-page");
+    (0, _viewInitToolbarDefault.default)(".id2");
+    (0, _viewInitToolbarDefault.default)(".id3");
+    (0, _viewInitToolbarDefault.default)(".id4");
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map

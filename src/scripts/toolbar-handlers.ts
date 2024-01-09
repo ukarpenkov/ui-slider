@@ -1,4 +1,7 @@
 import { store } from './model/store'
+import { updateSliders } from './updateSliders'
+import initSlider from './view-init-slider'
+import initToolBar from './view-init-toolbar'
 
 export function changeMinScale(): void {
   let minScaleInput: JQuery<object> = $(this)
@@ -176,7 +179,7 @@ export function changeOrientation(): void {
     //reducer code
     store.dispatch({
       type: 'HORIZONTAL_ORIENTANTION',
-      id: 1,
+      id: sliderId,
     })
     //end of reducer code
     console.log('orient hor')
@@ -185,6 +188,8 @@ export function changeOrientation(): void {
     $(slider).removeClass('uk-slider__range_orient_vertical')
     $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
   }
+  console.log(store.getState())
+  updateSliders()
 }
 
 export function changeSingleOrRange(): void {

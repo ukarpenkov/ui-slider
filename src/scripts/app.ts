@@ -47,9 +47,6 @@ store.dispatch({
 console.log(store.getState())
 
 initSlider('.slider-page')
-// initSlider('.id3')
-// initSlider('.id3', null)
-// initSlider('.id4', null)
 
 initToolBar('.id2')
 initToolBar('.id3')
