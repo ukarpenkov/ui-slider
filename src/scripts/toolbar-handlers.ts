@@ -157,7 +157,7 @@ export function changeOrientation(): void {
     .parent()
     .parent()
     .parent()
-    .children()
+
   let slider: HTMLElement = $(wrap).children()[0]
 
   let sliderId = $(slider).parent().attr('class').split(' ')[0]
@@ -174,6 +174,7 @@ export function changeOrientation(): void {
     //end of reducer code
     console.log('orient vert')
   } else {
+    console.log(sliderId)
     $(slider).removeClass('uk-slider__range_orient_vertical')
     $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
     //reducer code
@@ -188,7 +189,7 @@ export function changeOrientation(): void {
     $(slider).removeClass('uk-slider__range_orient_vertical')
     $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
   }
-  console.log(store.getState())
+
   updateSliders()
 }
 

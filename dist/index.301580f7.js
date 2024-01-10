@@ -586,7 +586,7 @@ verticalCheckedCheckbox.checked = true;
 let singleCheckedCheckbox = $("input[name='singleOrRange']")[2];
 singleCheckedCheckbox.checked = true;
 
-},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./toolbar-handlers":"cBPKI"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7550,6 +7550,7 @@ function reducer(state, action) {
                     ...slider,
                     orientation: "vertical"
                 };
+                console.log("vert reducer");
                 return slider;
             });
         case "HORIZONTAL_ORIENTANTION":
@@ -7558,6 +7559,7 @@ function reducer(state, action) {
                     ...slider,
                     orientation: "horizontal"
                 };
+                console.log("horiz reducer");
                 return slider;
             });
         case "CHANGE_MIN_VAL":
@@ -7755,7 +7757,7 @@ function changeScaleStep() {
 }
 function changeOrientation() {
     let verticalOrHorizontalCheckbox = $(this);
-    let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children();
+    let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent();
     let slider = $(wrap).children()[0];
     let sliderId = $(slider).parent().attr("class").split(" ")[0];
     let valueBlock = $(wrap).children()[1];
@@ -7771,6 +7773,7 @@ function changeOrientation() {
         //end of reducer code
         console.log("orient vert");
     } else {
+        console.log(sliderId);
         $(slider).removeClass("uk-slider__range_orient_vertical");
         $(valueBlock).removeClass("uk-slider__value_block_orient_vertical");
         //reducer code
@@ -7785,7 +7788,6 @@ function changeOrientation() {
         $(slider).removeClass("uk-slider__range_orient_vertical");
         $(valueBlock).removeClass("uk-slider__value_block_orient_vertical");
     }
-    console.log((0, _store.store).getState());
     (0, _updateSliders.updateSliders)();
 }
 function changeSingleOrRange() {
@@ -7818,10 +7820,12 @@ function changeVisibleSlider() {
     else $(slider).removeClass("hidden");
 }
 
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./updateSliders":"anlKZ"}],"anlKZ":[function(require,module,exports) {
+},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anlKZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "updateSliders", ()=>updateSliders);
+var _store = require("./model/store");
+var _toolbarHandlers = require("./toolbar-handlers");
 var _viewInitSlider = require("./view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 var _viewInitToolbar = require("./view-init-toolbar");
@@ -7832,8 +7836,18 @@ const updateSliders = ()=>{
     (0, _viewInitToolbarDefault.default)(".id2");
     (0, _viewInitToolbarDefault.default)(".id3");
     (0, _viewInitToolbarDefault.default)(".id4");
+    $("input[name='minScale']").on("change", (0, _toolbarHandlers.changeMinScale));
+    $("input[name='maxScale']").on("change", (0, _toolbarHandlers.changeMaxScale));
+    $("input[name='minPosition']").on("change", (0, _toolbarHandlers.changeMinPos));
+    $("input[name='maxPosition']").on("change", (0, _toolbarHandlers.changeMaxPos));
+    $("input[name='scaleStep']").on("change", (0, _toolbarHandlers.changeScaleStep));
+    $("input[name='verticalOrHorizontal']").on("change", (0, _toolbarHandlers.changeOrientation));
+    $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleOrRange));
+    $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
+    $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
+    console.log((0, _store.store).getState());
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/store":"gl3Yi","./toolbar-handlers":"cBPKI"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map

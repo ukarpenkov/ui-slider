@@ -18,7 +18,7 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, orientation: 'vertical' }
         }
-
+        console.log('vert reducer')
         return slider
       })
     case 'HORIZONTAL_ORIENTANTION':
@@ -26,7 +26,7 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, orientation: 'horizontal' }
         }
-
+        console.log('horiz reducer')
         return slider
       })
     case 'CHANGE_MIN_VAL':
