@@ -157,10 +157,11 @@ export function changeOrientation(): void {
     .parent()
     .parent()
     .parent()
-
+    .children()
   let slider: HTMLElement = $(wrap).children()[0]
 
-  let sliderId = $(slider).parent().attr('class').split(' ')[0]
+  let sliderId = $(slider).parent().parent().attr('class').split(' ')[0]
+  console.log('itssliderif', sliderId)
   let valueBlock: HTMLElement = $(wrap).children()[1]
   if ($(verticalOrHorizontalCheckbox).is(':checked')) {
     console.log(sliderId)

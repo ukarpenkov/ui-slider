@@ -42,6 +42,7 @@ function initSlider(wrapper: string) {
     return data.map((item) => {
       return $(`
     <div class="${item.id} slider-wrapper">  
+    <div class="slider-tem">
       <div class="uk-slider__range ${
         item.orientation === 'vertical'
           ? 'uk-slider__range_orient_vertical'
@@ -72,6 +73,7 @@ function initSlider(wrapper: string) {
       }" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${
         item.interval === 'single' ? 'no-vis' : ''
       }" />
+      </div>
       </div>
     </div>
   `)
@@ -106,7 +108,7 @@ function initSlider(wrapper: string) {
         .children('.js-uk-range_max')
       var minVal: number = Number($(minBtn).val())
       var maxVal: number = Number($(maxBtn).val())
-      let sliderId = $(range_min).parent().parent()[0].classList[0]
+      let sliderId = $(range_min).parent().parent().parent()[0].classList[0]
 
       if (minVal > maxVal - 1) {
         $(minBtn).val(maxVal)
@@ -128,8 +130,6 @@ function initSlider(wrapper: string) {
             payload: currentValue,
           })
         }
-
-        console.log(sliderId, store.getState())
       })
 
       $(range_min).val(minVal * 1)
@@ -161,7 +161,7 @@ function initSlider(wrapper: string) {
         id: sliderId,
         payload: maxVal,
       })
-      console.log(store.getState())
+      console.log('final', sliderId, store.getState())
     }
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)
