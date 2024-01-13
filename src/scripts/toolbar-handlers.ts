@@ -159,9 +159,7 @@ export function changeOrientation(): void {
     .parent()
     .children()
   let slider: HTMLElement = $(wrap).children()[0]
-
   let sliderId = $(slider).parent().parent().attr('class').split(' ')[0]
-  console.log('itssliderif', sliderId)
   let valueBlock: HTMLElement = $(wrap).children()[1]
   if ($(verticalOrHorizontalCheckbox).is(':checked')) {
     console.log(sliderId)
@@ -206,13 +204,23 @@ export function changeSingleOrRange(): void {
   let valueBlock: HTMLElement = $(wrap).children()[1]
   let secondSlider: HTMLElement = $(slider).children()[1]
   let secondValueBlock: HTMLElement = $(valueBlock).children()[1]
-
+  let sliderId = $(slider).parent().parent().attr('class').split(' ')[0]
   if ($(singleOrRangeCheckbox).is(':checked')) {
     $(secondSlider).addClass('hidden')
     $(secondValueBlock).addClass('no-vis')
+    store.dispatch({
+      type: 'SET_SINGLE',
+      id: sliderId,
+    })
+    console.log(store.getState())
   } else {
     $(secondSlider).removeClass('hidden')
     $(secondValueBlock).removeClass('no-vis')
+    store.dispatch({
+      type: 'SET_INTERVAL',
+      id: sliderId,
+    })
+    console.log(store.getState())
   }
 }
 

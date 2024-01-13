@@ -44,6 +44,22 @@ export function reducer(state, action) {
         }
         return slider
       })
+    case 'SET_SINGLE':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, interval: 'single' }
+        }
+        console.log('single')
+        return slider
+      })
+    case 'SET_INTERVAL':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, interval: 'interval' }
+        }
+        console.log('interval')
+        return slider
+      })
     default:
       return state
   }

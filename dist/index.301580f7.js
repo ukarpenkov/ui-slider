@@ -7582,6 +7582,24 @@ function reducer(state, action) {
                 };
                 return slider;
             });
+        case "SET_SINGLE":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    interval: "single"
+                };
+                console.log("single");
+                return slider;
+            });
+        case "SET_INTERVAL":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    interval: "interval"
+                };
+                console.log("interval");
+                return slider;
+            });
         default:
             return state;
     }
@@ -7764,7 +7782,6 @@ function changeOrientation() {
     let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children();
     let slider = $(wrap).children()[0];
     let sliderId = $(slider).parent().parent().attr("class").split(" ")[0];
-    console.log("itssliderif", sliderId);
     let valueBlock = $(wrap).children()[1];
     if ($(verticalOrHorizontalCheckbox).is(":checked")) {
         console.log(sliderId);
@@ -7802,12 +7819,23 @@ function changeSingleOrRange() {
     let valueBlock = $(wrap).children()[1];
     let secondSlider = $(slider).children()[1];
     let secondValueBlock = $(valueBlock).children()[1];
+    let sliderId = $(slider).parent().parent().attr("class").split(" ")[0];
     if ($(singleOrRangeCheckbox).is(":checked")) {
         $(secondSlider).addClass("hidden");
         $(secondValueBlock).addClass("no-vis");
+        (0, _store.store).dispatch({
+            type: "SET_SINGLE",
+            id: sliderId
+        });
+        console.log((0, _store.store).getState());
     } else {
         $(secondSlider).removeClass("hidden");
         $(secondValueBlock).removeClass("no-vis");
+        (0, _store.store).dispatch({
+            type: "SET_INTERVAL",
+            id: sliderId
+        });
+        console.log((0, _store.store).getState());
     }
 }
 function changeVisibleProgressBar() {
