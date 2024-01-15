@@ -44,8 +44,6 @@ store.dispatch({
   maxValue: 100,
 })
 
-console.log(store.getState())
-
 initSlider('.slider-page')
 
 initToolBar('.id2')

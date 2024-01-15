@@ -71,17 +71,26 @@ export function changeMaxScale(): void {
 
 export function changeMinPos(): void {
   let minPositionInput: JQuery<object> = $(this)
+  console.log(minPositionInput)
   let minPosValue: number = Number($(minPositionInput).val())
-  let wrap: JQuery<object> = $(minPositionInput)
-    .parent()
-    .parent()
-    .parent()
-    .children()
+  let wrap: JQuery<object> = $(minPositionInput).parent().parent().parent()
+  console.log('first')
+  console.log('WRAP', wrap)
   let valueBlock: HTMLElement = $(wrap).children().children()[2]
+  console.log('VALL', valueBlock)
   let minBtn: HTMLElement = $(wrap).children().children()[0]
   let minBtnValue = Number($(minBtn).val())
   let maxBtn: HTMLElement = $(wrap).children().children()[1]
   let maxBtnValue = Number($(maxBtn).val())
+  let slider: HTMLElement = $(wrap).children()
+  let sliderId = $(slider).parent().parent().attr('class').split(' ')[0]
+  console.log('iddddd', sliderId)
+  store.dispatch({
+    type: 'CHANGE_MIN_VAL',
+    id: sliderId,
+    payload: Number($(minBtn).val()),
+  })
+  console.log('minmmmmm', Number($(minBtn).val()))
   if (minPosValue > maxBtnValue) {
     $(minPositionInput).val(minBtnValue)
     $(valueBlock).val(maxBtnValue - 1)
@@ -94,6 +103,7 @@ export function changeMinPos(): void {
     $(minPositionInput).val(1)
     return
   }
+
   $(minBtn).val(Number(minPosValue))
   $(valueBlock).val(minPosValue)
   $(minPositionInput).val(Number($(minBtn).val()))
@@ -158,6 +168,7 @@ export function changeOrientation(): void {
     .parent()
     .parent()
     .children()
+  console.log('orient', wrap)
   let slider: HTMLElement = $(wrap).children()[0]
   let sliderId = $(slider).parent().parent().attr('class').split(' ')[0]
   let valueBlock: HTMLElement = $(wrap).children()[1]

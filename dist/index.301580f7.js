@@ -567,7 +567,6 @@ var _store = require("./model/store");
     minValue: 1,
     maxValue: 100
 });
-console.log((0, _store.store).getState());
 (0, _viewInitSliderDefault.default)(".slider-page");
 (0, _viewInitToolbarDefault.default)(".id2");
 (0, _viewInitToolbarDefault.default)(".id3");
@@ -7492,7 +7491,6 @@ function initSlider(wrapper) {
                     id: sliderId,
                     payload: currentValue
                 });
-                console.log((0, _store.store).getState());
             });
             $(range_max).val(maxVal * 1);
             (0, _store.store).dispatch({
@@ -7505,7 +7503,6 @@ function initSlider(wrapper) {
                 id: sliderId,
                 payload: maxVal
             });
-            console.log("final", sliderId, (0, _store.store).getState());
         }
         $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
         $(".uk-slider__input").trigger("input");
@@ -7713,13 +7710,25 @@ function changeMaxScale() {
 }
 function changeMinPos() {
     let minPositionInput = $(this);
+    console.log(minPositionInput);
     let minPosValue = Number($(minPositionInput).val());
-    let wrap = $(minPositionInput).parent().parent().parent().children();
+    let wrap = $(minPositionInput).parent().parent().parent();
+    console.log("WRAP", wrap);
     let valueBlock = $(wrap).children().children()[2];
+    console.log("VALL", valueBlock);
     let minBtn = $(wrap).children().children()[0];
     let minBtnValue = Number($(minBtn).val());
     let maxBtn = $(wrap).children().children()[1];
     let maxBtnValue = Number($(maxBtn).val());
+    let slider = $(wrap).children();
+    let sliderId = $(slider).parent().parent().attr("class").split(" ")[0];
+    console.log("iddddd", sliderId);
+    (0, _store.store).dispatch({
+        type: "CHANGE_MIN_VAL",
+        id: sliderId,
+        payload: Number($(minBtn).val())
+    });
+    console.log("minmmmmm", Number($(minBtn).val()));
     if (minPosValue > maxBtnValue) {
         $(minPositionInput).val(minBtnValue);
         $(valueBlock).val(maxBtnValue - 1);
@@ -7780,6 +7789,7 @@ function changeScaleStep() {
 function changeOrientation() {
     let verticalOrHorizontalCheckbox = $(this);
     let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children();
+    console.log("orient", wrap);
     let slider = $(wrap).children()[0];
     let sliderId = $(slider).parent().parent().attr("class").split(" ")[0];
     let valueBlock = $(wrap).children()[1];

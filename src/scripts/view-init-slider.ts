@@ -148,7 +148,6 @@ function initSlider(wrapper: string) {
           id: sliderId,
           payload: currentValue,
         })
-        console.log(store.getState())
       })
       $(range_max).val(maxVal * 1)
       store.dispatch({
@@ -161,7 +160,6 @@ function initSlider(wrapper: string) {
         id: sliderId,
         payload: maxVal,
       })
-      console.log('final', sliderId, store.getState())
     }
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)
