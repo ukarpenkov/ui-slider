@@ -74,7 +74,6 @@ export function changeMinPos(): void {
   console.log(minPositionInput)
   let minPosValue: number = Number($(minPositionInput).val())
   let wrap: JQuery<object> = $(minPositionInput).parent().parent().parent()
-  console.log('first')
   console.log('WRAP', wrap)
   let valueBlock: HTMLElement = $(wrap).children().children()[2]
   console.log('VALL', valueBlock)
