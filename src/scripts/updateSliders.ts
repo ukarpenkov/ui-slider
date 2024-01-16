@@ -14,7 +14,7 @@ import initSlider from './view-init-slider'
 import initToolBar from './view-init-toolbar'
 
 export const updateSliders = () => {
-  $('.slider-item').remove()
+  $('.slider-wrapper').remove()
   initSlider('.slider-page')
   // initToolBar('.id2')
   // initToolBar('.id3')

@@ -46,9 +46,8 @@ store.dispatch({
 
 initSlider('.slider-page')
 
-initToolBar('.id2')
-initToolBar('.id3')
-initToolBar('.id4')
+initToolBar('.toolbar-page')
+
 // initToolBar('.toolbar-item-1')
 // initToolBar('.toolbar-item-2')
 // initToolBar('.toolbar-item-3')

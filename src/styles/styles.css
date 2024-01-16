@@ -112,9 +112,15 @@ label {
 
 .control-panel {
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   align-items: baseline;
   margin-left: 600px;
+}
+
+.toolbar-page {
+  display: grid;
+  grid-gap: 100px;
+  height: 100%;
 }
 
 .control-panel__text-input {

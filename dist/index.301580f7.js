@@ -568,9 +568,7 @@ var _store = require("./model/store");
     maxValue: 100
 });
 (0, _viewInitSliderDefault.default)(".slider-page");
-(0, _viewInitToolbarDefault.default)(".id2");
-(0, _viewInitToolbarDefault.default)(".id3");
-(0, _viewInitToolbarDefault.default)(".id4");
+(0, _viewInitToolbarDefault.default)(".toolbar-page");
 // initToolBar('.toolbar-item-1')
 // initToolBar('.toolbar-item-2')
 // initToolBar('.toolbar-item-3')
@@ -7390,34 +7388,6 @@ parcelHelpers.defineInteropFlag(exports);
 var _store = require("./model/store");
 function initSlider(wrapper) {
     let state = (0, _store.store).getState();
-    let orientation;
-    let display = "";
-    let visibility = "";
-    let inputsOrientation;
-    // if (settings.orientation === 'vertical') {
-    //   orientation = 'uk-slider__range_orient_vertical'
-    //   inputsOrientation = 'uk-slider__value_block_orient_vertical'
-    // } else {
-    //   orientation = ''
-    //   inputsOrientation = ''
-    // }
-    // if (settings.interval === 'single') {
-    //   display = 'hidden'
-    //   visibility = 'no-vis'
-    // }
-    //СТАРЫЙ КОД БЕЗ СТОРА
-    // let slider: JQuery<HTMLElement> = $(`
-    //       <div class="uk-slider__range ${orientation}">
-    //       <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${settings.minValue}" max="${settings.maxValue}" value="${settings.minValue}" orient="vertical" step="1"/>
-    //       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${settings.minValue}"
-    //       max="${settings.maxValue}" value="${settings.maxValue}" orient="vertical" step="1"/>
-    //       </div>
-    //       <div class="uk-slider__value_block ${inputsOrientation}">
-    //       <input type="number" value="${settings.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-    //       <input type="number" value="${settings.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
-    //       </div>
-    //       `)
-    //СТАРЫЙ КОД БЕЗ СТОРА
     let sliderRendering = (data)=>{
         return data.map((item)=>{
             return $(`
@@ -7605,40 +7575,79 @@ function reducer(state, action) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2C3S4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _store = require("./model/store");
 function initToolBar(wrapper) {
-    let toolBar = $(`
-    <div class="control-panel"> 
-    <div class="control-panel__text-inputs">
-    <input class="control-panel__text-input js-min-scale" type="number" min=0 placeholder="min scale value" name="minScale"/>
-    <input class="control-panel__text-input js-max-scale" type="number" min=0 placeholder="max scale value" name="maxScale" />
-    <input class="control-panel__text-input js-scale-step" type="number" min=0 placeholder="scale step" name="scaleStep"/>
-    <input class="control-panel__text-input js-min-pos" type="number" min=0 placeholder="first slider position" name="minPosition"/>
-    <input class="control-panel__text-input js-max-pos" type="number" min=0 placeholder="second slider position" name="maxPosition"/>
-    </div>
-    <div class="control-panel__checkbox-inputs">
-    <div class="control-panel__checkbox-item">
-    <input class="control-panel__checkbox-input js-vertical-or-horizontal" type="checkbox" name="verticalOrHorizontal"/>
-    <label for="verticalOrHorizontal" data-onlabel="on" data-offlabel="off" class="control-panel__label">vertical/horizontal</label>
-    </div>
-    <div class="control-panel__checkbox-item">
-    <input class="control-panel__checkbox-input js-single-or-range" type="checkbox" name='singleOrRange'/>
-    <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
-    </div>
-    <div class="control-panel__checkbox-item">
-    <input class="control-panel__checkbox-input" type="checkbox" name='progressBar'/>
-    <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
-    </div>
-    <div class="control-panel__checkbox-item">
-    <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
-    <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
-    </div>
-    </div>
-    </div>`);
-    $(wrapper).append(toolBar);
+    // let toolBar: JQuery<HTMLElement> = $(`
+    //   <div class="control-panel">
+    //   <div class="control-panel__text-inputs">
+    //   <input class="control-panel__text-input js-min-scale" type="number" min=0 placeholder="min scale value" name="minScale"/>
+    //   <input class="control-panel__text-input js-max-scale" type="number" min=0 placeholder="max scale value" name="maxScale" />
+    //   <input class="control-panel__text-input js-scale-step" type="number" min=0 placeholder="scale step" name="scaleStep"/>
+    //   <input class="control-panel__text-input js-min-pos" type="number" min=0 placeholder="first slider position" name="minPosition"/>
+    //   <input class="control-panel__text-input js-max-pos" type="number" min=0 placeholder="second slider position" name="maxPosition"/>
+    //   </div>
+    //   <div class="control-panel__checkbox-inputs">
+    //   <div class="control-panel__checkbox-item">
+    //   <input class="control-panel__checkbox-input js-vertical-or-horizontal" type="checkbox" name="verticalOrHorizontal"/>
+    //   <label for="verticalOrHorizontal" data-onlabel="on" data-offlabel="off" class="control-panel__label">vertical/horizontal</label>
+    //   </div>
+    //   <div class="control-panel__checkbox-item">
+    //   <input class="control-panel__checkbox-input js-single-or-range" type="checkbox" name='singleOrRange'/>
+    //   <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
+    //   </div>
+    //   <div class="control-panel__checkbox-item">
+    //   <input class="control-panel__checkbox-input" type="checkbox" name='progressBar'/>
+    //   <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
+    //   </div>
+    //   <div class="control-panel__checkbox-item">
+    //   <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
+    //   <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
+    //   </div>
+    //   </div>
+    //   </div>`)
+    let state = (0, _store.store).getState();
+    let renderToolBar = (data)=>{
+        return data.map((item)=>{
+            return $(`
+      <div class="control-panel ${item.id}">
+      <div class="control-panel__text-inputs">
+      <input class="control-panel__text-input js-min-scale" type="number" min=${item.minValue}  placeholder="min scale value" name="minScale"/>
+      <input class="control-panel__text-input js-max-scale" type="number" min=${item.mmaxValue}  placeholder="max scale value" name="maxScale" />
+      <input class="control-panel__text-input js-scale-step" type="number" min=0 placeholder="scale step" name="scaleStep"/>
+      <input class="control-panel__text-input js-min-pos" type="number" min=${item.minValue}  placeholder="first slider position" name="minPosition"/>
+      <input class="control-panel__text-input js-max-pos" type="number" min=${item.mmaxValue} placeholder="second slider position" name="maxPosition"/>
+      </div>
+      <div class="control-panel__checkbox-inputs">
+      <div class="control-panel__checkbox-item">
+      <input class="control-panel__checkbox-input js-vertical-or-horizontal" type="checkbox" name="verticalOrHorizontal"
+      ${item.orientation === "vertical" ? "checked" : ""}
+      />
+      <label for="verticalOrHorizontal" data-onlabel="on" data-offlabel="off" class="control-panel__label">vertical/horizontal</label>
+      </div>
+      <div class="control-panel__checkbox-item">
+      <input class="control-panel__checkbox-input js-single-or-range" type="checkbox" name='singleOrRange'
+      ${item.interval === "single" ? "checked" : ""}
+      />
+      <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
+      </div>
+      <div class="control-panel__checkbox-item">
+      <input class="control-panel__checkbox-input" type="checkbox" name='progressBar'/>
+      <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
+      </div>
+      <div class="control-panel__checkbox-item">
+      <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
+      <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
+      </div>
+      </div>
+      </div>`);
+        });
+    };
+    $(wrapper).append(renderToolBar(state));
+    console.log("render TOOL");
 }
 exports.default = initToolBar;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/store":"gl3Yi"}],"cBPKI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7716,19 +7725,20 @@ function changeMinPos() {
     console.log("WRAP", wrap);
     let valueBlock = $(wrap).children().children()[2];
     console.log("VALL", valueBlock);
-    let minBtn = $(wrap).children().children()[0];
+    let minBtn = $(wrap).children().children().children()[0];
     let minBtnValue = Number($(minBtn).val());
-    let maxBtn = $(wrap).children().children()[1];
+    let maxBtn = $(wrap).children().children().children()[1];
     let maxBtnValue = Number($(maxBtn).val());
     let slider = $(wrap).children();
-    let sliderId = $(slider).parent().parent().attr("class").split(" ")[0];
+    let sliderId = $(slider).parent().parent().children().attr("class").split(" ")[0];
     console.log("iddddd", sliderId);
     (0, _store.store).dispatch({
         type: "CHANGE_MIN_VAL",
         id: sliderId,
-        payload: Number($(minBtn).val())
+        payload: minBtnValue
     });
-    console.log("minmmmmm", Number($(minBtn).val()));
+    (0, _updateSliders.updateSliders)();
+    console.log((0, _store.store).getState());
     if (minPosValue > maxBtnValue) {
         $(minPositionInput).val(minBtnValue);
         $(valueBlock).val(maxBtnValue - 1);
@@ -7794,7 +7804,7 @@ function changeOrientation() {
     let sliderId = $(slider).parent().parent().attr("class").split(" ")[0];
     let valueBlock = $(wrap).children()[1];
     if ($(verticalOrHorizontalCheckbox).is(":checked")) {
-        console.log(sliderId);
+        console.log("sliderID", sliderId);
         $(slider).addClass("uk-slider__range_orient_vertical");
         $(valueBlock).addClass("uk-slider__value_block_orient_vertical");
         //reducer code
@@ -7806,8 +7816,8 @@ function changeOrientation() {
         console.log("orient vert");
     } else {
         console.log(sliderId);
-        $(slider).removeClass("uk-slider__range_orient_vertical");
-        $(valueBlock).removeClass("uk-slider__value_block_orient_vertical");
+        // $(slider).removeClass('uk-slider__range_orient_vertical')
+        // $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
         //reducer code
         (0, _store.store).dispatch({
             type: "HORIZONTAL_ORIENTANTION",
@@ -7816,10 +7826,7 @@ function changeOrientation() {
         //end of reducer code
         console.log("orient hor");
     }
-    if (!$(verticalOrHorizontalCheckbox).is(":checked")) {
-        $(slider).removeClass("uk-slider__range_orient_vertical");
-        $(valueBlock).removeClass("uk-slider__value_block_orient_vertical");
-    }
+    $(verticalOrHorizontalCheckbox).is(":checked");
     (0, _updateSliders.updateSliders)();
 }
 function changeSingleOrRange() {
@@ -7871,7 +7878,7 @@ var _store = require("./model/store");
 var _viewInitSlider = require("./view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 const updateSliders = ()=>{
-    $(".slider-item").remove();
+    $(".slider-wrapper").remove();
     (0, _viewInitSliderDefault.default)(".slider-page");
     // initToolBar('.id2')
     // initToolBar('.id3')

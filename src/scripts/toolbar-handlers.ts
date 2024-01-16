@@ -77,19 +77,26 @@ export function changeMinPos(): void {
   console.log('WRAP', wrap)
   let valueBlock: HTMLElement = $(wrap).children().children()[2]
   console.log('VALL', valueBlock)
-  let minBtn: HTMLElement = $(wrap).children().children()[0]
+  let minBtn: HTMLElement = $(wrap).children().children().children()[0]
   let minBtnValue = Number($(minBtn).val())
-  let maxBtn: HTMLElement = $(wrap).children().children()[1]
+  let maxBtn: HTMLElement = $(wrap).children().children().children()[1]
   let maxBtnValue = Number($(maxBtn).val())
+
   let slider: HTMLElement = $(wrap).children()
-  let sliderId = $(slider).parent().parent().attr('class').split(' ')[0]
+  let sliderId = $(slider)
+    .parent()
+    .parent()
+    .children()
+    .attr('class')
+    .split(' ')[0]
   console.log('iddddd', sliderId)
   store.dispatch({
     type: 'CHANGE_MIN_VAL',
     id: sliderId,
-    payload: Number($(minBtn).val()),
+    payload: minBtnValue,
   })
-  console.log('minmmmmm', Number($(minBtn).val()))
+  updateSliders()
+  console.log(store.getState())
   if (minPosValue > maxBtnValue) {
     $(minPositionInput).val(minBtnValue)
     $(valueBlock).val(maxBtnValue - 1)
@@ -170,11 +177,13 @@ export function changeOrientation(): void {
   console.log('orient', wrap)
   let slider: HTMLElement = $(wrap).children()[0]
   let sliderId = $(slider).parent().parent().attr('class').split(' ')[0]
+
   let valueBlock: HTMLElement = $(wrap).children()[1]
   if ($(verticalOrHorizontalCheckbox).is(':checked')) {
-    console.log(sliderId)
+    console.log('sliderID', sliderId)
     $(slider).addClass('uk-slider__range_orient_vertical')
     $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
+
     //reducer code
     store.dispatch({
       type: 'VERTICAL_ORIENTANTION',
@@ -184,8 +193,8 @@ export function changeOrientation(): void {
     console.log('orient vert')
   } else {
     console.log(sliderId)
-    $(slider).removeClass('uk-slider__range_orient_vertical')
-    $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+    // $(slider).removeClass('uk-slider__range_orient_vertical')
+    // $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
     //reducer code
     store.dispatch({
       type: 'HORIZONTAL_ORIENTANTION',
@@ -195,8 +204,8 @@ export function changeOrientation(): void {
     console.log('orient hor')
   }
   if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
-    $(slider).removeClass('uk-slider__range_orient_vertical')
-    $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
+    // $(slider).removeClass('uk-slider__range_orient_vertical')
+    // $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
   }
 
   updateSliders()

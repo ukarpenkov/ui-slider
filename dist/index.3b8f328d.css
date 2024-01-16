@@ -104,7 +104,12 @@ input, label {
   align-items: baseline;
   margin-left: 600px;
   display: flex;
-  position: absolute;
+}
+
+.toolbar-page {
+  grid-gap: 100px;
+  height: 100%;
+  display: grid;
 }
 
 .control-panel__text-input {
