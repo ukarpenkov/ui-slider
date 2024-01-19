@@ -168,46 +168,22 @@ export function changeScaleStep(): void {
 
 export function changeOrientation(): void {
   let verticalOrHorizontalCheckbox: JQuery<object> = $(this)
-  let wrap: JQuery<object> = $(verticalOrHorizontalCheckbox)
+  let toolbarContainer = $(verticalOrHorizontalCheckbox)
     .parent()
     .parent()
-    .parent()
-    .parent()
-    .children()
-  console.log('orient', wrap)
-  let slider: HTMLElement = $(wrap).children()[0]
-  let sliderId = $(slider).parent().parent().attr('class').split(' ')[0]
-
-  let valueBlock: HTMLElement = $(wrap).children()[1]
+    .parent()[0]
+  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
   if ($(verticalOrHorizontalCheckbox).is(':checked')) {
-    console.log('sliderID', sliderId)
-    $(slider).addClass('uk-slider__range_orient_vertical')
-    $(valueBlock).addClass('uk-slider__value_block_orient_vertical')
-
-    //reducer code
     store.dispatch({
       type: 'VERTICAL_ORIENTANTION',
-      id: sliderId,
+      id: toolbarId,
     })
-    //end of reducer code
-    console.log('orient vert')
   } else {
-    console.log(sliderId)
-    // $(slider).removeClass('uk-slider__range_orient_vertical')
-    // $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
-    //reducer code
     store.dispatch({
       type: 'HORIZONTAL_ORIENTANTION',
-      id: sliderId,
+      id: toolbarId,
     })
-    //end of reducer code
-    console.log('orient hor')
   }
-  if (!$(verticalOrHorizontalCheckbox).is(':checked')) {
-    // $(slider).removeClass('uk-slider__range_orient_vertical')
-    // $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
-  }
-
   updateSliders()
 }
 

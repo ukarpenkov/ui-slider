@@ -62,7 +62,9 @@ function initSlider(wrapper: string) {
   // <input type="number" value="${state[0].maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
   // </div>
   // `)
-  $(wrapper).append(sliderRendering(state))
+  const slidersContainer = $('<div class="sliders-container"></div>')
+  $(wrapper).append(slidersContainer)
+  $(slidersContainer).append(sliderRendering(state))
   ;(function handleRange(): void {
     function rangeInputChangeEventHandler(): void {
       var minBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-min')

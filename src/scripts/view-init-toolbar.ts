@@ -76,7 +76,6 @@ function initToolBar(wrapper: string): void {
   }
 
   $(wrapper).append(renderToolBar(state))
-  console.log('render TOOL')
 }
 
 export default initToolBar

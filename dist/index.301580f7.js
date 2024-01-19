@@ -7418,7 +7418,9 @@ function initSlider(wrapper) {
     // <input type="number" value="${state[0].maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
     // </div>
     // `)
-    $(wrapper).append(sliderRendering(state));
+    const slidersContainer = $('<div class="sliders-container"></div>');
+    $(wrapper).append(slidersContainer);
+    $(slidersContainer).append(sliderRendering(state));
     (function handleRange() {
         function rangeInputChangeEventHandler() {
             var minBtn = $(this).parent().children(".js-uk-min");
@@ -7643,11 +7645,10 @@ function initToolBar(wrapper) {
         });
     };
     $(wrapper).append(renderToolBar(state));
-    console.log("render TOOL");
 }
 exports.default = initToolBar;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/store":"gl3Yi"}],"cBPKI":[function(require,module,exports) {
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7798,35 +7799,16 @@ function changeScaleStep() {
 }
 function changeOrientation() {
     let verticalOrHorizontalCheckbox = $(this);
-    let wrap = $(verticalOrHorizontalCheckbox).parent().parent().parent().parent().children();
-    console.log("orient", wrap);
-    let slider = $(wrap).children()[0];
-    let sliderId = $(slider).parent().parent().attr("class").split(" ")[0];
-    let valueBlock = $(wrap).children()[1];
-    if ($(verticalOrHorizontalCheckbox).is(":checked")) {
-        console.log("sliderID", sliderId);
-        $(slider).addClass("uk-slider__range_orient_vertical");
-        $(valueBlock).addClass("uk-slider__value_block_orient_vertical");
-        //reducer code
-        (0, _store.store).dispatch({
-            type: "VERTICAL_ORIENTANTION",
-            id: sliderId
-        });
-        //end of reducer code
-        console.log("orient vert");
-    } else {
-        console.log(sliderId);
-        // $(slider).removeClass('uk-slider__range_orient_vertical')
-        // $(valueBlock).removeClass('uk-slider__value_block_orient_vertical')
-        //reducer code
-        (0, _store.store).dispatch({
-            type: "HORIZONTAL_ORIENTANTION",
-            id: sliderId
-        });
-        //end of reducer code
-        console.log("orient hor");
-    }
-    $(verticalOrHorizontalCheckbox).is(":checked");
+    let toolbarContainer = $(verticalOrHorizontalCheckbox).parent().parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    if ($(verticalOrHorizontalCheckbox).is(":checked")) (0, _store.store).dispatch({
+        type: "VERTICAL_ORIENTANTION",
+        id: toolbarId
+    });
+    else (0, _store.store).dispatch({
+        type: "HORIZONTAL_ORIENTANTION",
+        id: toolbarId
+    });
     (0, _updateSliders.updateSliders)();
 }
 function changeSingleOrRange() {
@@ -7878,7 +7860,7 @@ var _store = require("./model/store");
 var _viewInitSlider = require("./view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 const updateSliders = ()=>{
-    $(".slider-wrapper").remove();
+    $(".sliders-container").remove();
     (0, _viewInitSliderDefault.default)(".slider-page");
     // initToolBar('.id2')
     // initToolBar('.id3')

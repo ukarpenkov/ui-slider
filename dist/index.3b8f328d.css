@@ -172,6 +172,12 @@ input, label {
   display: flex;
 }
 
+.sliders-container {
+  grid-gap: 100%;
+  padding-top: 10%;
+  display: grid;
+}
+
 @media (min-device-width: 320px) and (max-device-width: 950px) {
   .uk-slider__input::-webkit-slider-thumb {
     width: 30px;
