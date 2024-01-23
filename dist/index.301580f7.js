@@ -7660,59 +7660,27 @@ var _store = require("./model/store");
 var _updateSliders = require("./updateSliders");
 function changeMinScale() {
     let minScaleInput = $(this);
+    let toolbarContainer = $(minScaleInput).parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
     let minScaleValue = Number($(minScaleInput).val());
-    let maxScaleInput = $(minScaleInput).next();
-    let wrap = $(minScaleInput).parent().parent().parent().children();
-    let slider1 = $(wrap).children().children()[0];
-    let slider2 = $(wrap).children().children()[1];
-    let valueBlock = $(wrap).children().children()[2];
-    let currentValue = Number($(valueBlock).val());
-    let maxBtn = $(wrap).children().children()[1];
-    let maxBtnValue = Number($(maxBtn).val());
-    $(maxScaleInput).val(maxBtnValue);
-    let maxScaleValue = Number($(maxScaleInput).val());
-    if (minScaleValue < 0) {
-        minScaleValue = 0;
-        $(minScaleInput).val(0);
-    }
-    $(maxScaleInput).val(maxBtnValue);
-    if (minScaleValue > maxScaleValue) {
-        minScaleValue = maxScaleValue - 3;
-        $(minScaleInput).val(maxScaleValue - 3);
-    }
-    $(slider1).attr("min", minScaleValue);
-    $(slider2).attr("min", minScaleValue);
-    currentValue < minScaleValue && $(valueBlock).val(minScaleValue);
+    (0, _store.store).dispatch({
+        type: "CHANGE_MIN_SCALE",
+        id: toolbarId,
+        payload: minScaleValue
+    });
+    (0, _updateSliders.updateSliders)();
 }
 function changeMaxScale() {
     let maxScaleInput = $(this);
+    let toolbarContainer = $(maxScaleInput).parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
     let maxScaleValue = Number($(maxScaleInput).val());
-    let minScaleInput = $(maxScaleInput).prev();
-    let wrap = $(maxScaleInput).parent().parent().parent().children();
-    let slider1 = $(wrap).children().children()[0];
-    let slider2 = $(wrap).children().children()[1];
-    let valueBlock = $(wrap).children().children()[3];
-    let minValueBlock = $(wrap).children().children()[2];
-    let currentValue = Number($(valueBlock).val());
-    let minBtn = $(wrap).children().children()[0];
-    let minBtnValue = Number($(minBtn).val());
-    $(minScaleInput).val(minBtnValue);
-    let minScaleValue = Number($(minScaleInput).val());
-    if (maxScaleValue < 0) {
-        maxScaleValue = 3;
-        maxScaleInput.val(3);
-        $(minScaleInput).val(maxScaleValue - 3);
-        $(minBtn).val(maxScaleValue - 3);
-    }
-    if (minScaleValue) {
-        if (maxScaleValue < minScaleValue) {
-            maxScaleValue = minScaleValue + 3;
-            maxScaleInput.val(minScaleValue + 3);
-        }
-    }
-    $(slider1).attr("max", maxScaleValue);
-    $(slider2).attr("max", maxScaleValue);
-    currentValue > maxScaleValue && $(valueBlock).val(maxScaleValue);
+    (0, _store.store).dispatch({
+        type: "CHANGE_MAX_SCALE",
+        id: toolbarId,
+        payload: maxScaleValue
+    });
+    (0, _updateSliders.updateSliders)();
 }
 function changeMinPos() {
     let minPositionInput = $(this);

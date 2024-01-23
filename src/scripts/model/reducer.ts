@@ -51,7 +51,6 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, minScale: action.payload }
         }
-
         return slider
       })
     case 'CHANGE_MAX_SCALE':
