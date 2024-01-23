@@ -26,6 +26,8 @@ store.dispatch({
   orientation: 'horizontal',
   minValue: 1,
   maxValue: 20,
+  minScale: 1,
+  maxScale: 20,
 })
 store.dispatch({
   type: 'ADD_SLIDER',
@@ -34,6 +36,8 @@ store.dispatch({
   orientation: 'vertical',
   minValue: 1,
   maxValue: 20,
+  minScale: 1,
+  maxScale: 20,
 })
 store.dispatch({
   type: 'ADD_SLIDER',
@@ -42,6 +46,8 @@ store.dispatch({
   orientation: 'vertical',
   minValue: 1,
   maxValue: 100,
+  minScale: 1,
+  maxScale: 100,
 })
 
 initSlider('.slider-page')

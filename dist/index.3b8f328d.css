@@ -101,6 +101,7 @@ input, label {
 }
 
 .control-panel {
+  width: 90%;
   align-items: baseline;
   margin-left: 600px;
   display: flex;

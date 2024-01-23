@@ -115,6 +115,7 @@ label {
   /* position: absolute; */
   align-items: baseline;
   margin-left: 600px;
+  width: 90%;
 }
 
 .toolbar-page {

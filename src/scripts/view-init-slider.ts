@@ -20,14 +20,14 @@ function initSlider(wrapper: string) {
           : ''
       }">
       <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${
-        item.minValue
-      }" max="${item.maxValue}" value="${
+        item.minScale
+      }" max="${item.maxScale}" value="${
         item.minValue
       }" orient="vertical" step="1"/>
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${
         item.interval === 'single' ? 'hidden' : ''
-      }" name="range_1" type="range" min="${item.minValue}"
-      max="${item.maxValue}" value="${
+      }" name="range_1" type="range" min="${item.minScale}"
+      max="${item.maxScale}" value="${
         item.maxValue
       }" orient="vertical" step="1"/>
       </div>

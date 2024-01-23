@@ -11,6 +11,8 @@ export function reducer(state, action) {
           orientation: action.orientation,
           minValue: action.minValue,
           maxValue: action.maxValue,
+          minScale: action.minScale,
+          maxScale: action.maxScale,
         },
       ]
     case 'VERTICAL_ORIENTANTION':

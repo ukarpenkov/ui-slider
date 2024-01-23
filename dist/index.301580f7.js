@@ -549,7 +549,9 @@ var _store = require("./model/store");
     interval: "interval",
     orientation: "horizontal",
     minValue: 1,
-    maxValue: 20
+    maxValue: 20,
+    minScale: 1,
+    maxScale: 20
 });
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -557,7 +559,9 @@ var _store = require("./model/store");
     interval: "single",
     orientation: "vertical",
     minValue: 1,
-    maxValue: 20
+    maxValue: 20,
+    minScale: 1,
+    maxScale: 20
 });
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -565,7 +569,9 @@ var _store = require("./model/store");
     interval: "single",
     orientation: "vertical",
     minValue: 1,
-    maxValue: 100
+    maxValue: 100,
+    minScale: 1,
+    maxScale: 100
 });
 (0, _viewInitSliderDefault.default)(".slider-page");
 (0, _viewInitToolbarDefault.default)(".toolbar-page");
@@ -7394,9 +7400,9 @@ function initSlider(wrapper) {
     <div class="${item.id} slider-wrapper">  
     <div class="slider-tem">
       <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
-      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minValue}" max="${item.maxValue}" value="${item.minValue}" orient="vertical" step="1"/>
-      <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minValue}"
-      max="${item.maxValue}" value="${item.maxValue}" orient="vertical" step="1"/>
+      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" orient="vertical" step="1"/>
+      <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
+      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="1"/>
       </div>
       <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
       <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
@@ -7514,7 +7520,9 @@ function reducer(state, action) {
                     interval: action.interval,
                     orientation: action.orientation,
                     minValue: action.minValue,
-                    maxValue: action.maxValue
+                    maxValue: action.maxValue,
+                    minScale: action.minScale,
+                    maxScale: action.maxScale
                 }, 
             ];
         case "VERTICAL_ORIENTANTION":
@@ -7579,45 +7587,17 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _store = require("./model/store");
 function initToolBar(wrapper) {
-    // let toolBar: JQuery<HTMLElement> = $(`
-    //   <div class="control-panel">
-    //   <div class="control-panel__text-inputs">
-    //   <input class="control-panel__text-input js-min-scale" type="number" min=0 placeholder="min scale value" name="minScale"/>
-    //   <input class="control-panel__text-input js-max-scale" type="number" min=0 placeholder="max scale value" name="maxScale" />
-    //   <input class="control-panel__text-input js-scale-step" type="number" min=0 placeholder="scale step" name="scaleStep"/>
-    //   <input class="control-panel__text-input js-min-pos" type="number" min=0 placeholder="first slider position" name="minPosition"/>
-    //   <input class="control-panel__text-input js-max-pos" type="number" min=0 placeholder="second slider position" name="maxPosition"/>
-    //   </div>
-    //   <div class="control-panel__checkbox-inputs">
-    //   <div class="control-panel__checkbox-item">
-    //   <input class="control-panel__checkbox-input js-vertical-or-horizontal" type="checkbox" name="verticalOrHorizontal"/>
-    //   <label for="verticalOrHorizontal" data-onlabel="on" data-offlabel="off" class="control-panel__label">vertical/horizontal</label>
-    //   </div>
-    //   <div class="control-panel__checkbox-item">
-    //   <input class="control-panel__checkbox-input js-single-or-range" type="checkbox" name='singleOrRange'/>
-    //   <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
-    //   </div>
-    //   <div class="control-panel__checkbox-item">
-    //   <input class="control-panel__checkbox-input" type="checkbox" name='progressBar'/>
-    //   <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
-    //   </div>
-    //   <div class="control-panel__checkbox-item">
-    //   <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
-    //   <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
-    //   </div>
-    //   </div>
-    //   </div>`)
     let state = (0, _store.store).getState();
     let renderToolBar = (data)=>{
         return data.map((item)=>{
             return $(`
       <div class="control-panel ${item.id}">
       <div class="control-panel__text-inputs">
-      <input class="control-panel__text-input js-min-scale" type="number" min=${item.minValue}  placeholder="min scale value" name="minScale"/>
-      <input class="control-panel__text-input js-max-scale" type="number" min=${item.mmaxValue}  placeholder="max scale value" name="maxScale" />
-      <input class="control-panel__text-input js-scale-step" type="number" min=0 placeholder="scale step" name="scaleStep"/>
-      <input class="control-panel__text-input js-min-pos" type="number" min=${item.minValue}  placeholder="first slider position" name="minPosition"/>
-      <input class="control-panel__text-input js-max-pos" type="number" min=${item.mmaxValue} placeholder="second slider position" name="maxPosition"/>
+      <input class="control-panel__text-input js-min-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minScale} placeholder="min scale value" name="minScale"/>
+      <input class="control-panel__text-input js-max-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxScale}   placeholder="max scale value" name="maxScale" />
+      <input class="control-panel__text-input js-scale-step" type="number" value=${1} min=0 placeholder="scale step" name="scaleStep"/>
+      <input class="control-panel__text-input js-min-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minValue} placeholder="first slider position" name="minPosition"/>
+      <input class="control-panel__text-input js-max-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxValue} placeholder="second slider position" name="maxPosition"/>
       </div>
       <div class="control-panel__checkbox-inputs">
       <div class="control-panel__checkbox-item">
@@ -7720,72 +7700,28 @@ function changeMaxScale() {
 }
 function changeMinPos() {
     let minPositionInput = $(this);
-    console.log(minPositionInput);
+    let toolbarContainer = $(minPositionInput).parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
     let minPosValue = Number($(minPositionInput).val());
-    let wrap = $(minPositionInput).parent().parent().parent();
-    console.log("WRAP", wrap);
-    let valueBlock = $(wrap).children().children()[2];
-    console.log("VALL", valueBlock);
-    let minBtn = $(wrap).children().children().children()[0];
-    let minBtnValue = Number($(minBtn).val());
-    let maxBtn = $(wrap).children().children().children()[1];
-    let maxBtnValue = Number($(maxBtn).val());
-    let slider = $(wrap).children();
-    let sliderId = $(slider).parent().parent().children().attr("class").split(" ")[0];
-    console.log("iddddd", sliderId);
     (0, _store.store).dispatch({
         type: "CHANGE_MIN_VAL",
-        id: sliderId,
-        payload: minBtnValue
+        id: toolbarId,
+        payload: minPosValue
     });
     (0, _updateSliders.updateSliders)();
-    console.log((0, _store.store).getState());
-    if (minPosValue > maxBtnValue) {
-        $(minPositionInput).val(minBtnValue);
-        $(valueBlock).val(maxBtnValue - 1);
-        $(minPositionInput).val(maxBtnValue - 1);
-        $(minBtn).val(maxBtnValue - 1);
-        return;
-    }
-    if (minPosValue < 0) {
-        $(valueBlock).val(1);
-        $(minPositionInput).val(1);
-        return;
-    }
-    $(minBtn).val(Number(minPosValue));
-    $(valueBlock).val(minPosValue);
-    $(minPositionInput).val(Number($(minBtn).val()));
+// !!!!!!!!!!!!!!!!!!НАДО ДОПИСАТЬ ЛОГИКУ КОГДА МИН БОЛЬШЕ МАКС!!!!!!!!!!!!
 }
 function changeMaxPos() {
     let maxPositionInput = $(this);
+    let toolbarContainer = $(maxPositionInput).parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
     let maxPosValue = Number($(maxPositionInput).val());
-    let wrap = $(maxPositionInput).parent().parent().parent().children();
-    let valueBlock = $(wrap).children().children()[3];
-    let valueBlockVal = Number($(valueBlock).val());
-    let minBtn = $(wrap).children().children()[0];
-    let minBtnValue = Number($(minBtn).val());
-    let maxBtn = $(wrap).children().children()[1];
-    let maxBtnValue = Number($(maxBtn).val());
-    if (valueBlockVal < minBtnValue) {
-        $(valueBlock).val(minBtnValue);
-        $(maxPositionInput).val(minBtnValue);
-        $(maxBtn).val(minBtnValue);
-    }
-    if (maxPosValue <= 0) {
-        $(valueBlock).val(1);
-        maxPosValue = 1;
-        $(maxPositionInput).val(1);
-    }
-    if (maxPosValue < minBtnValue) {
-        $(maxPositionInput).val(maxBtnValue);
-        $(valueBlock).val(minBtnValue + 1);
-        $(maxPositionInput).val(minBtnValue + 1);
-        $(maxBtn).val(minBtnValue + 1);
-        return;
-    }
-    $(maxBtn).val(maxPosValue);
-    $(valueBlock).val(maxPosValue);
-    $(maxPositionInput).val(Number($(maxBtn).val()));
+    (0, _store.store).dispatch({
+        type: "CHANGE_MAX_VAL",
+        id: toolbarId,
+        payload: maxPosValue
+    });
+    (0, _updateSliders.updateSliders)();
 }
 function changeScaleStep() {
     let scaleStepInput = $(this);
@@ -7813,29 +7749,17 @@ function changeOrientation() {
 }
 function changeSingleOrRange() {
     let singleOrRangeCheckbox = $(this);
-    let wrap = $(singleOrRangeCheckbox).parent().parent().parent().parent().children();
-    let slider = $(wrap).children()[0];
-    let valueBlock = $(wrap).children()[1];
-    let secondSlider = $(slider).children()[1];
-    let secondValueBlock = $(valueBlock).children()[1];
-    let sliderId = $(slider).parent().parent().attr("class").split(" ")[0];
-    if ($(singleOrRangeCheckbox).is(":checked")) {
-        $(secondSlider).addClass("hidden");
-        $(secondValueBlock).addClass("no-vis");
-        (0, _store.store).dispatch({
-            type: "SET_SINGLE",
-            id: sliderId
-        });
-        console.log((0, _store.store).getState());
-    } else {
-        $(secondSlider).removeClass("hidden");
-        $(secondValueBlock).removeClass("no-vis");
-        (0, _store.store).dispatch({
-            type: "SET_INTERVAL",
-            id: sliderId
-        });
-        console.log((0, _store.store).getState());
-    }
+    let toolbarContainer = $(singleOrRangeCheckbox).parent().parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    if ($(singleOrRangeCheckbox).is(":checked")) (0, _store.store).dispatch({
+        type: "SET_SINGLE",
+        id: toolbarId
+    });
+    else (0, _store.store).dispatch({
+        type: "SET_INTERVAL",
+        id: toolbarId
+    });
+    (0, _updateSliders.updateSliders)();
 }
 function changeVisibleProgressBar() {
     let progressBarCheckbox = $(this);
