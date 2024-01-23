@@ -46,6 +46,21 @@ export function reducer(state, action) {
         }
         return slider
       })
+    case 'CHANGE_MIN_SCALE':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, minScale: action.payload }
+        }
+
+        return slider
+      })
+    case 'CHANGE_MAX_SCALE':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, maxScale: action.payload }
+        }
+        return slider
+      })
     case 'SET_SINGLE':
       return state.map((slider) => {
         if (slider.id === action.id) {
