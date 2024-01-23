@@ -59,17 +59,15 @@ export function changeMaxPos(): void {
 
 export function changeScaleStep(): void {
   let scaleStepInput: JQuery<object> = $(this)
+  let toolbarContainer = $(scaleStepInput).parent().parent()[0]
+  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
   let scaleStepInputValue: number = Number(scaleStepInput.val())
-  let wrap: JQuery<object> = $(scaleStepInput)
-    .parent()
-    .parent()
-    .parent()
-    .children()
-  let slider: HTMLElement = $(wrap).children()[0]
-  let minSlider: HTMLElement = $(slider).children()[0]
-  let maxSlider: HTMLElement = $(slider).children()[1]
-  $(minSlider).attr('step', scaleStepInputValue)
-  $(maxSlider).attr('step', scaleStepInputValue)
+  store.dispatch({
+    type: 'CHANGE_STEP',
+    id: toolbarId,
+    payload: scaleStepInputValue,
+  })
+  updateSliders()
 }
 
 export function changeOrientation(): void {
@@ -120,7 +118,6 @@ export function changeVisibleProgressBar(): void {
     .parent()
     .children()
   let valueBlock: HTMLElement = $(wrap).children()[1]
-
   if ($(progressBarCheckbox).is(':checked')) {
     $(valueBlock).addClass('hidden')
   } else {
@@ -137,7 +134,6 @@ export function changeVisibleSlider(): void {
     .parent()
     .children()
   let slider: HTMLElement = $(wrap).children()[0]
-
   if ($(scaleCheckbox).is(':checked')) {
     $(slider).addClass('hidden')
   } else {

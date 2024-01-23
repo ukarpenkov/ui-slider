@@ -13,6 +13,7 @@ export function reducer(state, action) {
           maxValue: action.maxValue,
           minScale: action.minScale,
           maxScale: action.maxScale,
+          step: action.step,
         },
       ]
     case 'VERTICAL_ORIENTANTION':
@@ -60,6 +61,13 @@ export function reducer(state, action) {
         }
         return slider
       })
+    case 'CHANGE_STEP':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, step: action.payload }
+        }
+        return slider
+      })
     case 'SET_SINGLE':
       return state.map((slider) => {
         if (slider.id === action.id) {
@@ -73,7 +81,7 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, interval: 'interval' }
         }
-        console.log('interval')
+
         return slider
       })
     default:

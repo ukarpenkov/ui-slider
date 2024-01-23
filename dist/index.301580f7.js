@@ -7400,7 +7400,7 @@ function initSlider(wrapper) {
     <div class="${item.id} slider-wrapper">  
     <div class="slider-tem">
       <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
-      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" orient="vertical" step="1"/>
+      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
       max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="1"/>
       </div>
@@ -7522,7 +7522,8 @@ function reducer(state, action) {
                     minValue: action.minValue,
                     maxValue: action.maxValue,
                     minScale: action.minScale,
-                    maxScale: action.maxScale
+                    maxScale: action.maxScale,
+                    step: action.step
                 }, 
             ];
         case "VERTICAL_ORIENTANTION":
@@ -7575,6 +7576,14 @@ function reducer(state, action) {
                 };
                 return slider;
             });
+        case "CHANGE_STEP":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    step: action.payload
+                };
+                return slider;
+            });
         case "SET_SINGLE":
             return state.map((slider)=>{
                 if (slider.id === action.id) return {
@@ -7590,7 +7599,6 @@ function reducer(state, action) {
                     ...slider,
                     interval: "interval"
                 };
-                console.log("interval");
                 return slider;
             });
         default:
@@ -7709,13 +7717,15 @@ function changeMaxPos() {
 }
 function changeScaleStep() {
     let scaleStepInput = $(this);
+    let toolbarContainer = $(scaleStepInput).parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
     let scaleStepInputValue = Number(scaleStepInput.val());
-    let wrap = $(scaleStepInput).parent().parent().parent().children();
-    let slider = $(wrap).children()[0];
-    let minSlider = $(slider).children()[0];
-    let maxSlider = $(slider).children()[1];
-    $(minSlider).attr("step", scaleStepInputValue);
-    $(maxSlider).attr("step", scaleStepInputValue);
+    (0, _store.store).dispatch({
+        type: "CHANGE_STEP",
+        id: toolbarId,
+        payload: scaleStepInputValue
+    });
+    (0, _updateSliders.updateSliders)();
 }
 function changeOrientation() {
     let verticalOrHorizontalCheckbox = $(this);
