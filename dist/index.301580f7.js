@@ -540,9 +540,6 @@ var _viewInitToolbar = require("./view-init-toolbar");
 var _viewInitToolbarDefault = parcelHelpers.interopDefault(_viewInitToolbar);
 var _toolbarHandlers = require("./toolbar-handlers");
 var _store = require("./model/store");
-// let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
-// let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
-// let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
     id: "id2",
@@ -575,9 +572,6 @@ var _store = require("./model/store");
 });
 (0, _viewInitSliderDefault.default)(".slider-page");
 (0, _viewInitToolbarDefault.default)(".toolbar-page");
-// initToolBar('.toolbar-item-1')
-// initToolBar('.toolbar-item-2')
-// initToolBar('.toolbar-item-3')
 $("input[name='minScale']").on("change", (0, _toolbarHandlers.changeMinScale));
 $("input[name='maxScale']").on("change", (0, _toolbarHandlers.changeMaxScale));
 $("input[name='minPosition']").on("change", (0, _toolbarHandlers.changeMinPos));
@@ -7392,6 +7386,7 @@ exports.export = function(dest, destName, get) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _store = require("./model/store");
+var _updateSliders = require("./updateSliders");
 function initSlider(wrapper) {
     let state = (0, _store.store).getState();
     let sliderRendering = (data)=>{
@@ -7413,17 +7408,6 @@ function initSlider(wrapper) {
   `);
         });
     };
-    // let slider: JQuery<HTMLElement> = $(`
-    // <div class="uk-slider__range ${state[0].orientation}">
-    // <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${state[0].minValue}" max="${state[0].maxValue}" value="${state[0].minValue}" orient="vertical" step="1"/>
-    // <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${settings.minValue}"
-    // max="${state[0].maxValue}" value="${state[0].maxValue}" orient="vertical" step="1"/>
-    // </div>
-    // <div class="uk-slider__value_block ${state[0].orientation}">
-    // <input type="number" value="${state[0].minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-    // <input type="number" value="${state[0].maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
-    // </div>
-    // `)
     const slidersContainer = $('<div class="sliders-container"></div>');
     $(wrapper).append(slidersContainer);
     $(slidersContainer).append(sliderRendering(state));
@@ -7436,6 +7420,7 @@ function initSlider(wrapper) {
             var minVal = Number($(minBtn).val());
             var maxVal = Number($(maxBtn).val());
             let sliderId = $(range_min).parent().parent().parent()[0].classList[0];
+            (0, _updateSliders.updateToolbar)();
             if (minVal > maxVal - 1) $(minBtn).val(maxVal);
             $(range_min).change(function() {
                 let currentValue = Number($(this).val()) / 1;
@@ -7454,6 +7439,7 @@ function initSlider(wrapper) {
                         payload: currentValue
                     });
                 }
+                (0, _updateSliders.updateToolbar)();
             });
             $(range_min).val(minVal * 1);
             if (maxVal < minVal) $(maxBtn).val(minVal);
@@ -7469,6 +7455,7 @@ function initSlider(wrapper) {
                     id: sliderId,
                     payload: currentValue
                 });
+                (0, _updateSliders.updateToolbar)();
             });
             $(range_max).val(maxVal * 1);
             (0, _store.store).dispatch({
@@ -7485,11 +7472,10 @@ function initSlider(wrapper) {
         $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
         $(".uk-slider__input").trigger("input");
     })();
-// return exportSettings
 }
 exports.default = initSlider;
 
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gl3Yi":[function(require,module,exports) {
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./updateSliders":"anlKZ"}],"gl3Yi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "store", ()=>store);
@@ -7532,7 +7518,6 @@ function reducer(state, action) {
                     ...slider,
                     orientation: "vertical"
                 };
-                console.log("vert reducer");
                 return slider;
             });
         case "HORIZONTAL_ORIENTANTION":
@@ -7541,7 +7526,6 @@ function reducer(state, action) {
                     ...slider,
                     orientation: "horizontal"
                 };
-                console.log("horiz reducer");
                 return slider;
             });
         case "CHANGE_MIN_VAL":
@@ -7590,7 +7574,6 @@ function reducer(state, action) {
                     ...slider,
                     interval: "single"
                 };
-                console.log("single");
                 return slider;
             });
         case "SET_INTERVAL":
@@ -7606,7 +7589,35 @@ function reducer(state, action) {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2C3S4":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anlKZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "updateSliders", ()=>updateSliders);
+parcelHelpers.export(exports, "updateToolbar", ()=>updateToolbar);
+var _toolbarHandlers = require("./toolbar-handlers");
+var _viewInitSlider = require("./view-init-slider");
+var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
+var _viewInitToolbar = require("./view-init-toolbar");
+var _viewInitToolbarDefault = parcelHelpers.interopDefault(_viewInitToolbar);
+const updateSliders = ()=>{
+    $(".sliders-container").remove();
+    (0, _viewInitSliderDefault.default)(".slider-page");
+};
+const updateToolbar = ()=>{
+    $(".control-panel").remove();
+    (0, _viewInitToolbarDefault.default)(".toolbar-page");
+    $("input[name='minScale']").on("change", (0, _toolbarHandlers.changeMinScale));
+    $("input[name='maxScale']").on("change", (0, _toolbarHandlers.changeMaxScale));
+    $("input[name='minPosition']").on("change", (0, _toolbarHandlers.changeMinPos));
+    $("input[name='maxPosition']").on("change", (0, _toolbarHandlers.changeMaxPos));
+    $("input[name='scaleStep']").on("change", (0, _toolbarHandlers.changeScaleStep));
+    $("input[name='verticalOrHorizontal']").on("change", (0, _toolbarHandlers.changeOrientation));
+    $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleOrRange));
+    $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
+    $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
+};
+
+},{"./view-init-slider":"8JR3W","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI"}],"2C3S4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _store = require("./model/store");
@@ -7770,31 +7781,6 @@ function changeVisibleSlider() {
     else $(slider).removeClass("hidden");
 }
 
-},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anlKZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "updateSliders", ()=>updateSliders);
-var _store = require("./model/store");
-var _viewInitSlider = require("./view-init-slider");
-var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
-const updateSliders = ()=>{
-    $(".sliders-container").remove();
-    (0, _viewInitSliderDefault.default)(".slider-page");
-    // initToolBar('.id2')
-    // initToolBar('.id3')
-    // initToolBar('.id4')
-    // $("input[name='minScale']").on('change', changeMinScale)
-    // $("input[name='maxScale']").on('change', changeMaxScale)
-    // $("input[name='minPosition']").on('change', changeMinPos)
-    // $("input[name='maxPosition']").on('change', changeMaxPos)
-    // $("input[name='scaleStep']").on('change', changeScaleStep)
-    // $("input[name='verticalOrHorizontal']").on('change', changeOrientation)
-    // $("input[name='singleOrRange']").on('change', changeSingleOrRange)
-    // $("input[name='progressBar']").on('change', changeVisibleProgressBar)
-    // $("input[name='scaleRange']").on('change', changeVisibleSlider)
-    console.log((0, _store.store).getState());
-};
-
-},{"./model/store":"gl3Yi","./view-init-slider":"8JR3W","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map

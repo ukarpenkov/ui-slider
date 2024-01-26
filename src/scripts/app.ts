@@ -15,10 +15,6 @@ import {
 } from './toolbar-handlers'
 import { store } from './model/store'
 
-// let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
-// let settings2 = new SliderSettings('interval', 'vertical', 1, 300)
-// let settings3 = new SliderSettings('single', 'horizontal', 1, 1000)
-
 store.dispatch({
   type: 'ADD_SLIDER',
   id: 'id2',
@@ -53,10 +49,6 @@ store.dispatch({
 initSlider('.slider-page')
 
 initToolBar('.toolbar-page')
-
-// initToolBar('.toolbar-item-1')
-// initToolBar('.toolbar-item-2')
-// initToolBar('.toolbar-item-3')
 
 $("input[name='minScale']").on('change', changeMinScale)
 $("input[name='maxScale']").on('change', changeMaxScale)

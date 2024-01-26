@@ -1,4 +1,5 @@
 import { store } from './model/store'
+import { updateSliders, updateToolbar } from './updateSliders'
 
 type Settings = {
   minValue: number
@@ -51,17 +52,6 @@ function initSlider(wrapper: string) {
     })
   }
 
-  // let slider: JQuery<HTMLElement> = $(`
-  // <div class="uk-slider__range ${state[0].orientation}">
-  // <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${state[0].minValue}" max="${state[0].maxValue}" value="${state[0].minValue}" orient="vertical" step="1"/>
-  // <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${display}" name="range_1" type="range" min="${settings.minValue}"
-  // max="${state[0].maxValue}" value="${state[0].maxValue}" orient="vertical" step="1"/>
-  // </div>
-  // <div class="uk-slider__value_block ${state[0].orientation}">
-  // <input type="number" value="${state[0].minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-  // <input type="number" value="${state[0].maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${visibility}" />
-  // </div>
-  // `)
   const slidersContainer = $('<div class="sliders-container"></div>')
   $(wrapper).append(slidersContainer)
   $(slidersContainer).append(sliderRendering(state))
@@ -82,7 +72,7 @@ function initSlider(wrapper: string) {
       var minVal: number = Number($(minBtn).val())
       var maxVal: number = Number($(maxBtn).val())
       let sliderId = $(range_min).parent().parent().parent()[0].classList[0]
-
+      updateToolbar()
       if (minVal > maxVal - 1) {
         $(minBtn).val(maxVal)
       }
@@ -103,6 +93,7 @@ function initSlider(wrapper: string) {
             payload: currentValue,
           })
         }
+        updateToolbar()
       })
 
       $(range_min).val(minVal * 1)
@@ -121,6 +112,7 @@ function initSlider(wrapper: string) {
           id: sliderId,
           payload: currentValue,
         })
+        updateToolbar()
       })
       $(range_max).val(maxVal * 1)
       store.dispatch({
@@ -138,8 +130,6 @@ function initSlider(wrapper: string) {
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)
     $('.uk-slider__input').trigger('input')
   })()
-
-  // return exportSettings
 }
 
 export default initSlider

@@ -21,7 +21,6 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, orientation: 'vertical' }
         }
-        console.log('vert reducer')
         return slider
       })
     case 'HORIZONTAL_ORIENTANTION':
@@ -29,7 +28,6 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, orientation: 'horizontal' }
         }
-        console.log('horiz reducer')
         return slider
       })
     case 'CHANGE_MIN_VAL':
@@ -73,7 +71,6 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, interval: 'single' }
         }
-        console.log('single')
         return slider
       })
     case 'SET_INTERVAL':
@@ -81,7 +78,6 @@ export function reducer(state, action) {
         if (slider.id === action.id) {
           return { ...slider, interval: 'interval' }
         }
-
         return slider
       })
     default:
