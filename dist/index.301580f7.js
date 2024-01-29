@@ -548,7 +548,8 @@ var _store = require("./model/store");
     minValue: 1,
     maxValue: 20,
     minScale: 1,
-    maxScale: 20
+    maxScale: 20,
+    step: 1
 });
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -558,7 +559,8 @@ var _store = require("./model/store");
     minValue: 1,
     maxValue: 20,
     minScale: 1,
-    maxScale: 20
+    maxScale: 20,
+    step: 1
 });
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -568,7 +570,8 @@ var _store = require("./model/store");
     minValue: 1,
     maxValue: 100,
     minScale: 1,
-    maxScale: 100
+    maxScale: 100,
+    step: 1
 });
 (0, _viewInitSliderDefault.default)(".slider-page");
 (0, _viewInitToolbarDefault.default)(".toolbar-page");
@@ -7397,7 +7400,7 @@ function initSlider(wrapper) {
       <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
       <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
-      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="1"/>
+      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${item.step}"/>
       </div>
       <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
       <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
@@ -7475,7 +7478,7 @@ function initSlider(wrapper) {
 }
 exports.default = initSlider;
 
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./updateSliders":"anlKZ"}],"gl3Yi":[function(require,module,exports) {
+},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gl3Yi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "store", ()=>store);
@@ -7617,53 +7620,7 @@ const updateToolbar = ()=>{
     $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
 };
 
-},{"./view-init-slider":"8JR3W","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI"}],"2C3S4":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _store = require("./model/store");
-function initToolBar(wrapper) {
-    let state = (0, _store.store).getState();
-    let renderToolBar = (data)=>{
-        return data.map((item)=>{
-            return $(`
-      <div class="control-panel ${item.id}">
-      <div class="control-panel__text-inputs">
-      <input class="control-panel__text-input js-min-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minScale} placeholder="min scale value" name="minScale"/>
-      <input class="control-panel__text-input js-max-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxScale}   placeholder="max scale value" name="maxScale" />
-      <input class="control-panel__text-input js-scale-step" type="number" value=${1} min=0 placeholder="scale step" name="scaleStep"/>
-      <input class="control-panel__text-input js-min-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minValue} placeholder="first slider position" name="minPosition"/>
-      <input class="control-panel__text-input js-max-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxValue} placeholder="second slider position" name="maxPosition"/>
-      </div>
-      <div class="control-panel__checkbox-inputs">
-      <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input js-vertical-or-horizontal" type="checkbox" name="verticalOrHorizontal"
-      ${item.orientation === "vertical" ? "checked" : ""}
-      />
-      <label for="verticalOrHorizontal" data-onlabel="on" data-offlabel="off" class="control-panel__label">vertical/horizontal</label>
-      </div>
-      <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input js-single-or-range" type="checkbox" name='singleOrRange'
-      ${item.interval === "single" ? "checked" : ""}
-      />
-      <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
-      </div>
-      <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox" name='progressBar'/>
-      <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
-      </div>
-      <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
-      <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
-      </div>
-      </div>
-      </div>`);
-        });
-    };
-    $(wrapper).append(renderToolBar(state));
-}
-exports.default = initToolBar;
-
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
+},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7682,18 +7639,24 @@ function changeMinScale() {
     let toolbarContainer = $(minScaleInput).parent().parent()[0];
     let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
     let minScaleValue = Number($(minScaleInput).val());
+    let maxScaleValue = Number($(minScaleInput).next().val());
+    if (minScaleValue > maxScaleValue) minScaleValue = maxScaleValue;
     (0, _store.store).dispatch({
         type: "CHANGE_MIN_SCALE",
         id: toolbarId,
         payload: minScaleValue
     });
     (0, _updateSliders.updateSliders)();
+    (0, _updateSliders.updateToolbar)();
+    console.log((0, _store.store).getState());
 }
 function changeMaxScale() {
     let maxScaleInput = $(this);
     let toolbarContainer = $(maxScaleInput).parent().parent()[0];
     let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
     let maxScaleValue = Number($(maxScaleInput).val());
+    let minScaleValue = Number($(maxScaleInput).prev().val());
+    if (maxScaleValue < minScaleValue) maxScaleValue = minScaleValue;
     (0, _store.store).dispatch({
         type: "CHANGE_MAX_SCALE",
         id: toolbarId,
@@ -7781,6 +7744,52 @@ function changeVisibleSlider() {
     else $(slider).removeClass("hidden");
 }
 
-},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2C3S4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _store = require("./model/store");
+function initToolBar(wrapper) {
+    let state = (0, _store.store).getState();
+    let renderToolBar = (data)=>{
+        return data.map((item)=>{
+            return $(`
+      <div class="control-panel ${item.id}">
+      <div class="control-panel__text-inputs">
+      <input class="control-panel__text-input js-min-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minScale} placeholder="min scale value" name="minScale"/>
+      <input class="control-panel__text-input js-max-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxScale}   placeholder="max scale value" name="maxScale" />
+      <input class="control-panel__text-input js-scale-step" type="number" value=${item.step} min=0  placeholder="scale step" name="scaleStep"/>
+      <input class="control-panel__text-input js-min-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minValue} placeholder="first slider position" name="minPosition"/>
+      <input class="control-panel__text-input js-max-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxValue} placeholder="second slider position" name="maxPosition"/>
+      </div>
+      <div class="control-panel__checkbox-inputs">
+      <div class="control-panel__checkbox-item">
+      <input class="control-panel__checkbox-input js-vertical-or-horizontal" type="checkbox" name="verticalOrHorizontal"
+      ${item.orientation === "vertical" ? "checked" : ""}
+      />
+      <label for="verticalOrHorizontal" data-onlabel="on" data-offlabel="off" class="control-panel__label">vertical/horizontal</label>
+      </div>
+      <div class="control-panel__checkbox-item">
+      <input class="control-panel__checkbox-input js-single-or-range" type="checkbox" name='singleOrRange'
+      ${item.interval === "single" ? "checked" : ""}
+      />
+      <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
+      </div>
+      <div class="control-panel__checkbox-item">
+      <input class="control-panel__checkbox-input" type="checkbox" name='progressBar'/>
+      <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
+      </div>
+      <div class="control-panel__checkbox-item">
+      <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
+      <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
+      </div>
+      </div>
+      </div>`);
+        });
+    };
+    $(wrapper).append(renderToolBar(state));
+}
+exports.default = initToolBar;
+
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map

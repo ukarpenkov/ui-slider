@@ -52,6 +52,7 @@ export function reducer(state, action) {
         }
         return slider
       })
+
     case 'CHANGE_MAX_SCALE':
       return state.map((slider) => {
         if (slider.id === action.id) {

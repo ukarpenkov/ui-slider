@@ -17,7 +17,9 @@ function initToolBar(wrapper: string): void {
       } max=${item.maxScale} value=${
         item.maxScale
       }   placeholder="max scale value" name="maxScale" />
-      <input class="control-panel__text-input js-scale-step" type="number" value=${1} min=0 placeholder="scale step" name="scaleStep"/>
+      <input class="control-panel__text-input js-scale-step" type="number" value=${
+        item.step
+      } min=0  placeholder="scale step" name="scaleStep"/>
       <input class="control-panel__text-input js-min-pos" type="number" min=${
         item.minScale
       } max=${item.maxScale} value=${

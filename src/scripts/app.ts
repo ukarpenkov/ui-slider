@@ -24,6 +24,7 @@ store.dispatch({
   maxValue: 20,
   minScale: 1,
   maxScale: 20,
+  step: 1,
 })
 store.dispatch({
   type: 'ADD_SLIDER',
@@ -34,6 +35,7 @@ store.dispatch({
   maxValue: 20,
   minScale: 1,
   maxScale: 20,
+  step: 1,
 })
 store.dispatch({
   type: 'ADD_SLIDER',
@@ -44,6 +46,7 @@ store.dispatch({
   maxValue: 100,
   minScale: 1,
   maxScale: 100,
+  step: 1,
 })
 
 initSlider('.slider-page')

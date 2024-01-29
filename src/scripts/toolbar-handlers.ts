@@ -1,5 +1,5 @@
 import { store } from './model/store'
-import { updateSliders } from './updateSliders'
+import { updateSliders, updateToolbar } from './updateSliders'
 import initSlider from './view-init-slider'
 import initToolBar from './view-init-toolbar'
 
@@ -8,12 +8,19 @@ export function changeMinScale(): void {
   let toolbarContainer = $(minScaleInput).parent().parent()[0]
   let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
   let minScaleValue: number = Number($(minScaleInput).val())
+  let maxScaleValue = Number($(minScaleInput).next().val())
+  if (minScaleValue > maxScaleValue) {
+    minScaleValue = maxScaleValue
+  }
   store.dispatch({
     type: 'CHANGE_MIN_SCALE',
     id: toolbarId,
     payload: minScaleValue,
   })
   updateSliders()
+  updateToolbar()
+
+  console.log(store.getState())
 }
 
 export function changeMaxScale(): void {
@@ -21,6 +28,10 @@ export function changeMaxScale(): void {
   let toolbarContainer = $(maxScaleInput).parent().parent()[0]
   let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
   let maxScaleValue: number = Number($(maxScaleInput).val())
+  let minScaleValue = Number($(maxScaleInput).prev().val())
+  if (maxScaleValue < minScaleValue) {
+    maxScaleValue = minScaleValue
+  }
   store.dispatch({
     type: 'CHANGE_MAX_SCALE',
     id: toolbarId,
@@ -28,7 +39,6 @@ export function changeMaxScale(): void {
   })
   updateSliders()
 }
-
 export function changeMinPos(): void {
   let minPositionInput: JQuery<object> = $(this)
   let toolbarContainer = $(minPositionInput).parent().parent()[0]
