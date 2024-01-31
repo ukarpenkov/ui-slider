@@ -64,8 +64,8 @@ $("input[name='singleOrRange']").on('change', changeSingleOrRange)
 $("input[name='progressBar']").on('change', changeVisibleProgressBar)
 $("input[name='scaleRange']").on('change', changeVisibleSlider)
 
-let verticalCheckedCheckbox: any = $('input[name="verticalOrHorizontal"]')[1]
-verticalCheckedCheckbox.checked = true
+// let verticalCheckedCheckbox: any = $('input[name="verticalOrHorizontal"]')[1]
+// verticalCheckedCheckbox.checked = true
 
-let singleCheckedCheckbox: any = $("input[name='singleOrRange']")[2]
-singleCheckedCheckbox.checked = true
+// let singleCheckedCheckbox: any = $("input[name='singleOrRange']")[2]
+// singleCheckedCheckbox.checked = true

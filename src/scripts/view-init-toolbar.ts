@@ -45,11 +45,11 @@ function initToolBar(wrapper: string): void {
       <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
       </div>
       <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox" name='progressBar'/>
+      <input class="control-panel__checkbox-input" type="checkbox"   name='progressBar'/>
       <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
       </div>
       <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
+      <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange' />
       <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
       </div>
       </div>

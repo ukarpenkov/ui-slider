@@ -28,9 +28,9 @@ function initSlider(wrapper: string) {
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${
         item.interval === 'single' ? 'hidden' : ''
       }" name="range_1" type="range" min="${item.minScale}"
-      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${
-        item.step
-      }"/>
+      max="${item.maxScale}" value="${
+        item.maxValue
+      }" orient="vertical" step="${1}"/>
       </div>
       <div class="uk-slider__value_block ${
         item.orientation === 'vertical'

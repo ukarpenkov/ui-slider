@@ -583,11 +583,11 @@ $("input[name='scaleStep']").on("change", (0, _toolbarHandlers.changeScaleStep))
 $("input[name='verticalOrHorizontal']").on("change", (0, _toolbarHandlers.changeOrientation));
 $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleOrRange));
 $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
-$("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
-let verticalCheckedCheckbox = $('input[name="verticalOrHorizontal"]')[1];
-verticalCheckedCheckbox.checked = true;
-let singleCheckedCheckbox = $("input[name='singleOrRange']")[2];
-singleCheckedCheckbox.checked = true;
+$("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider)) // let verticalCheckedCheckbox: any = $('input[name="verticalOrHorizontal"]')[1]
+ // verticalCheckedCheckbox.checked = true
+ // let singleCheckedCheckbox: any = $("input[name='singleOrRange']")[2]
+ // singleCheckedCheckbox.checked = true
+;
 
 },{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -7400,7 +7400,7 @@ function initSlider(wrapper) {
       <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
       <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
-      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${item.step}"/>
+      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
       </div>
       <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
       <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
@@ -7775,11 +7775,11 @@ function initToolBar(wrapper) {
       <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
       </div>
       <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox" name='progressBar'/>
+      <input class="control-panel__checkbox-input" type="checkbox"   name='progressBar'/>
       <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
       </div>
       <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox" name='scaleRange' />
+      <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange' />
       <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
       </div>
       </div>
