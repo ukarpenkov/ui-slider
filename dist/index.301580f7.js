@@ -536,9 +536,6 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _importJquery = require("./import-jquery");
 var _viewInitSlider = require("./view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
-var _viewInitToolbar = require("./view-init-toolbar");
-var _viewInitToolbarDefault = parcelHelpers.interopDefault(_viewInitToolbar);
-var _toolbarHandlers = require("./toolbar-handlers");
 var _store = require("./model/store");
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -574,26 +571,8 @@ var _store = require("./model/store");
     step: 1
 });
 (0, _viewInitSliderDefault.default)(".slider-page");
-(0, _viewInitToolbarDefault.default)(".toolbar-page");
-(0, _store.store).dispatch({
-    type: "VERTICAL_ORIENTANTION",
-    id: "id3"
-});
-$("input[name='minScale']").on("change", (0, _toolbarHandlers.changeMinScale));
-$("input[name='maxScale']").on("change", (0, _toolbarHandlers.changeMaxScale));
-$("input[name='minPosition']").on("change", (0, _toolbarHandlers.changeMinPos));
-$("input[name='maxPosition']").on("change", (0, _toolbarHandlers.changeMaxPos));
-$("input[name='scaleStep']").on("change", (0, _toolbarHandlers.changeScaleStep));
-$("input[name='verticalOrHorizontal']").on("change", (0, _toolbarHandlers.changeOrientation));
-$("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleOrRange));
-$("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
-$("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider)) // let verticalCheckedCheckbox: any = $('input[name="verticalOrHorizontal"]')[1]
- // verticalCheckedCheckbox.checked = true
- // let singleCheckedCheckbox: any = $("input[name='singleOrRange']")[2]
- // singleCheckedCheckbox.checked = true
-;
 
-},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./toolbar-handlers":"cBPKI","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./model/store":"gl3Yi","./view-init-slider":"8JR3W","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7389,100 +7368,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"8JR3W":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _store = require("./model/store");
-var _updateSliders = require("./updateSliders");
-function initSlider(wrapper) {
-    let state = (0, _store.store).getState();
-    let sliderRendering = (data)=>{
-        return data.map((item)=>{
-            return $(`
-    <div class="${item.id} slider-wrapper">  
-    <div class="slider-tem">
-      <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
-      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
-      <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
-      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
-      </div>
-      <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
-      <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-      <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
-      </div>
-      </div>
-    </div>
-  `);
-        });
-    };
-    const slidersContainer = $('<div class="sliders-container"></div>');
-    $(wrapper).append(slidersContainer);
-    $(slidersContainer).append(sliderRendering(state));
-    (function handleRange() {
-        function rangeInputChangeEventHandler() {
-            var minBtn = $(this).parent().children(".js-uk-min");
-            var maxBtn = $(this).parent().children(".js-uk-max");
-            var range_min = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_min");
-            var range_max = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_max");
-            var minVal = Number($(minBtn).val());
-            var maxVal = Number($(maxBtn).val());
-            let sliderId = $(range_min).parent().parent().parent()[0].classList[0];
-            (0, _updateSliders.updateToolbar)();
-            if (minVal > maxVal - 1) $(minBtn).val(maxVal);
-            $(range_min).change(function() {
-                let currentValue = Number($(this).val()) / 1;
-                $(minBtn).val(currentValue);
-                (0, _store.store).dispatch({
-                    type: "CHANGE_MIN_VAL",
-                    id: sliderId,
-                    payload: currentValue
-                });
-                if (Number($(range_min).val()) > Number($(range_max).val())) {
-                    $(minBtn).val(maxVal);
-                    $(range_min).val(Number($(range_max).val()));
-                    (0, _store.store).dispatch({
-                        type: "CHANGE_MIN_VAL",
-                        id: sliderId,
-                        payload: currentValue
-                    });
-                }
-                (0, _updateSliders.updateToolbar)();
-            });
-            $(range_min).val(minVal * 1);
-            if (maxVal < minVal) $(maxBtn).val(minVal);
-            $(range_max).change(function() {
-                let currentValue = Number($(this).val()) / 1;
-                $(maxBtn).val(currentValue);
-                if (Number($(range_max).val()) < Number($(range_min).val())) {
-                    $(maxBtn).val(maxVal);
-                    $(range_max).val(Number($(range_min).val()));
-                }
-                (0, _store.store).dispatch({
-                    type: "CHANGE_MAX_VAL",
-                    id: sliderId,
-                    payload: currentValue
-                });
-                (0, _updateSliders.updateToolbar)();
-            });
-            $(range_max).val(maxVal * 1);
-            (0, _store.store).dispatch({
-                type: "CHANGE_MIN_VAL",
-                id: sliderId,
-                payload: minVal
-            });
-            (0, _store.store).dispatch({
-                type: "CHANGE_MAX_VAL",
-                id: sliderId,
-                payload: maxVal
-            });
-        }
-        $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
-        $(".uk-slider__input").trigger("input");
-    })();
-}
-exports.default = initSlider;
-
-},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gl3Yi":[function(require,module,exports) {
+},{}],"gl3Yi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "store", ()=>store);
@@ -7596,7 +7482,100 @@ function reducer(state, action) {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anlKZ":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8JR3W":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _store = require("./model/store");
+var _updateSliders = require("./updateSliders");
+function initSlider(wrapper) {
+    let state = (0, _store.store).getState();
+    let sliderRendering = (data)=>{
+        return data.map((item)=>{
+            return $(`
+    <div class="${item.id} slider-wrapper">  
+    <div class="slider-tem">
+      <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
+      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
+      <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
+      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
+      </div>
+      <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
+      <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+      <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
+      </div>
+      </div>
+    </div>
+  `);
+        });
+    };
+    const slidersContainer = $('<div class="sliders-container"></div>');
+    $(wrapper).append(slidersContainer);
+    $(slidersContainer).append(sliderRendering(state));
+    (function handleRange() {
+        function rangeInputChangeEventHandler() {
+            var minBtn = $(this).parent().children(".js-uk-min");
+            var maxBtn = $(this).parent().children(".js-uk-max");
+            var range_min = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_min");
+            var range_max = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_max");
+            var minVal = Number($(minBtn).val());
+            var maxVal = Number($(maxBtn).val());
+            let sliderId = $(range_min).parent().parent().parent()[0].classList[0];
+            (0, _updateSliders.updateToolbar)();
+            if (minVal > maxVal - 1) $(minBtn).val(maxVal);
+            $(range_min).change(function() {
+                let currentValue = Number($(this).val()) / 1;
+                $(minBtn).val(currentValue);
+                (0, _store.store).dispatch({
+                    type: "CHANGE_MIN_VAL",
+                    id: sliderId,
+                    payload: currentValue
+                });
+                if (Number($(range_min).val()) > Number($(range_max).val())) {
+                    $(minBtn).val(maxVal);
+                    $(range_min).val(Number($(range_max).val()));
+                    (0, _store.store).dispatch({
+                        type: "CHANGE_MIN_VAL",
+                        id: sliderId,
+                        payload: currentValue
+                    });
+                }
+                (0, _updateSliders.updateToolbar)();
+            });
+            $(range_min).val(minVal * 1);
+            if (maxVal < minVal) $(maxBtn).val(minVal);
+            $(range_max).change(function() {
+                let currentValue = Number($(this).val()) / 1;
+                $(maxBtn).val(currentValue);
+                if (Number($(range_max).val()) < Number($(range_min).val())) {
+                    $(maxBtn).val(maxVal);
+                    $(range_max).val(Number($(range_min).val()));
+                }
+                (0, _store.store).dispatch({
+                    type: "CHANGE_MAX_VAL",
+                    id: sliderId,
+                    payload: currentValue
+                });
+                (0, _updateSliders.updateToolbar)();
+            });
+            $(range_max).val(maxVal * 1);
+            (0, _store.store).dispatch({
+                type: "CHANGE_MIN_VAL",
+                id: sliderId,
+                payload: minVal
+            });
+            (0, _store.store).dispatch({
+                type: "CHANGE_MAX_VAL",
+                id: sliderId,
+                payload: maxVal
+            });
+        }
+        $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
+        $(".uk-slider__input").trigger("input");
+    })();
+}
+exports.default = initSlider;
+
+},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anlKZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "updateSliders", ()=>updateSliders);
@@ -7759,8 +7738,8 @@ function initToolBar(wrapper) {
             return $(`
       <div class="control-panel ${item.id}">
       <div class="control-panel__text-inputs">
-      <input class="control-panel__text-input js-min-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minScale} placeholder="min scale value" name="minScale"/>
-      <input class="control-panel__text-input js-max-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxScale}   placeholder="max scale value" name="maxScale" />
+      <input title="Минимально возможное значение" class="control-panel__text-input js-min-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minScale} placeholder="min scale value" name="minScale"/>
+      <input title="Максимально возможное значение" class="control-panel__text-input js-max-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxScale}   placeholder="max scale value" name="maxScale" />
       <input class="control-panel__text-input js-scale-step" type="number" value=${item.step} min=0  placeholder="scale step" name="scaleStep"/>
       <input class="control-panel__text-input js-min-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minValue} placeholder="first slider position" name="minPosition"/>
       <input class="control-panel__text-input js-max-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxValue} placeholder="second slider position" name="maxPosition"/>

@@ -7,12 +7,12 @@ function initToolBar(wrapper: string): void {
       return $(`
       <div class="control-panel ${item.id}">
       <div class="control-panel__text-inputs">
-      <input class="control-panel__text-input js-min-scale" type="number" min=${
+      <input title="Минимально возможное значение" class="control-panel__text-input js-min-scale" type="number" min=${
         item.minScale
       } max=${item.maxScale} value=${
         item.minScale
       } placeholder="min scale value" name="minScale"/>
-      <input class="control-panel__text-input js-max-scale" type="number" min=${
+      <input title="Максимально возможное значение" class="control-panel__text-input js-max-scale" type="number" min=${
         item.minScale
       } max=${item.maxScale} value=${
         item.maxScale

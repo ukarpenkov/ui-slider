@@ -3,11 +3,11 @@ body {
 }
 
 input {
-  font-family: monospace;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 label {
-  font-family: monospace;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .slider-wrapper {
@@ -35,7 +35,7 @@ label {
 }
 
 .uk-slider__input {
-  width: 100%;
+  width: 80%;
   -webkit-appearance: none;
   appearance: none;
   position: absolute;
@@ -44,16 +44,16 @@ label {
 .uk-slider__input::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   appearance: none;
-  height: 3px; /*height of line*/
-  background: #7b7777; /*color of line*/
+  height: 4px; /*height of line*/
+  background: #7a97ef; /*color of line*/
   border-radius: 10px;
 }
 
 .uk-slider__input::-webkit-slider-thumb {
   position: relative;
-  margin-top: -6px; /*position of handle (automatic depend on height of line on -2 pos)*/
-  background: #000000; /*color of handle*/
-  border: 1px solid #000000; /*border of handle*/
+  margin-top: -5.3px; /*position of handle (automatic depend on height of line on -2 pos)*/
+  background: #1707cf; /*color of handle*/
+  border: 1px solid #1707cf; /*border of handle*/
   border-radius: 25px; /*25 - handle is circle; 0 - square*/
   width: 15px; /*width of handle*/
   height: 15px; /*height of handle*/
@@ -68,36 +68,32 @@ label {
 }
 
 .uk-slider__value_block {
+  position: relative;
+  top: 15px;
   display: flex;
   justify-content: space-between;
-  width: 53%;
+  width: 47%;
   margin-top: 8px;
   margin-left: 22px;
 }
 
 .uk-slider__value_block_orient_vertical {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  align-content: space-between;
-  display: grid;
-  grid-gap: 250%;
-  bottom: 53%;
-  position: relative;
-  bottom: 120%;
-  left: 2%;
+  grid-gap: 300%;
+  align-content: space-around;
   align-items: center;
+  display: grid;
+  position: relative;
+  left: 2%;
 }
 
 .uk-slider__range_value {
   width: 60px;
   border: none;
-  margin-top: 9px;
   font-size: 20px;
 }
 
 .uk-slider__value_block_orient_vertical .uk-slider__range_value_min {
-  margin-top: -198px;
+  margin-top: -176px;
 }
 
 .hidden {
