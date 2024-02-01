@@ -11,8 +11,6 @@ label {
 }
 
 .slider-wrapper {
-  width: 40%;
-  margin-left: 40px;
   position: relative;
 }
 
@@ -94,12 +92,12 @@ label {
 .uk-slider__range_value {
   width: 60px;
   border: none;
-  margin-top: 10px;
+  margin-top: 9px;
   font-size: 20px;
 }
 
 .uk-slider__value_block_orient_vertical .uk-slider__range_value_min {
-  margin-top: -3px;
+  margin-top: -198px;
 }
 
 .hidden {
@@ -112,16 +110,13 @@ label {
 
 .control-panel {
   display: flex;
-  /* position: absolute; */
   align-items: baseline;
-  margin-left: 600px;
   width: 90%;
 }
 
 .toolbar-page {
   display: grid;
   grid-gap: 100px;
-  height: 100%;
 }
 
 .control-panel__text-input {
@@ -175,7 +170,6 @@ label {
 .slider-page {
   display: grid;
   grid-gap: 100%;
-  padding-top: 10%;
 }
 
 .page-item {
@@ -185,9 +179,15 @@ label {
 }
 
 .sliders-container {
-  grid-gap: 100%;
-  padding-top: 10%;
+  padding-top: 17%;
+  grid-gap: 40%;
   display: grid;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 10%;
 }
 
 @media (min-device-width: 320px) and (max-device-width: 950px) {

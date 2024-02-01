@@ -575,6 +575,10 @@ var _store = require("./model/store");
 });
 (0, _viewInitSliderDefault.default)(".slider-page");
 (0, _viewInitToolbarDefault.default)(".toolbar-page");
+(0, _store.store).dispatch({
+    type: "VERTICAL_ORIENTANTION",
+    id: "id3"
+});
 $("input[name='minScale']").on("change", (0, _toolbarHandlers.changeMinScale));
 $("input[name='maxScale']").on("change", (0, _toolbarHandlers.changeMaxScale));
 $("input[name='minPosition']").on("change", (0, _toolbarHandlers.changeMinPos));

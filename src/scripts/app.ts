@@ -53,6 +53,10 @@ initSlider('.slider-page')
 
 initToolBar('.toolbar-page')
 
+store.dispatch({
+  type: 'VERTICAL_ORIENTANTION',
+  id: 'id3',
+})
 $("input[name='minScale']").on('change', changeMinScale)
 $("input[name='maxScale']").on('change', changeMaxScale)
 $("input[name='minPosition']").on('change', changeMinPos)
