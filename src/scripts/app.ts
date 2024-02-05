@@ -1,6 +1,10 @@
 import './import-jquery'
 import initSlider from './view-init-slider'
 import { store } from './model/store'
+import {
+  inputTooltip,
+  tooltip,
+} from './view/components/input-tooltips/input-tooltips'
 
 store.dispatch({
   type: 'ADD_SLIDER',
@@ -37,3 +41,4 @@ store.dispatch({
 })
 
 initSlider('.slider-page')
+inputTooltip()

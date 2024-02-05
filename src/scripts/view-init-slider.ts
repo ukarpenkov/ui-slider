@@ -1,5 +1,6 @@
 import { store } from './model/store'
 import { updateSliders, updateToolbar } from './updateSliders'
+import { inputTooltip } from './view/components/input-tooltips/input-tooltips'
 
 type Settings = {
   minValue: number
@@ -20,7 +21,7 @@ function initSlider(wrapper: string) {
           ? 'uk-slider__range_orient_vertical'
           : ''
       }">
-      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${
+      <input  class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${
         item.minScale
       }" max="${item.maxScale}" value="${item.minValue}" step="${
         item.step
@@ -73,6 +74,7 @@ function initSlider(wrapper: string) {
       var maxVal: number = Number($(maxBtn).val())
       let sliderId = $(range_min).parent().parent().parent()[0].classList[0]
       updateToolbar()
+
       if (minVal > maxVal - 1) {
         $(minBtn).val(maxVal)
       }

@@ -12,6 +12,7 @@ import {
 } from './toolbar-handlers'
 import initSlider from './view-init-slider'
 import initToolBar from './view-init-toolbar'
+import { inputTooltip } from './view/components/input-tooltips/input-tooltips'
 
 export const updateSliders = () => {
   $('.sliders-container').remove()

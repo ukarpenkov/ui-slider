@@ -1,4 +1,5 @@
 import { store } from './model/store'
+import { inputTooltip } from './view/components/input-tooltips/input-tooltips'
 
 function initToolBar(wrapper: string): void {
   let state = store.getState()
@@ -17,15 +18,15 @@ function initToolBar(wrapper: string): void {
       } max=${item.maxScale} value=${
         item.maxScale
       }   placeholder="max scale value" name="maxScale" />
-      <input class="control-panel__text-input js-scale-step" type="number" value=${
+      <input title="Шаг"  class="control-panel__text-input js-scale-step" type="number" value=${
         item.step
       } min=0  placeholder="scale step" name="scaleStep"/>
-      <input class="control-panel__text-input js-min-pos" type="number" min=${
+      <input title="Текущее минимальное значение" class="control-panel__text-input js-min-pos" type="number" min=${
         item.minScale
       } max=${item.maxScale} value=${
         item.minValue
       } placeholder="first slider position" name="minPosition"/>
-      <input class="control-panel__text-input js-max-pos" type="number" min=${
+      <input title="Текущее максимальное значение"  class="control-panel__text-input js-max-pos" type="number" min=${
         item.minScale
       } max=${item.maxScale} value=${
         item.maxValue
@@ -51,6 +52,7 @@ function initToolBar(wrapper: string): void {
       <div class="control-panel__checkbox-item">
       <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange' />
       <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
+      <div id='tooltip'>Высота</div>
       </div>
       </div>
       </div>`)

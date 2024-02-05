@@ -537,6 +537,7 @@ var _importJquery = require("./import-jquery");
 var _viewInitSlider = require("./view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 var _store = require("./model/store");
+var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
     id: "id2",
@@ -571,8 +572,9 @@ var _store = require("./model/store");
     step: 1
 });
 (0, _viewInitSliderDefault.default)(".slider-page");
+(0, _inputTooltips.inputTooltip)();
 
-},{"./import-jquery":"kmOly","./model/store":"gl3Yi","./view-init-slider":"8JR3W","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view/components/input-tooltips/input-tooltips":"lUGML"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7368,7 +7370,100 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"gl3Yi":[function(require,module,exports) {
+},{}],"8JR3W":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _store = require("./model/store");
+var _updateSliders = require("./updateSliders");
+function initSlider(wrapper) {
+    let state = (0, _store.store).getState();
+    let sliderRendering = (data)=>{
+        return data.map((item)=>{
+            return $(`
+    <div class="${item.id} slider-wrapper">  
+    <div class="slider-tem">
+      <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
+      <input  class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
+      <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
+      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
+      </div>
+      <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
+      <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
+      <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
+      </div>
+      </div>
+    </div>
+  `);
+        });
+    };
+    const slidersContainer = $('<div class="sliders-container"></div>');
+    $(wrapper).append(slidersContainer);
+    $(slidersContainer).append(sliderRendering(state));
+    (function handleRange() {
+        function rangeInputChangeEventHandler() {
+            var minBtn = $(this).parent().children(".js-uk-min");
+            var maxBtn = $(this).parent().children(".js-uk-max");
+            var range_min = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_min");
+            var range_max = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_max");
+            var minVal = Number($(minBtn).val());
+            var maxVal = Number($(maxBtn).val());
+            let sliderId = $(range_min).parent().parent().parent()[0].classList[0];
+            (0, _updateSliders.updateToolbar)();
+            if (minVal > maxVal - 1) $(minBtn).val(maxVal);
+            $(range_min).change(function() {
+                let currentValue = Number($(this).val()) / 1;
+                $(minBtn).val(currentValue);
+                (0, _store.store).dispatch({
+                    type: "CHANGE_MIN_VAL",
+                    id: sliderId,
+                    payload: currentValue
+                });
+                if (Number($(range_min).val()) > Number($(range_max).val())) {
+                    $(minBtn).val(maxVal);
+                    $(range_min).val(Number($(range_max).val()));
+                    (0, _store.store).dispatch({
+                        type: "CHANGE_MIN_VAL",
+                        id: sliderId,
+                        payload: currentValue
+                    });
+                }
+                (0, _updateSliders.updateToolbar)();
+            });
+            $(range_min).val(minVal * 1);
+            if (maxVal < minVal) $(maxBtn).val(minVal);
+            $(range_max).change(function() {
+                let currentValue = Number($(this).val()) / 1;
+                $(maxBtn).val(currentValue);
+                if (Number($(range_max).val()) < Number($(range_min).val())) {
+                    $(maxBtn).val(maxVal);
+                    $(range_max).val(Number($(range_min).val()));
+                }
+                (0, _store.store).dispatch({
+                    type: "CHANGE_MAX_VAL",
+                    id: sliderId,
+                    payload: currentValue
+                });
+                (0, _updateSliders.updateToolbar)();
+            });
+            $(range_max).val(maxVal * 1);
+            (0, _store.store).dispatch({
+                type: "CHANGE_MIN_VAL",
+                id: sliderId,
+                payload: minVal
+            });
+            (0, _store.store).dispatch({
+                type: "CHANGE_MAX_VAL",
+                id: sliderId,
+                payload: maxVal
+            });
+        }
+        $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
+        $(".uk-slider__input").trigger("input");
+    })();
+}
+exports.default = initSlider;
+
+},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gl3Yi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "store", ()=>store);
@@ -7482,100 +7577,7 @@ function reducer(state, action) {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8JR3W":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _store = require("./model/store");
-var _updateSliders = require("./updateSliders");
-function initSlider(wrapper) {
-    let state = (0, _store.store).getState();
-    let sliderRendering = (data)=>{
-        return data.map((item)=>{
-            return $(`
-    <div class="${item.id} slider-wrapper">  
-    <div class="slider-tem">
-      <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
-      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
-      <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
-      max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
-      </div>
-      <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
-      <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
-      <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
-      </div>
-      </div>
-    </div>
-  `);
-        });
-    };
-    const slidersContainer = $('<div class="sliders-container"></div>');
-    $(wrapper).append(slidersContainer);
-    $(slidersContainer).append(sliderRendering(state));
-    (function handleRange() {
-        function rangeInputChangeEventHandler() {
-            var minBtn = $(this).parent().children(".js-uk-min");
-            var maxBtn = $(this).parent().children(".js-uk-max");
-            var range_min = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_min");
-            var range_max = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_max");
-            var minVal = Number($(minBtn).val());
-            var maxVal = Number($(maxBtn).val());
-            let sliderId = $(range_min).parent().parent().parent()[0].classList[0];
-            (0, _updateSliders.updateToolbar)();
-            if (minVal > maxVal - 1) $(minBtn).val(maxVal);
-            $(range_min).change(function() {
-                let currentValue = Number($(this).val()) / 1;
-                $(minBtn).val(currentValue);
-                (0, _store.store).dispatch({
-                    type: "CHANGE_MIN_VAL",
-                    id: sliderId,
-                    payload: currentValue
-                });
-                if (Number($(range_min).val()) > Number($(range_max).val())) {
-                    $(minBtn).val(maxVal);
-                    $(range_min).val(Number($(range_max).val()));
-                    (0, _store.store).dispatch({
-                        type: "CHANGE_MIN_VAL",
-                        id: sliderId,
-                        payload: currentValue
-                    });
-                }
-                (0, _updateSliders.updateToolbar)();
-            });
-            $(range_min).val(minVal * 1);
-            if (maxVal < minVal) $(maxBtn).val(minVal);
-            $(range_max).change(function() {
-                let currentValue = Number($(this).val()) / 1;
-                $(maxBtn).val(currentValue);
-                if (Number($(range_max).val()) < Number($(range_min).val())) {
-                    $(maxBtn).val(maxVal);
-                    $(range_max).val(Number($(range_min).val()));
-                }
-                (0, _store.store).dispatch({
-                    type: "CHANGE_MAX_VAL",
-                    id: sliderId,
-                    payload: currentValue
-                });
-                (0, _updateSliders.updateToolbar)();
-            });
-            $(range_max).val(maxVal * 1);
-            (0, _store.store).dispatch({
-                type: "CHANGE_MIN_VAL",
-                id: sliderId,
-                payload: minVal
-            });
-            (0, _store.store).dispatch({
-                type: "CHANGE_MAX_VAL",
-                id: sliderId,
-                payload: maxVal
-            });
-        }
-        $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
-        $(".uk-slider__input").trigger("input");
-    })();
-}
-exports.default = initSlider;
-
-},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anlKZ":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anlKZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "updateSliders", ()=>updateSliders);
@@ -7740,9 +7742,9 @@ function initToolBar(wrapper) {
       <div class="control-panel__text-inputs">
       <input title="Минимально возможное значение" class="control-panel__text-input js-min-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minScale} placeholder="min scale value" name="minScale"/>
       <input title="Максимально возможное значение" class="control-panel__text-input js-max-scale" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxScale}   placeholder="max scale value" name="maxScale" />
-      <input class="control-panel__text-input js-scale-step" type="number" value=${item.step} min=0  placeholder="scale step" name="scaleStep"/>
-      <input class="control-panel__text-input js-min-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minValue} placeholder="first slider position" name="minPosition"/>
-      <input class="control-panel__text-input js-max-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxValue} placeholder="second slider position" name="maxPosition"/>
+      <input title="Шаг"  class="control-panel__text-input js-scale-step" type="number" value=${item.step} min=0  placeholder="scale step" name="scaleStep"/>
+      <input title="Текущее минимальное значение" class="control-panel__text-input js-min-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.minValue} placeholder="first slider position" name="minPosition"/>
+      <input title="Текущее максимальное значение"  class="control-panel__text-input js-max-pos" type="number" min=${item.minScale} max=${item.maxScale} value=${item.maxValue} placeholder="second slider position" name="maxPosition"/>
       </div>
       <div class="control-panel__checkbox-inputs">
       <div class="control-panel__checkbox-item">
@@ -7764,6 +7766,7 @@ function initToolBar(wrapper) {
       <div class="control-panel__checkbox-item">
       <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange' />
       <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
+      <div id='tooltip'>Высота</div>
       </div>
       </div>
       </div>`);
@@ -7773,6 +7776,136 @@ function initToolBar(wrapper) {
 }
 exports.default = initToolBar;
 
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUGML":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "inputTooltip", ()=>inputTooltip);
+const inputTooltip = ()=>{
+    var tooltip = {
+        /* НАЧАЛО НАСТРОЕК */ options: {
+            attr_name: "tooltip",
+            blank_text: "",
+            newline_entity: "\xb6",
+            max_width: 0,
+            delay: 100,
+            skip_tags: [
+                "link",
+                "style"
+            ]
+        },
+        /* КОНЕЦ НАСТРОЕК */ t: document.createElement("DIV"),
+        c: null,
+        g: false,
+        canvas: null,
+        m: function(e) {
+            if (tooltip.g) {
+                var x = window.event ? event.clientX + (tooltip.canvas.scrollLeft || document.body.scrollLeft) : e.pageX;
+                var y = window.event ? event.clientY + (tooltip.canvas.scrollTop || document.body.scrollTop) : e.pageY;
+                tooltip.a(x, y);
+            }
+        },
+        d: function() {
+            tooltip.canvas = document.getElementsByTagName(document.compatMode && document.compatMode == "CSS1Compat" ? "HTML" : "BODY")[0];
+            tooltip.t.setAttribute("id", "tooltip");
+            document.body.appendChild(tooltip.t);
+            if (tooltip.options.max_width) tooltip.t.style.maxWidth = tooltip.options.max_width + "px" // all but ie
+            ;
+            var a = document.all && !window.opera ? document.all : document.getElementsByTagName("*") // in opera 9 document.all produces type mismatch error
+            ;
+            var l = a.length;
+            for(var i = 0; i < l; i++){
+                if (!a[i] || tooltip.options.skip_tags.in_array(a[i].tagName.toLowerCase())) continue;
+                var tooltip_title = a[i].getAttribute("title") // returns form object if IE & name="title"; then IE crashes; so...
+                ;
+                if (tooltip_title && typeof tooltip_title != "string") tooltip_title = "";
+                var tooltip_alt = a[i].getAttribute("alt");
+                var tooltip_blank = a[i].getAttribute("target") && a[i].getAttribute("target") == "_blank" && tooltip.options.blank_text;
+                if (tooltip_title || tooltip_blank) {
+                    a[i].setAttribute(tooltip.options.attr_name, tooltip_blank ? tooltip_title ? tooltip_title + " " + tooltip.options.blank_text : tooltip.options.blank_text : tooltip_title);
+                    if (a[i].getAttribute(tooltip.options.attr_name)) {
+                        a[i].removeAttribute("title");
+                        if (tooltip_alt && a[i].complete) a[i].removeAttribute("alt");
+                        tooltip.l(a[i], "mouseover", tooltip.s);
+                        tooltip.l(a[i], "mouseout", tooltip.h);
+                    }
+                } else if (tooltip_alt && a[i].complete) {
+                    a[i].setAttribute(tooltip.options.attr_name, tooltip_alt);
+                    if (a[i].getAttribute(tooltip.options.attr_name)) {
+                        a[i].removeAttribute("alt");
+                        tooltip.l(a[i], "mouseover", tooltip.s);
+                        tooltip.l(a[i], "mouseout", tooltip.h);
+                    }
+                }
+                !a[i].getAttribute(tooltip.options.attr_name) && tooltip_blank;
+            }
+            document.onmousemove = tooltip.m;
+            window.onscroll = tooltip.h;
+            tooltip.a(-99, -99);
+        },
+        _: function(s) {
+            s = s.replace(/\&/g, "&amp;");
+            s = s.replace(/\</g, "&lt;");
+            s = s.replace(/\>/g, "&gt;");
+            return s;
+        },
+        s: function(e) {
+            if (typeof tooltip == "undefined") return;
+            var d = window.event ? window.event.srcElement : e.target;
+            if (!d.getAttribute(tooltip.options.attr_name)) return;
+            var s = d.getAttribute(tooltip.options.attr_name);
+            if (tooltip.options.newline_entity) {
+                var s = tooltip._(s);
+                s = s.replace(eval("/" + tooltip._(tooltip.options.newline_entity) + "/g"), "<br />");
+                tooltip.t.innerHTML = s;
+            } else {
+                if (tooltip.t.firstChild) tooltip.t.removeChild(tooltip.t.firstChild);
+                tooltip.t.appendChild(document.createTextNode(s));
+            }
+            tooltip.c = setTimeout(function() {
+                tooltip.t.style.visibility = "visible";
+            }, tooltip.options.delay);
+            tooltip.g = true;
+        },
+        h: function(e) {
+            if (typeof tooltip == "undefined") return;
+            tooltip.t.style.visibility = "hidden";
+            if (!tooltip.options.newline_entity && tooltip.t.firstChild) tooltip.t.removeChild(tooltip.t.firstChild);
+            clearTimeout(tooltip.c);
+            tooltip.g = false;
+            tooltip.a(-99, -99);
+        },
+        l: function(o, e, a) {
+            if (o.addEventListener) o.addEventListener(e, a, false) // was true--Opera 7b workaround!
+            ;
+            else if (o.attachEvent) o.attachEvent("on" + e, a);
+            else return null;
+        },
+        a: function(x, y) {
+            var w_width = tooltip.canvas.clientWidth ? tooltip.canvas.clientWidth + (tooltip.canvas.scrollLeft || document.body.scrollLeft) : window.innerWidth + window.pageXOffset;
+            var w_height = window.innerHeight ? window.innerHeight + window.pageYOffset : tooltip.canvas.clientHeight + (tooltip.canvas.scrollTop || document.body.scrollTop // should be vice verca since Opera 7 is crazy!
+            );
+            if (document.all && document.all.item && !window.opera) tooltip.t.style.width = tooltip.options.max_width && tooltip.t.offsetWidth > tooltip.options.max_width ? tooltip.options.max_width + "px" : "auto";
+            var t_width = tooltip.t.offsetWidth;
+            var t_height = tooltip.t.offsetHeight;
+            tooltip.t.style.left = x + 8 + "px";
+            tooltip.t.style.top = y + 8 + "px";
+            if (x + t_width > w_width) tooltip.t.style.left = w_width - t_width + "px";
+            if (y + t_height > w_height) tooltip.t.style.top = w_height - t_height + "px";
+        }
+    };
+    Array.prototype.in_array = function(value) {
+        var l = this.length;
+        for(var i = 0; i < l; i++)if (this[i] === value) return true;
+        return false;
+    };
+    var root = window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null;
+    if (root) {
+        if (root.addEventListener) root.addEventListener("load", tooltip.d, false);
+        else if (root.attachEvent) root.attachEvent("onload", tooltip.d);
+    }
+    console.log("ALL");
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map
