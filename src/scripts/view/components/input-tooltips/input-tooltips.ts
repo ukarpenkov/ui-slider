@@ -36,8 +36,9 @@ export const inputTooltip = () => {
           ? 'HTML'
           : 'BODY'
       )[0]
-      tooltip.t.setAttribute('id', 'tooltip')
+      tooltip.t.setAttribute('id', 'input-tooltip')
       document.body.appendChild(tooltip.t)
+
       if (tooltip.options.max_width)
         tooltip.t.style.maxWidth = tooltip.options.max_width + 'px' // all but ie
       var a =
@@ -180,10 +181,12 @@ export const inputTooltip = () => {
       : document.addEventListener
       ? document
       : null
-  if (root) {
-    if (root.addEventListener) root.addEventListener('load', tooltip.d, false)
-    else if (root.attachEvent) root.attachEvent('onload', tooltip.d)
-  }
 
-  console.log('ALL')
+  if (root) {
+    if (root.addEventListener) {
+      root.addEventListener('load', tooltip.d, false)
+    } else if (root.attachEvent) {
+      root.attachEvent('onload', tooltip.d)
+    }
+  }
 }

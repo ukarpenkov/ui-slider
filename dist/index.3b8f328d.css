@@ -207,7 +207,7 @@ input, label {
   }
 }
 
-#tooltip {
+#input-tooltip {
   color: #000;
   visibility: hidden;
   background: #e2e0e0;

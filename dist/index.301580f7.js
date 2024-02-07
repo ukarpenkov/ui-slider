@@ -7384,6 +7384,8 @@ function initSlider(wrapper) {
     <div class="slider-tem">
       <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
       <input  class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
+   
+      
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
       max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
       </div>
@@ -7590,6 +7592,7 @@ var _viewInitToolbarDefault = parcelHelpers.interopDefault(_viewInitToolbar);
 const updateSliders = ()=>{
     $(".sliders-container").remove();
     (0, _viewInitSliderDefault.default)(".slider-page");
+    console.log("upd-slid");
 };
 const updateToolbar = ()=>{
     $(".control-panel").remove();
@@ -7603,6 +7606,7 @@ const updateToolbar = ()=>{
     $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleOrRange));
     $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
     $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
+    console.log("upd-tool");
 };
 
 },{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
@@ -7766,7 +7770,7 @@ function initToolBar(wrapper) {
       <div class="control-panel__checkbox-item">
       <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange' />
       <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
-      <div id='tooltip'>Высота</div>
+     
       </div>
       </div>
       </div>`);
@@ -7806,7 +7810,7 @@ const inputTooltip = ()=>{
         },
         d: function() {
             tooltip.canvas = document.getElementsByTagName(document.compatMode && document.compatMode == "CSS1Compat" ? "HTML" : "BODY")[0];
-            tooltip.t.setAttribute("id", "tooltip");
+            tooltip.t.setAttribute("id", "input-tooltip");
             document.body.appendChild(tooltip.t);
             if (tooltip.options.max_width) tooltip.t.style.maxWidth = tooltip.options.max_width + "px" // all but ie
             ;
@@ -7903,7 +7907,6 @@ const inputTooltip = ()=>{
         if (root.addEventListener) root.addEventListener("load", tooltip.d, false);
         else if (root.attachEvent) root.attachEvent("onload", tooltip.d);
     }
-    console.log("ALL");
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")

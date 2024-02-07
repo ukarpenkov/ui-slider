@@ -215,7 +215,7 @@ label {
     margin-top: 50px;
   }
 }
-#tooltip {
+#input-tooltip {
   background: none repeat scroll 0% 0% #e2e0e0; /* Фон блока */
   border-radius: 5px; /* Закругление углов */
   color: #000000; /* Цвет букв */

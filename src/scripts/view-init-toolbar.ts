@@ -52,7 +52,7 @@ function initToolBar(wrapper: string): void {
       <div class="control-panel__checkbox-item">
       <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange' />
       <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
-      <div id='tooltip'>Высота</div>
+     
       </div>
       </div>
       </div>`)
