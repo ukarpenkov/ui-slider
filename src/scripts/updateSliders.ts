@@ -17,7 +17,6 @@ import { inputTooltip } from './view/components/input-tooltips/input-tooltips'
 export const updateSliders = () => {
   $('.sliders-container').remove()
   initSlider('.slider-page')
-  console.log('upd-slid')
 }
 
 export const updateToolbar = () => {
@@ -28,11 +27,8 @@ export const updateToolbar = () => {
   $("input[name='minPosition']").on('change', changeMinPos)
   $("input[name='maxPosition']").on('change', changeMaxPos)
   $("input[name='scaleStep']").on('change', changeScaleStep)
-
   $("input[name='verticalOrHorizontal']").on('change', changeOrientation)
   $("input[name='singleOrRange']").on('change', changeSingleOrRange)
   $("input[name='progressBar']").on('change', changeVisibleProgressBar)
   $("input[name='scaleRange']").on('change', changeVisibleSlider)
-
-  console.log('upd-tool')
 }

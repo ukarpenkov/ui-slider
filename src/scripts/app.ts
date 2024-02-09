@@ -3,6 +3,7 @@ import initSlider from './view-init-slider'
 import { store } from './model/store'
 import {
   inputTooltip,
+  simple_tooltip,
   tooltip,
 } from './view/components/input-tooltips/input-tooltips'
 
@@ -40,5 +41,9 @@ store.dispatch({
   step: 1,
 })
 
-initSlider('.slider-page')
-inputTooltip()
+initSlider('.slider-page', '.tooltip')
+// inputTooltip()
+// simple_tooltip()
+// $(function () {
+//   $(document).tooltip()
+// })

@@ -21,7 +21,9 @@ function initSlider(wrapper: string) {
           ? 'uk-slider__range_orient_vertical'
           : ''
       }">
-      <input  class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${
+      <input title="${
+        item.minValue
+      }" class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${
         item.minScale
       }" max="${item.maxScale}" value="${item.minValue}" step="${
         item.step
