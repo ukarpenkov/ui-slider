@@ -11,6 +11,8 @@
 //     },
 //     /* КОНЕЦ НАСТРОЕК */
 
+import { store } from '../../../model/store'
+
 //     t: document.createElement('DIV'),
 //     c: null,
 //     g: false,
@@ -193,33 +195,54 @@
 //   }
 // }
 
-export function simple_tooltip(target_items, name) {
-  $(target_items).each(function (i) {
-    $('body').append(
-      "<div class='" +
-        name +
-        "' id='" +
-        name +
-        i +
-        "'><p>" +
-        $(this).attr('title') +
-        '</p></div>'
-    )
-    var my_tooltip = $('#' + name + i)
+// export function simple_tooltip(target_items, name) {
+//   $(target_items).each(function (i) {
+//     $('body').append(
+//       "<div class='" +
+//         name +
+//         "' id='" +
+//         name +
+//         i +
+//         "'><p>" +
+//         $(this).attr('title') +
+//         '</p></div>'
+//     )
+//     var my_tooltip = $('#' + name + i)
 
-    $(this)
-      .removeAttr('title')
-      .mouseover(function () {
-        my_tooltip.css({ opacity: 0.8, display: 'none' }).fadeIn(400)
-      })
-      .mousemove(function (kmouse) {
-        my_tooltip.css({ left: kmouse.pageX + 15, top: kmouse.pageY + 15 })
-      })
-      .mouseout(function () {
-        my_tooltip.fadeOut(400)
-      })
-  })
+//     $(this)
+//       .removeAttr('title')
+//       .mouseover(function () {
+//         my_tooltip.css({ opacity: 0.8, display: 'none' }).fadeIn(400)
+//       })
+//       .mousemove(function (kmouse) {
+//         my_tooltip.css({ left: kmouse.pageX + 15, top: kmouse.pageY + 15 })
+//       })
+//       .mouseout(function () {
+//         my_tooltip.fadeOut(400)
+//       })
+//   })
+// }
+// $(document).ready(function () {
+//   simple_tooltip('a', 'tooltip')
+// })
+export const setTooltip = () => {
+  let btn = document.querySelector('.btn')
+  let input = document.querySelector('.js-uk-min')
+  let span = document.querySelector('.tooltip-slider')
+  let time = 1500
+
+  input.onmousemove = function () {
+    let state = store.getState()
+    console.log(state)
+    let data = input.getAttribute('data-tooltipe')
+    span.style.display = 'block'
+    span.onmousemove = remove
+    span.classList.add('tilda')
+    span.innerHTML = state[0].minValue
+    setTimeout(remove, time)
+  }
+
+  function remove() {
+    span.style.display = 'none'
+  }
 }
-$(document).ready(function () {
-  simple_tooltip('a', 'tooltip')
-})

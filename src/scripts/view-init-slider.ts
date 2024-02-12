@@ -28,8 +28,6 @@ function initSlider(wrapper: string) {
       }" max="${item.maxScale}" value="${item.minValue}" step="${
         item.step
       }" orient="vertical"  />
-   
-      
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${
         item.interval === 'single' ? 'hidden' : ''
       }" name="range_1" type="range" min="${item.minScale}"
@@ -37,6 +35,7 @@ function initSlider(wrapper: string) {
         item.maxValue
       }" orient="vertical" step="${1}"/>
       </div>
+      <div class="tooltip-slider">${item.minValue}</div>
       <div class="uk-slider__value_block ${
         item.orientation === 'vertical'
           ? 'uk-slider__value_block_orient_vertical'

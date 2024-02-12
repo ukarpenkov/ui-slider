@@ -242,3 +242,34 @@ label {
   background-color: #222;
   padding: 2px 7px;
 } */
+
+.tooltip-slider {
+  position: absolute;
+  top: 50px;
+  left: 120%;
+  background: #00cccc;
+  color: #fafafa;
+  padding: 6px 10px 10px 10px;
+  border-radius: 6px;
+  display: none;
+}
+
+.tilda {
+  animation: scale 0.34s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes scale {
+  0%,
+  100% {
+    padding: 7px 10px 10px 10px;
+  }
+  80% {
+    padding: 8px 12px 12px 12px;
+    background: tomato;
+  }
+}
+
+.tooltip-slider:hover {
+  border: 1px solid blue;
+  color: blue;
+}

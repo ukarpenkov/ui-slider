@@ -537,6 +537,7 @@ var _importJquery = require("./import-jquery");
 var _viewInitSlider = require("./view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 var _store = require("./model/store");
+var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
     id: "id2",
@@ -570,14 +571,15 @@ var _store = require("./model/store");
     maxScale: 100,
     step: 1
 });
-(0, _viewInitSliderDefault.default)(".slider-page", ".tooltip") // inputTooltip()
- // simple_tooltip()
- // $(function () {
- //   $(document).tooltip()
- // })
-;
+(0, _viewInitSliderDefault.default)(".slider-page", ".tooltip");
+// inputTooltip()
+// simple_tooltip()
+// $(function () {
+//   $(document).tooltip()
+// })
+(0, _inputTooltips.setTooltip)();
 
-},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view/components/input-tooltips/input-tooltips":"lUGML"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7387,11 +7389,10 @@ function initSlider(wrapper) {
     <div class="slider-tem">
       <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
       <input title="${item.minValue}" class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
-   
-      
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
       max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
       </div>
+      <div class="tooltip-slider">${item.minValue}</div>
       <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
       <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
       <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
@@ -7592,9 +7593,11 @@ var _viewInitSlider = require("./view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 var _viewInitToolbar = require("./view-init-toolbar");
 var _viewInitToolbarDefault = parcelHelpers.interopDefault(_viewInitToolbar);
+var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
 const updateSliders = ()=>{
     $(".sliders-container").remove();
     (0, _viewInitSliderDefault.default)(".slider-page");
+    (0, _inputTooltips.setTooltip)();
 };
 const updateToolbar = ()=>{
     $(".control-panel").remove();
@@ -7608,9 +7611,10 @@ const updateToolbar = ()=>{
     $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleOrRange));
     $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
     $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
+    (0, _inputTooltips.setTooltip)();
 };
 
-},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
+},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view/components/input-tooltips/input-tooltips":"lUGML"}],"cBPKI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7781,6 +7785,43 @@ function initToolBar(wrapper) {
 }
 exports.default = initToolBar;
 
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUGML":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
+// export const inputTooltip = () => {
+//   var tooltip = {
+//     /* НАЧАЛО НАСТРОЕК */
+//     options: {
+//       attr_name: 'tooltip', // наименование создаваемого tooltip'ого атрибута
+//       blank_text: '', // текст для ссылок с target="_blank"
+//       newline_entity: '', // укажите пустую строку (""), если не хотите использовать в tooltip'ах многострочность; ежели хотите, то укажите тот символ или символы, которые будут заменяться на перевод строки
+//       max_width: 0, // максимальная ширина tooltip'а в пикселах; обнулите это значение, если ширина должна быть нелимитирована
+//       delay: 100, // задержка при показе tooltip'а в миллисекундах
+//       skip_tags: ['link', 'style'], // теги, у которых не обрабатываем атрибуты alt и title
+//     },
+//     /* КОНЕЦ НАСТРОЕК */
+var _store = require("../../../model/store");
+const setTooltip = ()=>{
+    let btn = document.querySelector(".btn");
+    let input = document.querySelector(".js-uk-min");
+    let span = document.querySelector(".tooltip-slider");
+    let time = 1500;
+    input.onmousemove = function() {
+        let state = (0, _store.store).getState();
+        console.log(state);
+        let data = input.getAttribute("data-tooltipe");
+        span.style.display = "block";
+        span.onmousemove = remove;
+        span.classList.add("tilda");
+        span.innerHTML = state[0].minValue;
+        setTimeout(remove, time);
+    };
+    function remove() {
+        span.style.display = "none";
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../model/store":"gl3Yi"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map
