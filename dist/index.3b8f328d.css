@@ -218,35 +218,16 @@ input, label {
   position: absolute;
 }
 
-.tooltip-slider {
+.js-tooltip-slider-min, .js-tooltip-slider-max {
+  width: 15px;
+  height: 15px;
+  text-align: center;
   color: #fafafa;
   background: #0cc;
-  border-radius: 6px;
-  padding: 6px 10px 10px;
+  border-radius: 50%;
+  padding: 8px;
   display: none;
   position: absolute;
-  top: 50px;
-  left: 120%;
-}
-
-.tilda {
-  animation: scale .34s cubic-bezier(.68, -.55, .27, 1.55);
-}
-
-@keyframes scale {
-  0%, 100% {
-    padding: 7px 10px 10px;
-  }
-
-  80% {
-    background: tomato;
-    padding: 8px 12px 12px;
-  }
-}
-
-.tooltip-slider:hover {
-  color: #00f;
-  border: 1px solid #00f;
 }
 
 /*# sourceMappingURL=index.3b8f328d.css.map */

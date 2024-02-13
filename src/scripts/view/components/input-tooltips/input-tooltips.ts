@@ -226,23 +226,23 @@ import { store } from '../../../model/store'
 //   simple_tooltip('a', 'tooltip')
 // })
 export const setTooltip = () => {
-  let btn = document.querySelector('.btn')
   let input = document.querySelector('.js-uk-min')
-  let span = document.querySelector('.tooltip-slider')
-  let time = 1500
+  let minTooltip = document.querySelector('.js-tooltip-slider-min')
+  let time = 2000
 
-  input.onmousemove = function () {
+  input.onmousemove = function (event) {
     let state = store.getState()
-    console.log(state)
-    let data = input.getAttribute('data-tooltipe')
-    span.style.display = 'block'
-    span.onmousemove = remove
-    span.classList.add('tilda')
-    span.innerHTML = state[0].minValue
+    minTooltip.style.display = 'block'
+    minTooltip.innerHTML = state[0].minValue
+    const x = event.clientX // получаем координату X мыши
+    const y = event.clientY // получаем координату Y мыши
+
+    minTooltip.style.left = `${x - 5}px`
+    minTooltip.style.top = `${-32}px`
     setTimeout(remove, time)
   }
 
   function remove() {
-    span.style.display = 'none'
+    minTooltip.style.display = 'none'
   }
 }

@@ -226,50 +226,25 @@ label {
   visibility: hidden; /* Назначаем невидимость */
 }
 
-/* .tooltip {
+.js-tooltip-slider-min {
   position: absolute;
-  z-index: 999;
-  left: -9999px;
-  background-color: #dedede;
-  padding: 5px;
-  border: 1px solid #fff;
-  width: 250px;
-}
-.tooltip p {
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  background-color: #222;
-  padding: 2px 7px;
-} */
-
-.tooltip-slider {
-  position: absolute;
-  top: 50px;
-  left: 120%;
   background: #00cccc;
+  width: 15px;
+  height: 15px;
+  text-align: center;
   color: #fafafa;
-  padding: 6px 10px 10px 10px;
-  border-radius: 6px;
+  padding: 8px;
+  border-radius: 50%;
   display: none;
 }
-
-.tilda {
-  animation: scale 0.34s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-@keyframes scale {
-  0%,
-  100% {
-    padding: 7px 10px 10px 10px;
-  }
-  80% {
-    padding: 8px 12px 12px 12px;
-    background: tomato;
-  }
-}
-
-.tooltip-slider:hover {
-  border: 1px solid blue;
-  color: blue;
+.js-tooltip-slider-max {
+  position: absolute;
+  background: #00cccc;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  color: #fafafa;
+  padding: 8px;
+  border-radius: 50%;
+  display: none;
 }

@@ -579,7 +579,7 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
 // })
 (0, _inputTooltips.setTooltip)();
 
-},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view/components/input-tooltips/input-tooltips":"lUGML"}],"kmOly":[function(require,module,exports) {
+},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./model/store":"gl3Yi","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7392,7 +7392,8 @@ function initSlider(wrapper) {
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
       max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
       </div>
-      <div class="tooltip-slider">${item.minValue}</div>
+      <div class="js-tooltip-slider-min">${item.minValue}</div>
+      <div class="js-tooltip-slider-max">${item.maxValue}</div>
       <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
       <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
       <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
@@ -7614,7 +7615,7 @@ const updateToolbar = ()=>{
     (0, _inputTooltips.setTooltip)();
 };
 
-},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view/components/input-tooltips/input-tooltips":"lUGML"}],"cBPKI":[function(require,module,exports) {
+},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7803,25 +7804,26 @@ parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
 //     /* КОНЕЦ НАСТРОЕК */
 var _store = require("../../../model/store");
 const setTooltip = ()=>{
-    let btn = document.querySelector(".btn");
     let input = document.querySelector(".js-uk-min");
-    let span = document.querySelector(".tooltip-slider");
-    let time = 1500;
-    input.onmousemove = function() {
+    let minTooltip = document.querySelector(".js-tooltip-slider-min");
+    let time = 2000;
+    input.onmousemove = function(event) {
         let state = (0, _store.store).getState();
-        console.log(state);
-        let data = input.getAttribute("data-tooltipe");
-        span.style.display = "block";
-        span.onmousemove = remove;
-        span.classList.add("tilda");
-        span.innerHTML = state[0].minValue;
+        minTooltip.style.display = "block";
+        minTooltip.innerHTML = state[0].minValue;
+        const x = event.clientX // получаем координату X мыши
+        ;
+        const y = event.clientY // получаем координату Y мыши
+        ;
+        minTooltip.style.left = `${x - 5}px`;
+        minTooltip.style.top = `${-32}px`;
         setTimeout(remove, time);
     };
     function remove() {
-        span.style.display = "none";
+        minTooltip.style.display = "none";
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../model/store":"gl3Yi"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
+},{"../../../model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 
 //# sourceMappingURL=index.301580f7.js.map
