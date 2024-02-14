@@ -7392,12 +7392,13 @@ function initSlider(wrapper) {
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
       max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
       </div>
-      <div class="js-tooltip-slider-min">${item.minValue}</div>
-      <div class="js-tooltip-slider-max">${item.maxValue}</div>
+   
       <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
       <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
       <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
       </div>
+      <div class="js-tooltip-slider-min">${item.minValue}</div>
+      <div class="js-tooltip-slider-max">${item.maxValue}</div>
       </div>
     </div>
   `);
@@ -7804,23 +7805,51 @@ parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
 //     /* КОНЕЦ НАСТРОЕК */
 var _store = require("../../../model/store");
 const setTooltip = ()=>{
-    let input = document.querySelector(".js-uk-min");
+    let state = (0, _store.store).getState();
+    let inputMin = document.querySelectorAll(".js-uk-min");
+    let inputMax = document.querySelectorAll(".js-uk-max");
     let minTooltip = document.querySelector(".js-tooltip-slider-min");
+    let maxTooltip = document.querySelector(".js-tooltip-slider-max");
     let time = 2000;
-    input.onmousemove = function(event) {
-        let state = (0, _store.store).getState();
-        minTooltip.style.display = "block";
-        minTooltip.innerHTML = state[0].minValue;
-        const x = event.clientX // получаем координату X мыши
-        ;
-        const y = event.clientY // получаем координату Y мыши
-        ;
-        minTooltip.style.left = `${x - 5}px`;
-        minTooltip.style.top = `${-32}px`;
-        setTimeout(remove, time);
-    };
+    inputMin.forEach((a)=>a.onmousemove = function(event) {
+            console.log(state);
+            let wrapper = $(this).parent().parent().parent()[0];
+            let id = $(wrapper).attr("class").split(" ")[0];
+            console.log(id);
+            let currentValue = [
+                ...state
+            ].filter((a)=>a.id === id)[0].minValue;
+            console.log(currentValue);
+            minTooltip.style.display = "block";
+            minTooltip.innerHTML = currentValue;
+            const x = event.clientX;
+            const y = event.clientY;
+            minTooltip.style.left = `${x - 5}px`;
+            minTooltip.style.top = `${-32}px`;
+            setTimeout(remove, time);
+        });
+    inputMax.forEach((a)=>a.onmousemove = function(event) {
+            console.log(state);
+            let wrapper = $(this).parent().parent().parent()[0];
+            let id = $(wrapper).attr("class").split(" ")[0];
+            console.log(id);
+            let currentValue = [
+                ...state
+            ].filter((a)=>a.id === id)[0].maxValue;
+            console.log(currentValue);
+            maxTooltip.style.display = "block";
+            maxTooltip.innerHTML = currentValue;
+            const x = event.clientX;
+            const y = event.clientY;
+            maxTooltip.style.left = `${x}px`;
+            maxTooltip.style.right = `${x}px`;
+            maxTooltip.style.top = `${y}px`;
+            maxTooltip.style.bottom = `${y}px`;
+            setTimeout(remove, time);
+        });
     function remove() {
         minTooltip.style.display = "none";
+        maxTooltip.style.display = "none";
     }
 };
 

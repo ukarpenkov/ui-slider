@@ -226,23 +226,55 @@ import { store } from '../../../model/store'
 //   simple_tooltip('a', 'tooltip')
 // })
 export const setTooltip = () => {
-  let input = document.querySelector('.js-uk-min')
+  let state = store.getState()
+  let inputMin = document.querySelectorAll('.js-uk-min')
+  let inputMax = document.querySelectorAll('.js-uk-max')
   let minTooltip = document.querySelector('.js-tooltip-slider-min')
+  let maxTooltip = document.querySelector('.js-tooltip-slider-max')
   let time = 2000
 
-  input.onmousemove = function (event) {
-    let state = store.getState()
-    minTooltip.style.display = 'block'
-    minTooltip.innerHTML = state[0].minValue
-    const x = event.clientX // получаем координату X мыши
-    const y = event.clientY // получаем координату Y мыши
+  inputMin.forEach(
+    (a) =>
+      (a.onmousemove = function (event) {
+        console.log(state)
+        let wrapper = $(this).parent().parent().parent()[0]
+        let id = $(wrapper).attr('class').split(' ')[0]
+        console.log(id)
+        let currentValue = [...state].filter((a) => a.id === id)[0].minValue
+        console.log(currentValue)
+        minTooltip.style.display = 'block'
+        minTooltip.innerHTML = currentValue
+        const x = event.clientX
+        const y = event.clientY
+        minTooltip.style.left = `${x - 5}px`
+        minTooltip.style.top = `${-32}px`
+        setTimeout(remove, time)
+      })
+  )
+  inputMax.forEach(
+    (a) =>
+      (a.onmousemove = function (event) {
+        console.log(state)
+        let wrapper = $(this).parent().parent().parent()[0]
+        let id = $(wrapper).attr('class').split(' ')[0]
+        console.log(id)
+        let currentValue = [...state].filter((a) => a.id === id)[0].maxValue
+        console.log(currentValue)
+        maxTooltip.style.display = 'block'
+        maxTooltip.innerHTML = currentValue
+        const x = event.clientX
+        const y = event.clientY
 
-    minTooltip.style.left = `${x - 5}px`
-    minTooltip.style.top = `${-32}px`
-    setTimeout(remove, time)
-  }
+        maxTooltip.style.left = `${x}px`
+        maxTooltip.style.right = `${x}px`
+        maxTooltip.style.top = `${y}px`
+        maxTooltip.style.bottom = `${y}px`
+        setTimeout(remove, time)
+      })
+  )
 
   function remove() {
     minTooltip.style.display = 'none'
+    maxTooltip.style.display = 'none'
   }
 }
