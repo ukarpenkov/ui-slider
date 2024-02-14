@@ -218,7 +218,21 @@ input, label {
   position: absolute;
 }
 
-.js-tooltip-slider-min, .js-tooltip-slider-max {
+.js-tooltip-slider-min {
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  color: #fafafa;
+  background: #0cc;
+  border-radius: 50%;
+  padding: 8px;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.js-tooltip-slider-max {
   width: 15px;
   height: 15px;
   text-align: center;

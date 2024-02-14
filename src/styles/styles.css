@@ -228,6 +228,8 @@ label {
 
 .js-tooltip-slider-min {
   position: absolute;
+  top: 0;
+  left: 0;
   background: #00cccc;
   width: 15px;
   height: 15px;

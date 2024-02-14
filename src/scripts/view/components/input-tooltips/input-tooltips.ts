@@ -229,13 +229,14 @@ export const setTooltip = () => {
   let state = store.getState()
   let inputMin = document.querySelectorAll('.js-uk-min')
   let inputMax = document.querySelectorAll('.js-uk-max')
-  let minTooltip = document.querySelector('.js-tooltip-slider-min')
-  let maxTooltip = document.querySelector('.js-tooltip-slider-max')
-  let time = 2000
+
+  let time = 1200
 
   inputMin.forEach(
     (a) =>
       (a.onmousemove = function (event) {
+        let minTooltip = document.querySelector('.js-tooltip-slider-min')
+
         console.log(state)
         let wrapper = $(this).parent().parent().parent()[0]
         let id = $(wrapper).attr('class').split(' ')[0]
@@ -249,11 +250,15 @@ export const setTooltip = () => {
         minTooltip.style.left = `${x - 5}px`
         minTooltip.style.top = `${-32}px`
         setTimeout(remove, time)
+        function remove() {
+          minTooltip.style.display = 'none'
+        }
       })
   )
   inputMax.forEach(
     (a) =>
       (a.onmousemove = function (event) {
+        let maxTooltip = document.querySelector('.js-tooltip-slider-max')
         console.log(state)
         let wrapper = $(this).parent().parent().parent()[0]
         let id = $(wrapper).attr('class').split(' ')[0]
@@ -270,11 +275,9 @@ export const setTooltip = () => {
         maxTooltip.style.top = `${y}px`
         maxTooltip.style.bottom = `${y}px`
         setTimeout(remove, time)
+        function remove() {
+          maxTooltip.style.display = 'none'
+        }
       })
   )
-
-  function remove() {
-    minTooltip.style.display = 'none'
-    maxTooltip.style.display = 'none'
-  }
 }
