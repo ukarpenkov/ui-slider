@@ -1,5 +1,6 @@
 body {
   user-select: none;
+  max-width: 1000px;
 }
 
 input {
@@ -184,6 +185,7 @@ label {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 10%;
+  margin-left: 10%;
 }
 
 @media (min-device-width: 320px) and (max-device-width: 950px) {
@@ -199,6 +201,12 @@ label {
     appearance: none;
     cursor: pointer; /*cursor of slider`*/
     transition: 3s;
+  }
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 10%;
+    margin-left: 10%;
   }
 
   .uk-slider__value_block_orient_vertical {

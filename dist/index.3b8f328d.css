@@ -1,5 +1,6 @@
 body {
   user-select: none;
+  max-width: 1000px;
 }
 
 input, label {
@@ -175,6 +176,7 @@ input, label {
 .wrapper {
   grid-template-columns: 1fr 1fr;
   margin-top: 10%;
+  margin-left: 10%;
   display: grid;
 }
 
@@ -190,6 +192,13 @@ input, label {
     margin-top: -14px;
     transition: all 3s;
     position: relative;
+  }
+
+  .wrapper {
+    grid-template-columns: 1fr;
+    margin-top: 10%;
+    margin-left: 10%;
+    display: grid;
   }
 
   .uk-slider__value_block_orient_vertical {

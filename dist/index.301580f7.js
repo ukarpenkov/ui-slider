@@ -547,7 +547,8 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
     maxValue: 20,
     minScale: 1,
     maxScale: 20,
-    step: 1
+    step: 1,
+    tooltip: true
 });
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -558,7 +559,8 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
     maxValue: 20,
     minScale: 1,
     maxScale: 20,
-    step: 1
+    step: 1,
+    tooltip: true
 });
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -569,7 +571,8 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
     maxValue: 100,
     minScale: 1,
     maxScale: 100,
-    step: 1
+    step: 1,
+    tooltip: true
 });
 (0, _viewInitSliderDefault.default)(".slider-page", ".tooltip");
 (0, _inputTooltips.createToolTips)();
@@ -7384,7 +7387,7 @@ function initSlider(wrapper) {
     <div class="${item.id} slider-wrapper">  
     <div class="slider-tem">
       <div class="uk-slider__range ${item.orientation === "vertical" ? "uk-slider__range_orient_vertical" : ""}">
-      <input title="${item.minValue}" class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
+      <input class="uk-slider__input uk-slider__input_handle_min js-uk-min" name="range_1" type="range" min="${item.minScale}" max="${item.maxScale}" value="${item.minValue}" step="${item.step}" orient="vertical"  />
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
       max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
       </div>
@@ -7501,7 +7504,8 @@ function reducer(state, action) {
                     maxValue: action.maxValue,
                     minScale: action.minScale,
                     maxScale: action.maxScale,
-                    step: action.step
+                    step: action.step,
+                    tooltip: action.tooltip
                 }, 
             ];
         case "VERTICAL_ORIENTANTION":
@@ -7576,6 +7580,22 @@ function reducer(state, action) {
                 };
                 return slider;
             });
+        case "ON_TOOLTIP":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    tooltip: true
+                };
+                return slider;
+            });
+        case "OFF_TOOLTIP":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    tooltip: false
+                };
+                return slider;
+            });
         default:
             return state;
     }
@@ -7608,11 +7628,11 @@ const updateToolbar = ()=>{
     $("input[name='verticalOrHorizontal']").on("change", (0, _toolbarHandlers.changeOrientation));
     $("input[name='singleOrRange']").on("change", (0, _toolbarHandlers.changeSingleOrRange));
     $("input[name='progressBar']").on("change", (0, _toolbarHandlers.changeVisibleProgressBar));
-    $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleSlider));
+    $("input[name='scaleRange']").on("change", (0, _toolbarHandlers.changeVisibleTooltips));
     (0, _inputTooltips.setTooltip)();
 };
 
-},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view/components/input-tooltips/input-tooltips":"lUGML"}],"cBPKI":[function(require,module,exports) {
+},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7623,7 +7643,7 @@ parcelHelpers.export(exports, "changeScaleStep", ()=>changeScaleStep);
 parcelHelpers.export(exports, "changeOrientation", ()=>changeOrientation);
 parcelHelpers.export(exports, "changeSingleOrRange", ()=>changeSingleOrRange);
 parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgressBar);
-parcelHelpers.export(exports, "changeVisibleSlider", ()=>changeVisibleSlider);
+parcelHelpers.export(exports, "changeVisibleTooltips", ()=>changeVisibleTooltips);
 var _store = require("./model/store");
 var _updateSliders = require("./updateSliders");
 function changeMinScale() {
@@ -7728,12 +7748,27 @@ function changeVisibleProgressBar() {
     if ($(progressBarCheckbox).is(":checked")) $(valueBlock).addClass("hidden");
     else $(valueBlock).removeClass("hidden");
 }
-function changeVisibleSlider() {
-    let scaleCheckbox = $(this);
-    let wrap = $(scaleCheckbox).parent().parent().parent().parent().children();
-    let slider = $(wrap).children()[0];
-    if ($(scaleCheckbox).is(":checked")) $(slider).addClass("hidden");
-    else $(slider).removeClass("hidden");
+function changeVisibleTooltips() {
+    let tooltipCheckbox = $(this);
+    let toolbarContainer = $(tooltipCheckbox).parent().parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let maxTooltip = document.querySelector(".js-tooltip-slider-max");
+    let minTooltip = document.querySelector(".js-tooltip-slider-min");
+    if ($(tooltipCheckbox).is(":checked")) {
+        (0, _store.store).dispatch({
+            type: "ON_TOOLTIP",
+            id: toolbarId
+        });
+        maxTooltip.style.visibility = "visible";
+        minTooltip.style.visibility = "visible";
+    } else {
+        (0, _store.store).dispatch({
+            type: "OFF_TOOLTIP",
+            id: toolbarId
+        });
+        maxTooltip.style.visibility = "hidden";
+        minTooltip.style.visibility = "hidden";
+    }
 }
 
 },{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2C3S4":[function(require,module,exports) {
@@ -7771,8 +7806,9 @@ function initToolBar(wrapper) {
       <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
       </div>
       <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange' />
-      <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
+      <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange'
+      ${item.tooltip === true ? "checked" : ""} />
+      <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">tooltips</label>
      
       </div>
       </div>
@@ -7812,7 +7848,7 @@ const createToolTips = ()=>{
 const setTooltip = ()=>{
     let inputMin = document.querySelectorAll(".js-uk-min");
     let inputMax = document.querySelectorAll(".js-uk-max");
-    let time = 3000;
+    let time = 1500;
     inputMin.forEach((a)=>a.onmousemove = function(event) {
             let state = (0, _store.store).getState();
             let minTooltip = document.querySelector(".js-tooltip-slider-min");
@@ -7827,7 +7863,7 @@ const setTooltip = ()=>{
             const x = event.clientX;
             const y = event.clientY;
             minTooltip.style.left = `${x + 10}px`;
-            minTooltip.style.top = `${y - 30}px`;
+            minTooltip.style.top = `${y + 3}px`;
             setTimeout(remove, time);
             function remove() {
                 minTooltip.style.display = "none";
@@ -7849,7 +7885,7 @@ const setTooltip = ()=>{
             const x = event.clientX;
             const y = event.clientY;
             maxTooltip.style.left = `${x + 10}px`;
-            maxTooltip.style.top = `${y - 30}px`;
+            maxTooltip.style.top = `${y + 3}px`;
             setTimeout(remove, time);
             function remove() {
                 maxTooltip.style.display = "none";

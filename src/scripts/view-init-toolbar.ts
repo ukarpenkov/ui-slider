@@ -50,8 +50,9 @@ function initToolBar(wrapper: string): void {
       <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
       </div>
       <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange' />
-      <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">scale</label>
+      <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange'
+      ${item.tooltip === true ? 'checked' : ''} />
+      <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">tooltips</label>
      
       </div>
       </div>

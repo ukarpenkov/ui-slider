@@ -237,7 +237,7 @@ export const createToolTips = () => {
 export const setTooltip = () => {
   let inputMin = document.querySelectorAll('.js-uk-min')
   let inputMax = document.querySelectorAll('.js-uk-max')
-  let time = 3000
+  let time = 1500
 
   inputMin.forEach(
     (a) =>
@@ -253,7 +253,7 @@ export const setTooltip = () => {
         const x = event.clientX
         const y = event.clientY
         minTooltip.style.left = `${x + 10}px`
-        minTooltip.style.top = `${y - 30}px`
+        minTooltip.style.top = `${y + 3}px`
         setTimeout(remove, time)
         function remove() {
           minTooltip.style.display = 'none'
@@ -277,7 +277,7 @@ export const setTooltip = () => {
         const x = event.clientX
         const y = event.clientY
         maxTooltip.style.left = `${x + 10}px`
-        maxTooltip.style.top = `${y - 30}px`
+        maxTooltip.style.top = `${y + 3}px`
         setTimeout(remove, time)
         function remove() {
           maxTooltip.style.display = 'none'

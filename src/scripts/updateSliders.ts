@@ -8,14 +8,11 @@ import {
   changeScaleStep,
   changeSingleOrRange,
   changeVisibleProgressBar,
-  changeVisibleSlider,
+  changeVisibleTooltips,
 } from './toolbar-handlers'
 import initSlider from './view-init-slider'
 import initToolBar from './view-init-toolbar'
-import {
-  inputTooltip,
-  setTooltip,
-} from './view/components/input-tooltips/input-tooltips'
+import { setTooltip } from './view/components/input-tooltips/input-tooltips'
 
 export const updateSliders = () => {
   $('.sliders-container').remove()
@@ -34,6 +31,6 @@ export const updateToolbar = () => {
   $("input[name='verticalOrHorizontal']").on('change', changeOrientation)
   $("input[name='singleOrRange']").on('change', changeSingleOrRange)
   $("input[name='progressBar']").on('change', changeVisibleProgressBar)
-  $("input[name='scaleRange']").on('change', changeVisibleSlider)
+  $("input[name='scaleRange']").on('change', changeVisibleTooltips)
   setTooltip()
 }

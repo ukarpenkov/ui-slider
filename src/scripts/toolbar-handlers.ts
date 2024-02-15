@@ -135,18 +135,25 @@ export function changeVisibleProgressBar(): void {
   }
 }
 
-export function changeVisibleSlider(): void {
-  let scaleCheckbox: JQuery<object> = $(this)
-  let wrap: JQuery<object> = $(scaleCheckbox)
-    .parent()
-    .parent()
-    .parent()
-    .parent()
-    .children()
-  let slider: HTMLElement = $(wrap).children()[0]
-  if ($(scaleCheckbox).is(':checked')) {
-    $(slider).addClass('hidden')
+export function changeVisibleTooltips(): void {
+  let tooltipCheckbox: JQuery<object> = $(this)
+  let toolbarContainer = $(tooltipCheckbox).parent().parent().parent()[0]
+  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+  let maxTooltip = document.querySelector('.js-tooltip-slider-max')
+  let minTooltip = document.querySelector('.js-tooltip-slider-min')
+  if ($(tooltipCheckbox).is(':checked')) {
+    store.dispatch({
+      type: 'ON_TOOLTIP',
+      id: toolbarId,
+    })
+    maxTooltip.style.visibility = 'visible'
+    minTooltip.style.visibility = 'visible'
   } else {
-    $(slider).removeClass('hidden')
+    store.dispatch({
+      type: 'OFF_TOOLTIP',
+      id: toolbarId,
+    })
+    maxTooltip.style.visibility = 'hidden'
+    minTooltip.style.visibility = 'hidden'
   }
 }
