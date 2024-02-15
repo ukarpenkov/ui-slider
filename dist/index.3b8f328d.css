@@ -207,17 +207,6 @@ input, label {
   }
 }
 
-#input-tooltip {
-  color: #000;
-  visibility: hidden;
-  background: #e2e0e0;
-  border-radius: 5px;
-  margin: 10pt -20px;
-  padding: 5px;
-  font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
-  position: absolute;
-}
-
 .js-tooltip-slider-min {
   width: 15px;
   height: 15px;

@@ -225,39 +225,46 @@ import { store } from '../../../model/store'
 // $(document).ready(function () {
 //   simple_tooltip('a', 'tooltip')
 // })
+
+export const createToolTips = () => {
+  let minTooltip = document.createElement('div')
+  minTooltip.className = 'js-tooltip-slider-min'
+  document.body.appendChild(minTooltip)
+  let maxTooltip = document.createElement('div')
+  maxTooltip.className = 'js-tooltip-slider-max'
+  document.body.appendChild(maxTooltip)
+}
 export const setTooltip = () => {
-  let state = store.getState()
   let inputMin = document.querySelectorAll('.js-uk-min')
   let inputMax = document.querySelectorAll('.js-uk-max')
-
-  let time = 1200
+  let time = 3000
 
   inputMin.forEach(
     (a) =>
       (a.onmousemove = function (event) {
+        let state = store.getState()
         let minTooltip = document.querySelector('.js-tooltip-slider-min')
-
-        console.log(state)
         let wrapper = $(this).parent().parent().parent()[0]
         let id = $(wrapper).attr('class').split(' ')[0]
-        console.log(id)
         let currentValue = [...state].filter((a) => a.id === id)[0].minValue
         console.log(currentValue)
         minTooltip.style.display = 'block'
         minTooltip.innerHTML = currentValue
         const x = event.clientX
         const y = event.clientY
-        minTooltip.style.left = `${x - 5}px`
-        minTooltip.style.top = `${-32}px`
+        minTooltip.style.left = `${x + 10}px`
+        minTooltip.style.top = `${y - 30}px`
         setTimeout(remove, time)
         function remove() {
           minTooltip.style.display = 'none'
         }
       })
   )
+
   inputMax.forEach(
     (a) =>
       (a.onmousemove = function (event) {
+        let state = store.getState()
         let maxTooltip = document.querySelector('.js-tooltip-slider-max')
         console.log(state)
         let wrapper = $(this).parent().parent().parent()[0]
@@ -269,11 +276,8 @@ export const setTooltip = () => {
         maxTooltip.innerHTML = currentValue
         const x = event.clientX
         const y = event.clientY
-
-        maxTooltip.style.left = `${x}px`
-        maxTooltip.style.right = `${x}px`
-        maxTooltip.style.top = `${y}px`
-        maxTooltip.style.bottom = `${y}px`
+        maxTooltip.style.left = `${x + 10}px`
+        maxTooltip.style.top = `${y - 30}px`
         setTimeout(remove, time)
         function remove() {
           maxTooltip.style.display = 'none'

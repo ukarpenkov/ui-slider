@@ -572,11 +572,7 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
     step: 1
 });
 (0, _viewInitSliderDefault.default)(".slider-page", ".tooltip");
-// inputTooltip()
-// simple_tooltip()
-// $(function () {
-//   $(document).tooltip()
-// })
+(0, _inputTooltips.createToolTips)();
 (0, _inputTooltips.setTooltip)();
 
 },{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./model/store":"gl3Yi","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
@@ -7392,8 +7388,7 @@ function initSlider(wrapper) {
       <input class="uk-slider__input uk-slider__input_handle_max js-uk-max ${item.interval === "single" ? "hidden" : ""}" name="range_1" type="range" min="${item.minScale}"
       max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
       </div>
-      <div class="js-tooltip-slider-min">${item.minValue}</div>
-      <div class="js-tooltip-slider-max">${item.maxValue}</div>
+    
       <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
       <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
       <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
@@ -7464,6 +7459,7 @@ function initSlider(wrapper) {
                 id: sliderId,
                 payload: maxVal
             });
+            (0, _updateSliders.updateToolbar)();
         }
         $(".uk-slider__input").on("input", rangeInputChangeEventHandler);
         $(".uk-slider__input").trigger("input");
@@ -7616,7 +7612,7 @@ const updateToolbar = ()=>{
     (0, _inputTooltips.setTooltip)();
 };
 
-},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
+},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./view/components/input-tooltips/input-tooltips":"lUGML"}],"cBPKI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7790,6 +7786,7 @@ exports.default = initToolBar;
 },{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUGML":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createToolTips", ()=>createToolTips);
 parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
 // export const inputTooltip = () => {
 //   var tooltip = {
@@ -7804,17 +7801,23 @@ parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
 //     },
 //     /* КОНЕЦ НАСТРОЕК */
 var _store = require("../../../model/store");
+const createToolTips = ()=>{
+    let minTooltip = document.createElement("div");
+    minTooltip.className = "js-tooltip-slider-min";
+    document.body.appendChild(minTooltip);
+    let maxTooltip = document.createElement("div");
+    maxTooltip.className = "js-tooltip-slider-max";
+    document.body.appendChild(maxTooltip);
+};
 const setTooltip = ()=>{
-    let state = (0, _store.store).getState();
     let inputMin = document.querySelectorAll(".js-uk-min");
     let inputMax = document.querySelectorAll(".js-uk-max");
-    let time = 1200;
+    let time = 3000;
     inputMin.forEach((a)=>a.onmousemove = function(event) {
+            let state = (0, _store.store).getState();
             let minTooltip = document.querySelector(".js-tooltip-slider-min");
-            console.log(state);
             let wrapper = $(this).parent().parent().parent()[0];
             let id = $(wrapper).attr("class").split(" ")[0];
-            console.log(id);
             let currentValue = [
                 ...state
             ].filter((a)=>a.id === id)[0].minValue;
@@ -7823,14 +7826,15 @@ const setTooltip = ()=>{
             minTooltip.innerHTML = currentValue;
             const x = event.clientX;
             const y = event.clientY;
-            minTooltip.style.left = `${x - 5}px`;
-            minTooltip.style.top = `${-32}px`;
+            minTooltip.style.left = `${x + 10}px`;
+            minTooltip.style.top = `${y - 30}px`;
             setTimeout(remove, time);
             function remove() {
                 minTooltip.style.display = "none";
             }
         });
     inputMax.forEach((a)=>a.onmousemove = function(event) {
+            let state = (0, _store.store).getState();
             let maxTooltip = document.querySelector(".js-tooltip-slider-max");
             console.log(state);
             let wrapper = $(this).parent().parent().parent()[0];
@@ -7844,10 +7848,8 @@ const setTooltip = ()=>{
             maxTooltip.innerHTML = currentValue;
             const x = event.clientX;
             const y = event.clientY;
-            maxTooltip.style.left = `${x}px`;
-            maxTooltip.style.right = `${x}px`;
-            maxTooltip.style.top = `${y}px`;
-            maxTooltip.style.bottom = `${y}px`;
+            maxTooltip.style.left = `${x + 10}px`;
+            maxTooltip.style.top = `${y - 30}px`;
             setTimeout(remove, time);
             function remove() {
                 maxTooltip.style.display = "none";

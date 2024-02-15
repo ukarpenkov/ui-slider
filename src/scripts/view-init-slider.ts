@@ -35,8 +35,7 @@ function initSlider(wrapper: string) {
         item.maxValue
       }" orient="vertical" step="${1}"/>
       </div>
-      <div class="js-tooltip-slider-min">${item.minValue}</div>
-      <div class="js-tooltip-slider-max">${item.maxValue}</div>
+    
       <div class="uk-slider__value_block ${
         item.orientation === 'vertical'
           ? 'uk-slider__value_block_orient_vertical'
@@ -132,6 +131,7 @@ function initSlider(wrapper: string) {
         id: sliderId,
         payload: maxVal,
       })
+      updateToolbar()
     }
 
     $('.uk-slider__input').on('input', rangeInputChangeEventHandler)
