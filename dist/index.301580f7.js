@@ -548,7 +548,8 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
     minScale: 1,
     maxScale: 20,
     step: 1,
-    tooltip: true
+    tooltip: true,
+    valueBlock: true
 });
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -560,7 +561,8 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
     minScale: 1,
     maxScale: 20,
     step: 1,
-    tooltip: true
+    tooltip: true,
+    valueBlock: true
 });
 (0, _store.store).dispatch({
     type: "ADD_SLIDER",
@@ -572,7 +574,8 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
     minScale: 1,
     maxScale: 100,
     step: 1,
-    tooltip: true
+    tooltip: true,
+    valueBlock: true
 });
 (0, _viewInitSliderDefault.default)(".slider-page", ".tooltip");
 (0, _inputTooltips.createToolTips)();
@@ -7392,7 +7395,7 @@ function initSlider(wrapper) {
       max="${item.maxScale}" value="${item.maxValue}" orient="vertical" step="${1}"/>
       </div>
     
-      <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}">
+      <div class="uk-slider__value_block ${item.orientation === "vertical" ? "uk-slider__value_block_orient_vertical" : ""}  ${item.valueBlock === true ? "" : "hidden"}">
       <input type="number" value="${item.minValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
       <input type="number" value="${item.maxValue}" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_max right js-uk-range_max ${item.interval === "single" ? "no-vis" : ""}" />
       </div>
@@ -7505,7 +7508,8 @@ function reducer(state, action) {
                     minScale: action.minScale,
                     maxScale: action.maxScale,
                     step: action.step,
-                    tooltip: action.tooltip
+                    tooltip: action.tooltip,
+                    valueBlock: action.valueBlock
                 }, 
             ];
         case "VERTICAL_ORIENTANTION":
@@ -7593,6 +7597,22 @@ function reducer(state, action) {
                 if (slider.id === action.id) return {
                     ...slider,
                     tooltip: false
+                };
+                return slider;
+            });
+        case "ON_TOOLBAR":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    valueBlock: true
+                };
+                return slider;
+            });
+        case "OFF_TOOLBAR":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    valueBlock: false
                 };
                 return slider;
             });
@@ -7743,10 +7763,25 @@ function changeSingleOrRange() {
 }
 function changeVisibleProgressBar() {
     let progressBarCheckbox = $(this);
-    let wrap = $(progressBarCheckbox).parent().parent().parent().parent().children();
-    let valueBlock = $(wrap).children()[1];
-    if ($(progressBarCheckbox).is(":checked")) $(valueBlock).addClass("hidden");
-    else $(valueBlock).removeClass("hidden");
+    let toolbarContainer = $(progressBarCheckbox).parent().parent().parent()[0];
+    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    console.log(toolbarId);
+    let valueBlocks = document.querySelectorAll(".uk-slider__value_block ");
+    if ($(progressBarCheckbox).is(":checked")) valueBlocks.forEach((element)=>{
+        (0, _store.store).dispatch({
+            type: "ON_TOOLBAR",
+            id: toolbarId
+        });
+    // element.classList.add('hidden')
+    });
+    else valueBlocks.forEach((element)=>{
+        (0, _store.store).dispatch({
+            type: "OFF_TOOLBAR",
+            id: toolbarId
+        });
+    // element.classList.remove('hidden')
+    });
+    (0, _updateSliders.updateSliders)();
 }
 function changeVisibleTooltips() {
     let tooltipCheckbox = $(this);
@@ -7802,7 +7837,8 @@ function initToolBar(wrapper) {
       <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
       </div>
       <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox"   name='progressBar'/>
+      <input class="control-panel__checkbox-input" type="checkbox"   name='progressBar'
+      ${item.valueBlock === true ? "checked" : ""}/>
       <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
       </div>
       <div class="control-panel__checkbox-item">

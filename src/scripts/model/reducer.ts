@@ -15,6 +15,7 @@ export function reducer(state, action) {
           maxScale: action.maxScale,
           step: action.step,
           tooltip: action.tooltip,
+          valueBlock: action.valueBlock,
         },
       ]
     case 'VERTICAL_ORIENTANTION':
@@ -93,6 +94,20 @@ export function reducer(state, action) {
       return state.map((slider) => {
         if (slider.id === action.id) {
           return { ...slider, tooltip: false }
+        }
+        return slider
+      })
+    case 'ON_TOOLBAR':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, valueBlock: true }
+        }
+        return slider
+      })
+    case 'OFF_TOOLBAR':
+      return state.map((slider) => {
+        if (slider.id === action.id) {
+          return { ...slider, valueBlock: false }
         }
         return slider
       })

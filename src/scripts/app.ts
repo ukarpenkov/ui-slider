@@ -17,6 +17,7 @@ store.dispatch({
   maxScale: 20,
   step: 1,
   tooltip: true,
+  valueBlock: true,
 })
 store.dispatch({
   type: 'ADD_SLIDER',
@@ -29,6 +30,7 @@ store.dispatch({
   maxScale: 20,
   step: 1,
   tooltip: true,
+  valueBlock: true,
 })
 store.dispatch({
   type: 'ADD_SLIDER',
@@ -41,6 +43,7 @@ store.dispatch({
   maxScale: 100,
   step: 1,
   tooltip: true,
+  valueBlock: true,
 })
 
 initSlider('.slider-page', '.tooltip')

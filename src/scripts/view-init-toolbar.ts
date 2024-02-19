@@ -46,7 +46,8 @@ function initToolBar(wrapper: string): void {
       <label for="singleOrRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">single/range</label>
       </div>
       <div class="control-panel__checkbox-item">
-      <input class="control-panel__checkbox-input" type="checkbox"   name='progressBar'/>
+      <input class="control-panel__checkbox-input" type="checkbox"   name='progressBar'
+      ${item.valueBlock === true ? 'checked' : ''}/>
       <label for="progressBar" data-onlabel="on" data-offlabel="off" class="control-panel__label">progress-bar</label>
       </div>
       <div class="control-panel__checkbox-item">

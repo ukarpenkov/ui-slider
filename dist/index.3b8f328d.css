@@ -89,11 +89,7 @@ input, label {
   margin-top: -176px;
 }
 
-.hidden {
-  display: none;
-}
-
-.no-vis {
+.hidden, .no-vis {
   visibility: hidden;
 }
 

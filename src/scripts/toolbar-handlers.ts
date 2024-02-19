@@ -121,18 +121,31 @@ export function changeSingleOrRange(): void {
 
 export function changeVisibleProgressBar(): void {
   let progressBarCheckbox: JQuery<object> = $(this)
-  let wrap: JQuery<object> = $(progressBarCheckbox)
-    .parent()
-    .parent()
-    .parent()
-    .parent()
-    .children()
-  let valueBlock: HTMLElement = $(wrap).children()[1]
+  let toolbarContainer = $(progressBarCheckbox).parent().parent().parent()[0]
+  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+  console.log(toolbarId)
+  let valueBlocks: HTMLElement = document.querySelectorAll(
+    '.uk-slider__value_block '
+  )
+
   if ($(progressBarCheckbox).is(':checked')) {
-    $(valueBlock).addClass('hidden')
+    valueBlocks.forEach((element) => {
+      store.dispatch({
+        type: 'ON_TOOLBAR',
+        id: toolbarId,
+      })
+      // element.classList.add('hidden')
+    })
   } else {
-    $(valueBlock).removeClass('hidden')
+    valueBlocks.forEach((element) => {
+      store.dispatch({
+        type: 'OFF_TOOLBAR',
+        id: toolbarId,
+      })
+      // element.classList.remove('hidden')
+    })
   }
+  updateSliders()
 }
 
 export function changeVisibleTooltips(): void {

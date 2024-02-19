@@ -38,7 +38,7 @@ function initSlider(wrapper: string) {
         item.orientation === 'vertical'
           ? 'uk-slider__value_block_orient_vertical'
           : ''
-      }">
+      }  ${item.valueBlock === true ? '' : 'hidden'}">
       <input type="number" value="${
         item.minValue
       }" min="0" max="99999999" class="uk-slider__range_value uk-slider__range_value_min left js-uk-range_min" />
