@@ -16,7 +16,7 @@ interface StateItemType {
 interface ActionType {
   type: string
   payload: {
-    action: string
+    // action: string
   }
 }
 
