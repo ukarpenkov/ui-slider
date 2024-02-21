@@ -1,4 +1,4 @@
-import { store } from './model/store'
+import { store } from '../../model/store'
 import {
   changeMaxPos,
   changeMaxScale,
@@ -9,10 +9,10 @@ import {
   changeSingleOrRange,
   changeVisibleProgressBar,
   changeVisibleTooltips,
-} from './toolbar-handlers'
-import initSlider from './view-init-slider'
-import initToolBar from './view-init-toolbar'
-import { setTooltip } from './view/components/input-tooltips/input-tooltips'
+} from '../toolbarHandlers/toolbar-handlers'
+import initSlider from '../../view/components/initSlider/view-init-slider'
+import initToolBar from '../../view/components/initToolbar/view-init-toolbar'
+import { setTooltip } from '../../view/components/input-tooltips/input-tooltips'
 
 export const updateSliders = () => {
   $('.sliders-container').remove()

@@ -1,5 +1,5 @@
-import './import-jquery'
-import initSlider from './view-init-slider'
+import './utils/import-jquery'
+import initSlider from './view/components/initSlider/view-init-slider'
 import { store } from './model/store'
 import {
   createToolTips,

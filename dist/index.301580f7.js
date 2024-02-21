@@ -533,8 +533,8 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"lAnY0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _importJquery = require("./import-jquery");
-var _viewInitSlider = require("./view-init-slider");
+var _importJquery = require("./utils/import-jquery");
+var _viewInitSlider = require("./view/components/initSlider/view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 var _store = require("./model/store");
 var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
@@ -581,7 +581,260 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
 (0, _inputTooltips.createToolTips)();
 (0, _inputTooltips.setTooltip)();
 
-},{"./import-jquery":"kmOly","./view-init-slider":"8JR3W","./model/store":"gl3Yi","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmOly":[function(require,module,exports) {
+},{"./model/store":"gl3Yi","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./utils/import-jquery":"kUjWH","./view/components/initSlider/view-init-slider":"bxGtt"}],"gl3Yi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "store", ()=>store);
+var _reducer = require("./reducer");
+function createStore(reducer, initialState) {
+    let state = initialState;
+    return {
+        dispatch: (action)=>{
+            state = reducer(state, action);
+        },
+        getState: ()=>state
+    };
+}
+const initialSlider = [];
+const store = createStore((0, _reducer.reducer), initialSlider);
+
+},{"./reducer":"1G2Wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1G2Wt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "reducer", ()=>reducer);
+function reducer(state, action) {
+    switch(action.type){
+        case "ADD_SLIDER":
+            return [
+                ...state,
+                {
+                    id: action.id,
+                    interval: action.interval,
+                    orientation: action.orientation,
+                    minValue: action.minValue,
+                    maxValue: action.maxValue,
+                    minScale: action.minScale,
+                    maxScale: action.maxScale,
+                    step: action.step,
+                    tooltip: action.tooltip,
+                    valueBlock: action.valueBlock
+                }, 
+            ];
+        case "VERTICAL_ORIENTANTION":
+            console.log(state);
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    orientation: "vertical"
+                };
+                return slider;
+            });
+        case "HORIZONTAL_ORIENTANTION":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    orientation: "horizontal"
+                };
+                return slider;
+            });
+        case "CHANGE_MIN_VAL":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    minValue: action.payload
+                };
+                return slider;
+            });
+        case "CHANGE_MAX_VAL":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    maxValue: action.payload
+                };
+                return slider;
+            });
+        case "CHANGE_MIN_SCALE":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    minScale: action.payload
+                };
+                return slider;
+            });
+        case "CHANGE_MAX_SCALE":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    maxScale: action.payload
+                };
+                return slider;
+            });
+        case "CHANGE_STEP":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    step: action.payload
+                };
+                return slider;
+            });
+        case "SET_SINGLE":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    interval: "single"
+                };
+                return slider;
+            });
+        case "SET_INTERVAL":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    interval: "interval"
+                };
+                return slider;
+            });
+        case "ON_TOOLTIP":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    tooltip: true
+                };
+                return slider;
+            });
+        case "OFF_TOOLTIP":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    tooltip: false
+                };
+                return slider;
+            });
+        case "ON_TOOLBAR":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    valueBlock: true
+                };
+                return slider;
+            });
+        case "OFF_TOOLBAR":
+            return state.map((slider)=>{
+                if (slider.id === action.id) return {
+                    ...slider,
+                    valueBlock: false
+                };
+                return slider;
+            });
+        default:
+            return state;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"lUGML":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createToolTips", ()=>createToolTips);
+parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
+// export const inputTooltip = () => {
+//   var tooltip = {
+//     /* НАЧАЛО НАСТРОЕК */
+//     options: {
+//       attr_name: 'tooltip', // наименование создаваемого tooltip'ого атрибута
+//       blank_text: '', // текст для ссылок с target="_blank"
+//       newline_entity: '', // укажите пустую строку (""), если не хотите использовать в tooltip'ах многострочность; ежели хотите, то укажите тот символ или символы, которые будут заменяться на перевод строки
+//       max_width: 0, // максимальная ширина tooltip'а в пикселах; обнулите это значение, если ширина должна быть нелимитирована
+//       delay: 100, // задержка при показе tooltip'а в миллисекундах
+//       skip_tags: ['link', 'style'], // теги, у которых не обрабатываем атрибуты alt и title
+//     },
+//     /* КОНЕЦ НАСТРОЕК */
+var _store = require("../../../model/store");
+const createToolTips = ()=>{
+    let minTooltip = document.createElement("div");
+    minTooltip.className = "js-tooltip-slider-min";
+    document.body.appendChild(minTooltip);
+    let maxTooltip = document.createElement("div");
+    maxTooltip.className = "js-tooltip-slider-max";
+    document.body.appendChild(maxTooltip);
+};
+const setTooltip = ()=>{
+    let inputMin = document.querySelectorAll(".js-uk-min");
+    let inputMax = document.querySelectorAll(".js-uk-max");
+    let time = 1500;
+    inputMin.forEach((a)=>a.onmousemove = function(event) {
+            let state = (0, _store.store).getState();
+            let minTooltip = document.querySelector(".js-tooltip-slider-min");
+            let wrapper = $(this).parent().parent().parent()[0];
+            let id = $(wrapper).attr("class").split(" ")[0];
+            let currentValue = [
+                ...state
+            ].filter((a)=>a.id === id)[0].minValue;
+            console.log(currentValue);
+            minTooltip.style.display = "block";
+            minTooltip.innerHTML = currentValue;
+            const x = event.clientX;
+            const y = event.clientY;
+            minTooltip.style.left = `${x + 10}px`;
+            minTooltip.style.top = `${y + 3}px`;
+            setTimeout(remove, time);
+            function remove() {
+                minTooltip.style.display = "none";
+            }
+        });
+    inputMax.forEach((a)=>a.onmousemove = function(event) {
+            let state = (0, _store.store).getState();
+            let maxTooltip = document.querySelector(".js-tooltip-slider-max");
+            console.log(state);
+            let wrapper = $(this).parent().parent().parent()[0];
+            let id = $(wrapper).attr("class").split(" ")[0];
+            console.log(id);
+            let currentValue = [
+                ...state
+            ].filter((a)=>a.id === id)[0].maxValue;
+            console.log(currentValue);
+            maxTooltip.style.display = "block";
+            maxTooltip.innerHTML = currentValue;
+            const x = event.clientX;
+            const y = event.clientY;
+            maxTooltip.style.left = `${x + 10}px`;
+            maxTooltip.style.top = `${y + 3}px`;
+            setTimeout(remove, time);
+            function remove() {
+                maxTooltip.style.display = "none";
+            }
+        });
+};
+
+},{"../../../model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kUjWH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7347,41 +7600,11 @@ exports.default = window.$ = window.jQuery = (0, _jqueryDefault.default);
     return jQuery;
 });
 
-},{}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"8JR3W":[function(require,module,exports) {
+},{}],"bxGtt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _store = require("./model/store");
-var _updateSliders = require("./updateSliders");
+var _store = require("../../../model/store");
+var _updateSliders = require("../../../controller/updateSlider/updateSliders");
 function initSlider(wrapper) {
     let state = (0, _store.store).getState();
     let sliderRendering = (data)=>{
@@ -7473,165 +7696,17 @@ function initSlider(wrapper) {
 }
 exports.default = initSlider;
 
-},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gl3Yi":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "store", ()=>store);
-var _reducer = require("./reducer");
-function createStore(reducer, initialState) {
-    let state = initialState;
-    return {
-        dispatch: (action)=>{
-            state = reducer(state, action);
-        },
-        getState: ()=>state
-    };
-}
-const initialSlider = [];
-const store = createStore((0, _reducer.reducer), initialSlider);
-
-},{"./reducer":"1G2Wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1G2Wt":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "reducer", ()=>reducer);
-function reducer(state, action) {
-    switch(action.type){
-        case "ADD_SLIDER":
-            return [
-                ...state,
-                {
-                    id: action.id,
-                    interval: action.interval,
-                    orientation: action.orientation,
-                    minValue: action.minValue,
-                    maxValue: action.maxValue,
-                    minScale: action.minScale,
-                    maxScale: action.maxScale,
-                    step: action.step,
-                    tooltip: action.tooltip,
-                    valueBlock: action.valueBlock
-                }, 
-            ];
-        case "VERTICAL_ORIENTANTION":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    orientation: "vertical"
-                };
-                return slider;
-            });
-        case "HORIZONTAL_ORIENTANTION":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    orientation: "horizontal"
-                };
-                return slider;
-            });
-        case "CHANGE_MIN_VAL":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    minValue: action.payload
-                };
-                return slider;
-            });
-        case "CHANGE_MAX_VAL":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    maxValue: action.payload
-                };
-                return slider;
-            });
-        case "CHANGE_MIN_SCALE":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    minScale: action.payload
-                };
-                return slider;
-            });
-        case "CHANGE_MAX_SCALE":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    maxScale: action.payload
-                };
-                return slider;
-            });
-        case "CHANGE_STEP":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    step: action.payload
-                };
-                return slider;
-            });
-        case "SET_SINGLE":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    interval: "single"
-                };
-                return slider;
-            });
-        case "SET_INTERVAL":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    interval: "interval"
-                };
-                return slider;
-            });
-        case "ON_TOOLTIP":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    tooltip: true
-                };
-                return slider;
-            });
-        case "OFF_TOOLTIP":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    tooltip: false
-                };
-                return slider;
-            });
-        case "ON_TOOLBAR":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    valueBlock: true
-                };
-                return slider;
-            });
-        case "OFF_TOOLBAR":
-            return state.map((slider)=>{
-                if (slider.id === action.id) return {
-                    ...slider,
-                    valueBlock: false
-                };
-                return slider;
-            });
-        default:
-            return state;
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anlKZ":[function(require,module,exports) {
+},{"../../../model/store":"gl3Yi","../../../controller/updateSlider/updateSliders":"1y7IN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1y7IN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "updateSliders", ()=>updateSliders);
 parcelHelpers.export(exports, "updateToolbar", ()=>updateToolbar);
-var _toolbarHandlers = require("./toolbar-handlers");
-var _viewInitSlider = require("./view-init-slider");
+var _toolbarHandlers = require("../toolbarHandlers/toolbar-handlers");
+var _viewInitSlider = require("../../view/components/initSlider/view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
-var _viewInitToolbar = require("./view-init-toolbar");
+var _viewInitToolbar = require("../../view/components/initToolbar/view-init-toolbar");
 var _viewInitToolbarDefault = parcelHelpers.interopDefault(_viewInitToolbar);
-var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
+var _inputTooltips = require("../../view/components/input-tooltips/input-tooltips");
 const updateSliders = ()=>{
     $(".sliders-container").remove();
     (0, _viewInitSliderDefault.default)(".slider-page");
@@ -7652,7 +7727,7 @@ const updateToolbar = ()=>{
     (0, _inputTooltips.setTooltip)();
 };
 
-},{"./toolbar-handlers":"cBPKI","./view-init-slider":"8JR3W","./view-init-toolbar":"2C3S4","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cBPKI":[function(require,module,exports) {
+},{"../toolbarHandlers/toolbar-handlers":"dkj8Y","../../view/components/initSlider/view-init-slider":"bxGtt","../../view/components/initToolbar/view-init-toolbar":"gU5LY","../../view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dkj8Y":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changeMinScale", ()=>changeMinScale);
@@ -7664,8 +7739,8 @@ parcelHelpers.export(exports, "changeOrientation", ()=>changeOrientation);
 parcelHelpers.export(exports, "changeSingleOrRange", ()=>changeSingleOrRange);
 parcelHelpers.export(exports, "changeVisibleProgressBar", ()=>changeVisibleProgressBar);
 parcelHelpers.export(exports, "changeVisibleTooltips", ()=>changeVisibleTooltips);
-var _store = require("./model/store");
-var _updateSliders = require("./updateSliders");
+var _store = require("../../model/store");
+var _updateSliders = require("../updateSlider/updateSliders");
 function changeMinScale() {
     let minScaleInput = $(this);
     let toolbarContainer = $(minScaleInput).parent().parent()[0];
@@ -7806,10 +7881,10 @@ function changeVisibleTooltips() {
     }
 }
 
-},{"./model/store":"gl3Yi","./updateSliders":"anlKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2C3S4":[function(require,module,exports) {
+},{"../../model/store":"gl3Yi","../updateSlider/updateSliders":"1y7IN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gU5LY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _store = require("./model/store");
+var _store = require("../../../model/store");
 function initToolBar(wrapper) {
     let state = (0, _store.store).getState();
     let renderToolBar = (data)=>{
@@ -7854,80 +7929,6 @@ function initToolBar(wrapper) {
     $(wrapper).append(renderToolBar(state));
 }
 exports.default = initToolBar;
-
-},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUGML":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "createToolTips", ()=>createToolTips);
-parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
-// export const inputTooltip = () => {
-//   var tooltip = {
-//     /* НАЧАЛО НАСТРОЕК */
-//     options: {
-//       attr_name: 'tooltip', // наименование создаваемого tooltip'ого атрибута
-//       blank_text: '', // текст для ссылок с target="_blank"
-//       newline_entity: '', // укажите пустую строку (""), если не хотите использовать в tooltip'ах многострочность; ежели хотите, то укажите тот символ или символы, которые будут заменяться на перевод строки
-//       max_width: 0, // максимальная ширина tooltip'а в пикселах; обнулите это значение, если ширина должна быть нелимитирована
-//       delay: 100, // задержка при показе tooltip'а в миллисекундах
-//       skip_tags: ['link', 'style'], // теги, у которых не обрабатываем атрибуты alt и title
-//     },
-//     /* КОНЕЦ НАСТРОЕК */
-var _store = require("../../../model/store");
-const createToolTips = ()=>{
-    let minTooltip = document.createElement("div");
-    minTooltip.className = "js-tooltip-slider-min";
-    document.body.appendChild(minTooltip);
-    let maxTooltip = document.createElement("div");
-    maxTooltip.className = "js-tooltip-slider-max";
-    document.body.appendChild(maxTooltip);
-};
-const setTooltip = ()=>{
-    let inputMin = document.querySelectorAll(".js-uk-min");
-    let inputMax = document.querySelectorAll(".js-uk-max");
-    let time = 1500;
-    inputMin.forEach((a)=>a.onmousemove = function(event) {
-            let state = (0, _store.store).getState();
-            let minTooltip = document.querySelector(".js-tooltip-slider-min");
-            let wrapper = $(this).parent().parent().parent()[0];
-            let id = $(wrapper).attr("class").split(" ")[0];
-            let currentValue = [
-                ...state
-            ].filter((a)=>a.id === id)[0].minValue;
-            console.log(currentValue);
-            minTooltip.style.display = "block";
-            minTooltip.innerHTML = currentValue;
-            const x = event.clientX;
-            const y = event.clientY;
-            minTooltip.style.left = `${x + 10}px`;
-            minTooltip.style.top = `${y + 3}px`;
-            setTimeout(remove, time);
-            function remove() {
-                minTooltip.style.display = "none";
-            }
-        });
-    inputMax.forEach((a)=>a.onmousemove = function(event) {
-            let state = (0, _store.store).getState();
-            let maxTooltip = document.querySelector(".js-tooltip-slider-max");
-            console.log(state);
-            let wrapper = $(this).parent().parent().parent()[0];
-            let id = $(wrapper).attr("class").split(" ")[0];
-            console.log(id);
-            let currentValue = [
-                ...state
-            ].filter((a)=>a.id === id)[0].maxValue;
-            console.log(currentValue);
-            maxTooltip.style.display = "block";
-            maxTooltip.innerHTML = currentValue;
-            const x = event.clientX;
-            const y = event.clientY;
-            maxTooltip.style.left = `${x + 10}px`;
-            maxTooltip.style.top = `${y + 3}px`;
-            setTimeout(remove, time);
-            function remove() {
-                maxTooltip.style.display = "none";
-            }
-        });
-};
 
 },{"../../../model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 

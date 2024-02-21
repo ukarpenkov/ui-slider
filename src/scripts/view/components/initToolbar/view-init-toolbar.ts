@@ -1,5 +1,5 @@
-import { store } from './model/store'
-import { inputTooltip } from './view/components/input-tooltips/input-tooltips'
+import { store } from '../../../model/store'
+import { inputTooltip } from '../input-tooltips/input-tooltips'
 
 function initToolBar(wrapper: string): void {
   let state = store.getState()

@@ -1,7 +1,7 @@
-import { store } from './model/store'
-import { updateSliders, updateToolbar } from './updateSliders'
-import initSlider from './view-init-slider'
-import initToolBar from './view-init-toolbar'
+import { store } from '../../model/store'
+import { updateSliders, updateToolbar } from '../updateSlider/updateSliders'
+import initSlider from '../../view/components/initSlider/view-init-slider'
+import initToolBar from '../../view/components/initToolbar/view-init-toolbar'
 
 export function changeMinScale(): void {
   let minScaleInput: JQuery<object> = $(this)

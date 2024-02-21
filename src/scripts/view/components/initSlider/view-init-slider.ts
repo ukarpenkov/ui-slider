@@ -1,6 +1,9 @@
-import { store } from './model/store'
-import { updateSliders, updateToolbar } from './updateSliders'
-import { inputTooltip } from './view/components/input-tooltips/input-tooltips'
+import { store } from '../../../model/store'
+import {
+  updateSliders,
+  updateToolbar,
+} from '../../../controller/updateSlider/updateSliders'
+import { inputTooltip } from '../input-tooltips/input-tooltips'
 
 type Settings = {
   minValue: number

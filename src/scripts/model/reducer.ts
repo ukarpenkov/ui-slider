@@ -1,6 +1,26 @@
 import { store } from './store'
 
-export function reducer(state, action) {
+interface StateItemType {
+  id: string
+  interval: 'interval' | 'single'
+  maxScale: number
+  maxValue: number
+  minScale: number
+  minValue: number
+  orientation: 'horizontal' | 'vertical'
+  step: number
+  tooltip: boolean
+  valueBlock: boolean
+}
+
+interface ActionType {
+  type: string
+  payload: {
+    action: string
+  }
+}
+
+export function reducer(state: StateItemType[], action: ActionType) {
   switch (action.type) {
     case 'ADD_SLIDER':
       return [
@@ -19,6 +39,7 @@ export function reducer(state, action) {
         },
       ]
     case 'VERTICAL_ORIENTANTION':
+      console.log(state)
       return state.map((slider) => {
         if (slider.id === action.id) {
           return { ...slider, orientation: 'vertical' }
