@@ -1,15 +1,15 @@
-import { reducer } from './reducer'
+import { ActionType, StateItemType, reducer } from './reducer'
 
-function createStore(reducer, initialState) {
+function createStore(reducer: any, initialState: StateItemType | []) {
   let state = initialState
   return {
-    dispatch: (action) => {
+    dispatch: (action: ActionType) => {
       state = reducer(state, action)
     },
     getState: () => state,
   }
 }
 
-const initialSlider = []
+const initialSlider: StateItemType | [] = []
 
 export const store = createStore(reducer, initialSlider)

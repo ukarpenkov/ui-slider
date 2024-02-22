@@ -621,7 +621,6 @@ function reducer(state, action) {
                 }, 
             ];
         case "VERTICAL_ORIENTANTION":
-            console.log(state);
             return state.map((slider)=>{
                 if (slider.id === action.id) return {
                     ...slider,
@@ -7744,7 +7743,7 @@ var _updateSliders = require("../updateSlider/updateSliders");
 function changeMinScale() {
     let minScaleInput = $(this);
     let toolbarContainer = $(minScaleInput).parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     let minScaleValue = Number($(minScaleInput).val());
     let maxScaleValue = Number($(minScaleInput).next().val());
     if (minScaleValue > maxScaleValue) minScaleValue = maxScaleValue;

@@ -3,10 +3,12 @@ import { updateSliders, updateToolbar } from '../updateSlider/updateSliders'
 import initSlider from '../../view/components/initSlider/view-init-slider'
 import initToolBar from '../../view/components/initToolbar/view-init-toolbar'
 
-export function changeMinScale(): void {
-  let minScaleInput: JQuery<object> = $(this)
-  let toolbarContainer = $(minScaleInput).parent().parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+export function changeMinScale(this: JQuery<Element>): void {
+  let minScaleInput = $(this)
+  let toolbarContainer: Element = $(minScaleInput).parent().parent()[0]
+  let toolbarId: string | undefined = $(toolbarContainer)
+    ?.attr('class')
+    ?.split(' ')[1]
   let minScaleValue: number = Number($(minScaleInput).val())
   let maxScaleValue = Number($(minScaleInput).next().val())
   if (minScaleValue > maxScaleValue) {

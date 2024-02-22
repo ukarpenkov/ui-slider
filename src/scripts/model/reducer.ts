@@ -1,7 +1,5 @@
-import { store } from './store'
-
-interface StateItemType {
-  id: string
+export type StateItemType = {
+  id: string | undefined
   interval: 'interval' | 'single'
   maxScale: number
   maxValue: number
@@ -13,11 +11,19 @@ interface StateItemType {
   valueBlock: boolean
 }
 
-interface ActionType {
+export type ActionType = {
   type: string
-  payload: {
-    // action: string
-  }
+  id: string | undefined
+  interval?: 'interval' | 'single'
+  maxScale?: number
+  maxValue?: number
+  minScale?: number
+  minValue?: number
+  orientation?: 'horizontal' | 'vertical'
+  step?: number
+  tooltip?: boolean
+  valueBlock?: boolean
+  payload?: StateItemType
 }
 
 export function reducer(state: StateItemType[], action: ActionType) {
@@ -39,7 +45,6 @@ export function reducer(state: StateItemType[], action: ActionType) {
         },
       ]
     case 'VERTICAL_ORIENTANTION':
-      console.log(state)
       return state.map((slider) => {
         if (slider.id === action.id) {
           return { ...slider, orientation: 'vertical' }
@@ -58,7 +63,6 @@ export function reducer(state: StateItemType[], action: ActionType) {
         if (slider.id === action.id) {
           return { ...slider, minValue: action.payload }
         }
-
         return slider
       })
     case 'CHANGE_MAX_VAL':
