@@ -7759,7 +7759,7 @@ function changeMinScale() {
 function changeMaxScale() {
     let maxScaleInput = $(this);
     let toolbarContainer = $(maxScaleInput).parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     let maxScaleValue = Number($(maxScaleInput).val());
     let minScaleValue = Number($(maxScaleInput).prev().val());
     if (maxScaleValue < minScaleValue) maxScaleValue = minScaleValue;
@@ -7773,7 +7773,7 @@ function changeMaxScale() {
 function changeMinPos() {
     let minPositionInput = $(this);
     let toolbarContainer = $(minPositionInput).parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     let minPosValue = Number($(minPositionInput).val());
     (0, _store.store).dispatch({
         type: "CHANGE_MIN_VAL",
@@ -7781,12 +7781,11 @@ function changeMinPos() {
         payload: minPosValue
     });
     (0, _updateSliders.updateSliders)();
-// !!!!!!!!!!!!!!!!!!НАДО ДОПИСАТЬ ЛОГИКУ КОГДА МИН БОЛЬШЕ МАКС!!!!!!!!!!!!
 }
 function changeMaxPos() {
     let maxPositionInput = $(this);
     let toolbarContainer = $(maxPositionInput).parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     let maxPosValue = Number($(maxPositionInput).val());
     (0, _store.store).dispatch({
         type: "CHANGE_MAX_VAL",
@@ -7798,7 +7797,7 @@ function changeMaxPos() {
 function changeScaleStep() {
     let scaleStepInput = $(this);
     let toolbarContainer = $(scaleStepInput).parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     let scaleStepInputValue = Number(scaleStepInput.val());
     (0, _store.store).dispatch({
         type: "CHANGE_STEP",
@@ -7810,7 +7809,7 @@ function changeScaleStep() {
 function changeOrientation() {
     let verticalOrHorizontalCheckbox = $(this);
     let toolbarContainer = $(verticalOrHorizontalCheckbox).parent().parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     if ($(verticalOrHorizontalCheckbox).is(":checked")) (0, _store.store).dispatch({
         type: "VERTICAL_ORIENTANTION",
         id: toolbarId
@@ -7824,7 +7823,7 @@ function changeOrientation() {
 function changeSingleOrRange() {
     let singleOrRangeCheckbox = $(this);
     let toolbarContainer = $(singleOrRangeCheckbox).parent().parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     if ($(singleOrRangeCheckbox).is(":checked")) (0, _store.store).dispatch({
         type: "SET_SINGLE",
         id: toolbarId
@@ -7838,29 +7837,26 @@ function changeSingleOrRange() {
 function changeVisibleProgressBar() {
     let progressBarCheckbox = $(this);
     let toolbarContainer = $(progressBarCheckbox).parent().parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
-    console.log(toolbarId);
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     let valueBlocks = document.querySelectorAll(".uk-slider__value_block ");
     if ($(progressBarCheckbox).is(":checked")) valueBlocks.forEach((element)=>{
         (0, _store.store).dispatch({
             type: "ON_TOOLBAR",
             id: toolbarId
         });
-    // element.classList.add('hidden')
     });
     else valueBlocks.forEach((element)=>{
         (0, _store.store).dispatch({
             type: "OFF_TOOLBAR",
             id: toolbarId
         });
-    // element.classList.remove('hidden')
     });
     (0, _updateSliders.updateSliders)();
 }
 function changeVisibleTooltips() {
     let tooltipCheckbox = $(this);
     let toolbarContainer = $(tooltipCheckbox).parent().parent().parent()[0];
-    let toolbarId = $(toolbarContainer).attr("class").split(" ")[1];
+    let toolbarId = $(toolbarContainer)?.attr("class")?.split(" ")[1];
     let maxTooltip = document.querySelector(".js-tooltip-slider-max");
     let minTooltip = document.querySelector(".js-tooltip-slider-min");
     if ($(tooltipCheckbox).is(":checked")) {
@@ -7868,15 +7864,15 @@ function changeVisibleTooltips() {
             type: "ON_TOOLTIP",
             id: toolbarId
         });
-        maxTooltip.style.visibility = "visible";
-        minTooltip.style.visibility = "visible";
+        if (maxTooltip) maxTooltip.style.visibility = "visible";
+        if (minTooltip) minTooltip.style.visibility = "visible";
     } else {
         (0, _store.store).dispatch({
             type: "OFF_TOOLTIP",
             id: toolbarId
         });
-        maxTooltip.style.visibility = "hidden";
-        minTooltip.style.visibility = "hidden";
+        if (maxTooltip) maxTooltip.style.visibility = "hidden";
+        if (minTooltip) minTooltip.style.visibility = "hidden";
     }
 }
 

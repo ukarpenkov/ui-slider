@@ -25,10 +25,10 @@ export function changeMinScale(this: JQuery<Element>): void {
   console.log(store.getState())
 }
 
-export function changeMaxScale(): void {
-  let maxScaleInput: JQuery<object> = $(this)
+export function changeMaxScale(this: JQuery<Element>): void {
+  let maxScaleInput = $(this)
   let toolbarContainer = $(maxScaleInput).parent().parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+  let toolbarId = $(toolbarContainer)?.attr('class')?.split(' ')[1]
   let maxScaleValue: number = Number($(maxScaleInput).val())
   let minScaleValue = Number($(maxScaleInput).prev().val())
   if (maxScaleValue < minScaleValue) {
@@ -41,25 +41,23 @@ export function changeMaxScale(): void {
   })
   updateSliders()
 }
-export function changeMinPos(): void {
-  let minPositionInput: JQuery<object> = $(this)
+export function changeMinPos(this: JQuery<Element>): void {
+  let minPositionInput = $(this)
   let toolbarContainer = $(minPositionInput).parent().parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+  let toolbarId = $(toolbarContainer)?.attr('class')?.split(' ')[1]
   let minPosValue: number = Number($(minPositionInput).val())
-
   store.dispatch({
     type: 'CHANGE_MIN_VAL',
     id: toolbarId,
     payload: minPosValue,
   })
   updateSliders()
-  // !!!!!!!!!!!!!!!!!!НАДО ДОПИСАТЬ ЛОГИКУ КОГДА МИН БОЛЬШЕ МАКС!!!!!!!!!!!!
 }
 
-export function changeMaxPos(): void {
-  let maxPositionInput: JQuery<object> = $(this)
+export function changeMaxPos(this: JQuery<Element>): void {
+  let maxPositionInput = $(this)
   let toolbarContainer = $(maxPositionInput).parent().parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+  let toolbarId = $(toolbarContainer)?.attr('class')?.split(' ')[1]
   let maxPosValue: number = Number($(maxPositionInput).val())
   store.dispatch({
     type: 'CHANGE_MAX_VAL',
@@ -69,10 +67,10 @@ export function changeMaxPos(): void {
   updateSliders()
 }
 
-export function changeScaleStep(): void {
-  let scaleStepInput: JQuery<object> = $(this)
+export function changeScaleStep(this: JQuery<Element>): void {
+  let scaleStepInput = $(this)
   let toolbarContainer = $(scaleStepInput).parent().parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+  let toolbarId = $(toolbarContainer)?.attr('class')?.split(' ')[1]
   let scaleStepInputValue: number = Number(scaleStepInput.val())
   store.dispatch({
     type: 'CHANGE_STEP',
@@ -82,13 +80,13 @@ export function changeScaleStep(): void {
   updateSliders()
 }
 
-export function changeOrientation(): void {
+export function changeOrientation(this: JQuery<Element>): void {
   let verticalOrHorizontalCheckbox: JQuery<object> = $(this)
   let toolbarContainer = $(verticalOrHorizontalCheckbox)
     .parent()
     .parent()
     .parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+  let toolbarId = $(toolbarContainer)?.attr('class')?.split(' ')[1]
   if ($(verticalOrHorizontalCheckbox).is(':checked')) {
     store.dispatch({
       type: 'VERTICAL_ORIENTANTION',
@@ -103,10 +101,10 @@ export function changeOrientation(): void {
   updateSliders()
 }
 
-export function changeSingleOrRange(): void {
-  let singleOrRangeCheckbox: JQuery<object> = $(this)
+export function changeSingleOrRange(this: JQuery<Element>): void {
+  let singleOrRangeCheckbox = $(this)
   let toolbarContainer = $(singleOrRangeCheckbox).parent().parent().parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
+  let toolbarId = $(toolbarContainer)?.attr('class')?.split(' ')[1]
   if ($(singleOrRangeCheckbox).is(':checked')) {
     store.dispatch({
       type: 'SET_SINGLE',
@@ -121,22 +119,19 @@ export function changeSingleOrRange(): void {
   updateSliders()
 }
 
-export function changeVisibleProgressBar(): void {
-  let progressBarCheckbox: JQuery<object> = $(this)
+export function changeVisibleProgressBar(this: JQuery<Element>): void {
+  let progressBarCheckbox = $(this)
   let toolbarContainer = $(progressBarCheckbox).parent().parent().parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
-  console.log(toolbarId)
-  let valueBlocks: HTMLElement = document.querySelectorAll(
+  let toolbarId = $(toolbarContainer)?.attr('class')?.split(' ')[1]
+  let valueBlocks: NodeListOf<Element> = document.querySelectorAll(
     '.uk-slider__value_block '
   )
-
   if ($(progressBarCheckbox).is(':checked')) {
     valueBlocks.forEach((element) => {
       store.dispatch({
         type: 'ON_TOOLBAR',
         id: toolbarId,
       })
-      // element.classList.add('hidden')
     })
   } else {
     valueBlocks.forEach((element) => {
@@ -144,31 +139,42 @@ export function changeVisibleProgressBar(): void {
         type: 'OFF_TOOLBAR',
         id: toolbarId,
       })
-      // element.classList.remove('hidden')
     })
   }
   updateSliders()
 }
 
-export function changeVisibleTooltips(): void {
-  let tooltipCheckbox: JQuery<object> = $(this)
+export function changeVisibleTooltips(this: JQuery<Element>): void {
+  let tooltipCheckbox = $(this)
   let toolbarContainer = $(tooltipCheckbox).parent().parent().parent()[0]
-  let toolbarId = $(toolbarContainer).attr('class').split(' ')[1]
-  let maxTooltip = document.querySelector('.js-tooltip-slider-max')
-  let minTooltip = document.querySelector('.js-tooltip-slider-min')
+  let toolbarId = $(toolbarContainer)?.attr('class')?.split(' ')[1]
+  let maxTooltip: HTMLElement | null = document.querySelector(
+    '.js-tooltip-slider-max'
+  )
+  let minTooltip: HTMLElement | null = document.querySelector(
+    '.js-tooltip-slider-min'
+  )
   if ($(tooltipCheckbox).is(':checked')) {
     store.dispatch({
       type: 'ON_TOOLTIP',
       id: toolbarId,
     })
-    maxTooltip.style.visibility = 'visible'
-    minTooltip.style.visibility = 'visible'
+    if (maxTooltip) {
+      maxTooltip.style.visibility = 'visible'
+    }
+    if (minTooltip) {
+      minTooltip.style.visibility = 'visible'
+    }
   } else {
     store.dispatch({
       type: 'OFF_TOOLTIP',
       id: toolbarId,
     })
-    maxTooltip.style.visibility = 'hidden'
-    minTooltip.style.visibility = 'hidden'
+    if (maxTooltip) {
+      maxTooltip.style.visibility = 'hidden'
+    }
+    if (minTooltip) {
+      minTooltip.style.visibility = 'hidden'
+    }
   }
 }

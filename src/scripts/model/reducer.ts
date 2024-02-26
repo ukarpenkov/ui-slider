@@ -11,6 +11,10 @@ export type StateItemType = {
   valueBlock: boolean
 }
 
+type PayloadType = {
+  [key: string]: Partial<StateItemType>
+}
+
 export type ActionType = {
   type: string
   id: string | undefined
@@ -23,7 +27,7 @@ export type ActionType = {
   step?: number
   tooltip?: boolean
   valueBlock?: boolean
-  payload?: StateItemType
+  payload?: StateItemType | number | string
 }
 
 export function reducer(state: StateItemType[], action: ActionType) {
