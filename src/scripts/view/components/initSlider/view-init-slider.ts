@@ -1,20 +1,10 @@
 import { store } from '../../../model/store'
-import {
-  updateSliders,
-  updateToolbar,
-} from '../../../controller/updateSlider/updateSliders'
-import { inputTooltip } from '../input-tooltips/input-tooltips'
-
-type Settings = {
-  minValue: number
-  maxValue: number
-  orientation: string
-  interval: string
-}
+import { updateToolbar } from '../../../controller/updateSlider/updateSliders'
+import { StateItemType } from '../../../model/reducer'
 
 function initSlider(wrapper: string) {
-  let state = store.getState()
-  let sliderRendering = (data) => {
+  let state: StateItemType[] | [] = store.getState() as []
+  let sliderRendering = (data: StateItemType[]) => {
     return data.map((item) => {
       return $(`
     <div class="${item.id} slider-wrapper">  
@@ -60,23 +50,24 @@ function initSlider(wrapper: string) {
 
   const slidersContainer = $('<div class="sliders-container"></div>')
   $(wrapper).append(slidersContainer)
+
   $(slidersContainer).append(sliderRendering(state))
   ;(function handleRange(): void {
-    function rangeInputChangeEventHandler(): void {
-      var minBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-min')
-      var maxBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-max')
-      var range_min: JQuery<HTMLElement> = $(this)
+    function rangeInputChangeEventHandler(this: HTMLElement): void {
+      let minBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-min')
+      let maxBtn: JQuery<HTMLElement> = $(this).parent().children('.js-uk-max')
+      let range_min: JQuery<HTMLElement> = $(this)
         .parent()
         .parent()
         .children('.uk-slider__value_block')
         .children('.js-uk-range_min')
-      var range_max: JQuery<HTMLElement> = $(this)
+      let range_max: JQuery<HTMLElement> = $(this)
         .parent()
         .parent()
         .children('.uk-slider__value_block')
         .children('.js-uk-range_max')
-      var minVal: number = Number($(minBtn).val())
-      var maxVal: number = Number($(maxBtn).val())
+      let minVal: number = Number($(minBtn).val())
+      let maxVal: number = Number($(maxBtn).val())
       let sliderId = $(range_min).parent().parent().parent()[0].classList[0]
       updateToolbar()
 

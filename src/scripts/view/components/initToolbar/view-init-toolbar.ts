@@ -1,10 +1,11 @@
+import { StateItemType } from '../../../model/reducer'
 import { store } from '../../../model/store'
-import { inputTooltip } from '../input-tooltips/input-tooltips'
+
 
 function initToolBar(wrapper: string): void {
-  let state = store.getState()
-  let renderToolBar = (data) => {
-    return data.map((item) => {
+  let state: StateItemType[] | [] = store.getState() as []
+  let renderToolBar = (data: StateItemType[]) => {
+    return data.map((item: StateItemType) => {
       return $(`
       <div class="control-panel ${item.id}">
       <div class="control-panel__text-inputs">
@@ -54,7 +55,6 @@ function initToolBar(wrapper: string): void {
       <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange'
       ${item.tooltip === true ? 'checked' : ''} />
       <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">tooltips</label>
-     
       </div>
       </div>
       </div>`)

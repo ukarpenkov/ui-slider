@@ -764,18 +764,6 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createToolTips", ()=>createToolTips);
 parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
-// export const inputTooltip = () => {
-//   var tooltip = {
-//     /* НАЧАЛО НАСТРОЕК */
-//     options: {
-//       attr_name: 'tooltip', // наименование создаваемого tooltip'ого атрибута
-//       blank_text: '', // текст для ссылок с target="_blank"
-//       newline_entity: '', // укажите пустую строку (""), если не хотите использовать в tooltip'ах многострочность; ежели хотите, то укажите тот символ или символы, которые будут заменяться на перевод строки
-//       max_width: 0, // максимальная ширина tooltip'а в пикселах; обнулите это значение, если ширина должна быть нелимитирована
-//       delay: 100, // задержка при показе tooltip'а в миллисекундах
-//       skip_tags: ['link', 'style'], // теги, у которых не обрабатываем атрибуты alt и title
-//     },
-//     /* КОНЕЦ НАСТРОЕК */
 var _store = require("../../../model/store");
 const createToolTips = ()=>{
     let minTooltip = document.createElement("div");
@@ -797,7 +785,6 @@ const setTooltip = ()=>{
             let currentValue = [
                 ...state
             ].filter((a)=>a.id === id)[0].minValue;
-            console.log(currentValue);
             minTooltip.style.display = "block";
             minTooltip.innerHTML = currentValue;
             const x = event.clientX;
@@ -812,10 +799,8 @@ const setTooltip = ()=>{
     inputMax.forEach((a)=>a.onmousemove = function(event) {
             let state = (0, _store.store).getState();
             let maxTooltip = document.querySelector(".js-tooltip-slider-max");
-            console.log(state);
             let wrapper = $(this).parent().parent().parent()[0];
             let id = $(wrapper).attr("class").split(" ")[0];
-            console.log(id);
             let currentValue = [
                 ...state
             ].filter((a)=>a.id === id)[0].maxValue;
@@ -833,7 +818,7 @@ const setTooltip = ()=>{
         });
 };
 
-},{"../../../model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kUjWH":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../model/store":"gl3Yi"}],"kUjWH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7632,12 +7617,12 @@ function initSlider(wrapper) {
     $(slidersContainer).append(sliderRendering(state));
     (function handleRange() {
         function rangeInputChangeEventHandler() {
-            var minBtn = $(this).parent().children(".js-uk-min");
-            var maxBtn = $(this).parent().children(".js-uk-max");
-            var range_min = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_min");
-            var range_max = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_max");
-            var minVal = Number($(minBtn).val());
-            var maxVal = Number($(maxBtn).val());
+            let minBtn = $(this).parent().children(".js-uk-min");
+            let maxBtn = $(this).parent().children(".js-uk-max");
+            let range_min = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_min");
+            let range_max = $(this).parent().parent().children(".uk-slider__value_block").children(".js-uk-range_max");
+            let minVal = Number($(minBtn).val());
+            let maxVal = Number($(maxBtn).val());
             let sliderId = $(range_min).parent().parent().parent()[0].classList[0];
             (0, _updateSliders.updateToolbar)();
             if (minVal > maxVal - 1) $(minBtn).val(maxVal);
@@ -7915,7 +7900,6 @@ function initToolBar(wrapper) {
       <input class="control-panel__checkbox-input" type="checkbox"  name='scaleRange'
       ${item.tooltip === true ? "checked" : ""} />
       <label for="scaleRange" data-onlabel="on" data-offlabel="off" class="control-panel__label">tooltips</label>
-     
       </div>
       </div>
       </div>`);
