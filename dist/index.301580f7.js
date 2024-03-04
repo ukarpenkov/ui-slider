@@ -777,48 +777,51 @@ const setTooltip = ()=>{
     let inputMin = document.querySelectorAll(".js-uk-min");
     let inputMax = document.querySelectorAll(".js-uk-max");
     let time = 1500;
-    inputMin.forEach((a)=>a.onmousemove = function(event) {
+    Array.from(inputMin).forEach((a)=>a.onmousemove = function(event) {
             let state = (0, _store.store).getState();
             let minTooltip = document.querySelector(".js-tooltip-slider-min");
             let wrapper = $(this).parent().parent().parent()[0];
-            let id = $(wrapper).attr("class").split(" ")[0];
+            let id = $(wrapper)?.attr("class")?.split(" ")[0];
             let currentValue = [
                 ...state
             ].filter((a)=>a.id === id)[0].minValue;
-            minTooltip.style.display = "block";
-            minTooltip.innerHTML = currentValue;
             const x = event.clientX;
             const y = event.clientY;
-            minTooltip.style.left = `${x + 10}px`;
-            minTooltip.style.top = `${y + 3}px`;
+            if (minTooltip) {
+                minTooltip.style.display = "block";
+                minTooltip.innerHTML = currentValue;
+                minTooltip.style.left = `${x + 10}px`;
+                minTooltip.style.top = `${y + 3}px`;
+            }
             setTimeout(remove, time);
             function remove() {
-                minTooltip.style.display = "none";
+                if (minTooltip) minTooltip.style.display = "none";
             }
         });
     inputMax.forEach((a)=>a.onmousemove = function(event) {
             let state = (0, _store.store).getState();
             let maxTooltip = document.querySelector(".js-tooltip-slider-max");
             let wrapper = $(this).parent().parent().parent()[0];
-            let id = $(wrapper).attr("class").split(" ")[0];
+            let id = $(wrapper)?.attr("class")?.split(" ")[0];
             let currentValue = [
                 ...state
             ].filter((a)=>a.id === id)[0].maxValue;
-            console.log(currentValue);
-            maxTooltip.style.display = "block";
-            maxTooltip.innerHTML = currentValue;
             const x = event.clientX;
             const y = event.clientY;
-            maxTooltip.style.left = `${x + 10}px`;
-            maxTooltip.style.top = `${y + 3}px`;
+            if (maxTooltip) {
+                maxTooltip.style.display = "block";
+                maxTooltip.innerHTML = currentValue;
+                maxTooltip.style.left = `${x + 10}px`;
+                maxTooltip.style.top = `${y + 3}px`;
+            }
             setTimeout(remove, time);
             function remove() {
-                maxTooltip.style.display = "none";
+                if (maxTooltip) maxTooltip.style.display = "none";
             }
         });
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../model/store":"gl3Yi"}],"kUjWH":[function(require,module,exports) {
+},{"../../../model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kUjWH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
