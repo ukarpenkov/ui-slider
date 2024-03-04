@@ -577,11 +577,11 @@ var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
     tooltip: true,
     valueBlock: true
 });
-(0, _viewInitSliderDefault.default)(".slider-page", ".tooltip");
+(0, _viewInitSliderDefault.default)(".slider-page");
 (0, _inputTooltips.createToolTips)();
 (0, _inputTooltips.setTooltip)();
 
-},{"./model/store":"gl3Yi","./view/components/input-tooltips/input-tooltips":"lUGML","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./utils/import-jquery":"kUjWH","./view/components/initSlider/view-init-slider":"bxGtt"}],"gl3Yi":[function(require,module,exports) {
+},{"./model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./utils/import-jquery":"kUjWH","./view/components/initSlider/view-init-slider":"bxGtt","./view/components/input-tooltips/input-tooltips":"lUGML"}],"gl3Yi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "store", ()=>store);
@@ -759,69 +759,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"lUGML":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "createToolTips", ()=>createToolTips);
-parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
-var _store = require("../../../model/store");
-const createToolTips = ()=>{
-    let minTooltip = document.createElement("div");
-    minTooltip.className = "js-tooltip-slider-min";
-    document.body.appendChild(minTooltip);
-    let maxTooltip = document.createElement("div");
-    maxTooltip.className = "js-tooltip-slider-max";
-    document.body.appendChild(maxTooltip);
-};
-const setTooltip = ()=>{
-    let inputMin = document.querySelectorAll(".js-uk-min");
-    let inputMax = document.querySelectorAll(".js-uk-max");
-    let time = 1500;
-    Array.from(inputMin).forEach((a)=>a.onmousemove = function(event) {
-            let state = (0, _store.store).getState();
-            let minTooltip = document.querySelector(".js-tooltip-slider-min");
-            let wrapper = $(this).parent().parent().parent()[0];
-            let id = $(wrapper)?.attr("class")?.split(" ")[0];
-            let currentValue = [
-                ...state
-            ].filter((a)=>a.id === id)[0].minValue;
-            const x = event.clientX;
-            const y = event.clientY;
-            if (minTooltip) {
-                minTooltip.style.display = "block";
-                minTooltip.innerHTML = currentValue;
-                minTooltip.style.left = `${x + 10}px`;
-                minTooltip.style.top = `${y + 3}px`;
-            }
-            setTimeout(remove, time);
-            function remove() {
-                if (minTooltip) minTooltip.style.display = "none";
-            }
-        });
-    inputMax.forEach((a)=>a.onmousemove = function(event) {
-            let state = (0, _store.store).getState();
-            let maxTooltip = document.querySelector(".js-tooltip-slider-max");
-            let wrapper = $(this).parent().parent().parent()[0];
-            let id = $(wrapper)?.attr("class")?.split(" ")[0];
-            let currentValue = [
-                ...state
-            ].filter((a)=>a.id === id)[0].maxValue;
-            const x = event.clientX;
-            const y = event.clientY;
-            if (maxTooltip) {
-                maxTooltip.style.display = "block";
-                maxTooltip.innerHTML = currentValue;
-                maxTooltip.style.left = `${x + 10}px`;
-                maxTooltip.style.top = `${y + 3}px`;
-            }
-            setTimeout(remove, time);
-            function remove() {
-                if (maxTooltip) maxTooltip.style.display = "none";
-            }
-        });
-};
-
-},{"../../../model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kUjWH":[function(require,module,exports) {
+},{}],"kUjWH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jquery = require("jquery");
@@ -7911,6 +7849,70 @@ function initToolBar(wrapper) {
     $(wrapper).append(renderToolBar(state));
 }
 exports.default = initToolBar;
+
+},{"../../../model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUGML":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createToolTips", ()=>createToolTips);
+parcelHelpers.export(exports, "setTooltip", ()=>setTooltip);
+var _store = require("../../../model/store");
+const createToolTips = ()=>{
+    let minTooltip = document.createElement("div");
+    minTooltip.className = "js-tooltip-slider-min";
+    document.body.appendChild(minTooltip);
+    let maxTooltip = document.createElement("div");
+    maxTooltip.className = "js-tooltip-slider-max";
+    document.body.appendChild(maxTooltip);
+};
+const setTooltip = ()=>{
+    let inputMin = document.querySelectorAll(".js-uk-min");
+    let inputMax = document.querySelectorAll(".js-uk-max");
+    let time = 1500;
+    Array.from(inputMin).forEach((a)=>a.onmousemove = function(event) {
+            let state = (0, _store.store).getState();
+            let minTooltip = document.querySelector(".js-tooltip-slider-min");
+            let wrapper = $(this).parent().parent().parent()[0];
+            let id = $(wrapper)?.attr("class")?.split(" ")[0];
+            let arayFromState = Array.from([
+                ...state
+            ]);
+            let currentValue = arayFromState.filter((a)=>a.id === id)[0].minValue;
+            const x = event.clientX;
+            const y = event.clientY;
+            if (minTooltip) {
+                minTooltip.style.display = "block";
+                minTooltip.innerHTML = currentValue;
+                minTooltip.style.left = `${x + 10}px`;
+                minTooltip.style.top = `${y + 3}px`;
+            }
+            setTimeout(remove, time);
+            function remove() {
+                if (minTooltip) minTooltip.style.display = "none";
+            }
+        });
+    inputMax.forEach((a)=>a.onmousemove = function(event) {
+            let state = (0, _store.store).getState();
+            let maxTooltip = document.querySelector(".js-tooltip-slider-max");
+            let wrapper = $(this).parent().parent().parent()[0];
+            let id = $(wrapper)?.attr("class")?.split(" ")[0];
+            let arayFromState = Array.from([
+                ...state
+            ]);
+            let currentValue = arayFromState.filter((a)=>a.id === id)[0].maxValue;
+            const x = event.clientX;
+            const y = event.clientY;
+            if (maxTooltip) {
+                maxTooltip.style.display = "block";
+                maxTooltip.innerHTML = currentValue;
+                maxTooltip.style.left = `${x + 10}px`;
+                maxTooltip.style.top = `${y + 3}px`;
+            }
+            setTimeout(remove, time);
+            function remove() {
+                if (maxTooltip) maxTooltip.style.display = "none";
+            }
+        });
+};
 
 },{"../../../model/store":"gl3Yi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["jVJxO","lAnY0"], "lAnY0", "parcelRequirec06f")
 

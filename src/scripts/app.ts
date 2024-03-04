@@ -46,6 +46,6 @@ store.dispatch({
   valueBlock: true,
 })
 
-initSlider('.slider-page', '.tooltip')
+initSlider('.slider-page')
 createToolTips()
 setTooltip()

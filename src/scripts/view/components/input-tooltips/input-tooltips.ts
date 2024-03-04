@@ -24,7 +24,9 @@ export const setTooltip = () => {
         )
         let wrapper = $(this).parent().parent().parent()[0]
         let id = $(wrapper)?.attr('class')?.split(' ')[0]
-        let currentValue = [...state].filter((a) => a.id === id)[0].minValue
+        let arayFromState: any[] = Array.from([...(state as [])])
+        let currentValue: string = arayFromState.filter((a) => a.id === id)[0]
+          .minValue
         const x = event.clientX
         const y = event.clientY
         if (minTooltip) {
@@ -51,7 +53,9 @@ export const setTooltip = () => {
         )
         let wrapper = $(this).parent().parent().parent()[0]
         let id = $(wrapper)?.attr('class')?.split(' ')[0]
-        let currentValue = [...state].filter((a) => a.id === id)[0].maxValue
+        let arayFromState: any[] = Array.from([...(state as [])])
+        let currentValue: string = arayFromState.filter((a) => a.id === id)[0]
+          .maxValue
         const x = event.clientX
         const y = event.clientY
         if (maxTooltip) {
