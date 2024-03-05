@@ -12,7 +12,7 @@ let slider1 = new AddSliderToStore(
   'interval',
   'horizontal',
   1,
-  100,
+  50,
   1,
   100,
   1,

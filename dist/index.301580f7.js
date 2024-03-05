@@ -538,7 +538,7 @@ var _viewInitSlider = require("./view/components/initSlider/view-init-slider");
 var _viewInitSliderDefault = parcelHelpers.interopDefault(_viewInitSlider);
 var _inputTooltips = require("./view/components/input-tooltips/input-tooltips");
 var _addSliderToStore = require("./controller/addSliderToStore/addSliderToStore");
-let slider1 = new (0, _addSliderToStore.AddSliderToStore)("1", "interval", "horizontal", 1, 100, 1, 100, 1, true, true);
+let slider1 = new (0, _addSliderToStore.AddSliderToStore)("1", "interval", "horizontal", 1, 50, 1, 100, 1, true, true);
 slider1.init();
 let slider2 = new (0, _addSliderToStore.AddSliderToStore)("2", "interval", "vertical", 1, 20, 1, 20, 1, true, true);
 slider2.init();
