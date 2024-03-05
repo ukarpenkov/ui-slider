@@ -1,7 +1,5 @@
 import { store } from '../../model/store'
 import { updateSliders, updateToolbar } from '../updateSlider/updateSliders'
-import initSlider from '../../view/components/initSlider/view-init-slider'
-import initToolBar from '../../view/components/initToolbar/view-init-toolbar'
 
 export function changeMinScale(this: JQuery<Element>): void {
   let minScaleInput = $(this)
@@ -21,8 +19,6 @@ export function changeMinScale(this: JQuery<Element>): void {
   })
   updateSliders()
   updateToolbar()
-
-  console.log(store.getState())
 }
 
 export function changeMaxScale(this: JQuery<Element>): void {
