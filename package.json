@@ -12,10 +12,10 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "author": "ukarpenkov <truloveu@gmail.com>",
   "license": "MIT",
-  "source": "src/index.html",
+  "source": "src/index.pug",
   "scripts": {
     "start": "yarn parcel src/index.pug",
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.pug",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "devDependencies": {
