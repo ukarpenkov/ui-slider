@@ -1,6 +1,6 @@
 # ui-slider
 
-## [GITHUB PAGES LINK](https://ukarpenkov.github.io/ui-slider/dist/)
+## [GITHUB PAGES LINK](https://ukarpenkov.github.io/ui-slider/demo/)
 
 ## Как воспользоваться данным слайдером
 
