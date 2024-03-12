@@ -1,6 +1,5 @@
 import './utils/import-jquery'
 import initSlider from './view/components/initSlider/view-init-slider'
-import { store } from './model/store'
 import {
   createToolTips,
   setTooltip,
@@ -34,6 +33,7 @@ let slider2 = new AddSliderToStore(
   true
 )
 slider2.init()
+
 let slider3 = new AddSliderToStore(
   '3',
   'single',
