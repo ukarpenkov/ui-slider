@@ -1,0 +1,242 @@
+body {
+  -webkit-user-select: none;
+  user-select: none;
+  max-width: 1000px;
+}
+
+input, label {
+  font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
+}
+
+.slider-wrapper {
+  position: relative;
+}
+
+.uk-slider {
+  font-size: 20px;
+  display: block;
+  position: relative;
+}
+
+.uk-slider__range {
+  width: 50%;
+  margin-left: 10px;
+  position: absolute;
+}
+
+.uk-slider__range_orient_vertical {
+  position: relative;
+  top: 32%;
+  right: 24%;
+  transform: rotate(90deg);
+}
+
+.uk-slider__input {
+  width: 80%;
+  appearance: none;
+  position: absolute;
+}
+
+.uk-slider__input::-webkit-slider-runnable-track {
+  appearance: none;
+  height: 4px;
+  background: #7a97ef;
+  border-radius: 10px;
+}
+
+.uk-slider__input::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  appearance: none;
+  cursor: pointer;
+  background: #1707cf;
+  border: 1px solid #1707cf;
+  border-radius: 25px;
+  margin-top: -5.3px;
+  transition: all 3s;
+  position: relative;
+}
+
+.uk-slider__input:nth-child(1)::-webkit-slider-thumb {
+  z-index: 2;
+}
+
+.uk-slider__value_block {
+  width: 47%;
+  justify-content: space-between;
+  margin-top: 8px;
+  margin-left: 22px;
+  display: flex;
+  position: relative;
+  top: 15px;
+}
+
+.uk-slider__value_block_orient_vertical {
+  grid-gap: 300%;
+  align-content: space-around;
+  align-items: center;
+  display: grid;
+  position: relative;
+  left: 2%;
+}
+
+.uk-slider__range_value {
+  width: 60px;
+  border: none;
+  font-size: 20px;
+}
+
+.uk-slider__value_block_orient_vertical .uk-slider__range_value_min {
+  margin-top: -176px;
+}
+
+.hidden, .no-vis {
+  visibility: hidden;
+}
+
+.control-panel {
+  width: 90%;
+  align-items: baseline;
+  display: flex;
+}
+
+.toolbar-page {
+  grid-gap: 100px;
+  display: grid;
+}
+
+.control-panel__text-input {
+  width: 100%;
+  height: calc(1.25rem + 1px);
+  border: 1px solid #bdbdbd;
+  border-radius: .25rem;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  display: block;
+}
+
+.control-panel__text-input::placeholder {
+  color: #212529;
+  opacity: .4;
+}
+
+.control-panel__text-input:focus {
+  color: #17191b;
+  background-color: #fff;
+  border-color: #bdbdbd;
+  outline: 0;
+  box-shadow: 0 0 0 .1rem #26252540;
+}
+
+.control-panel__checkbox-inputs {
+  margin-left: 50px;
+}
+
+.control-panel__checkbox-input {
+  cursor: pointer;
+  margin-top: 10px;
+  transform: scale(1.8);
+}
+
+.control-panel__label {
+  color: #484b4e;
+  margin-top: 8px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.control-panel__checkbox-describe {
+  display: inline-block;
+}
+
+.control-panel__checkbox-item {
+  display: flex;
+}
+
+.slider-page {
+  grid-gap: 100%;
+  display: grid;
+}
+
+.page-item {
+  height: 100%;
+  margin-top: 50px;
+  display: flex;
+}
+
+.sliders-container {
+  grid-gap: 40%;
+  padding-top: 17%;
+  display: grid;
+}
+
+.wrapper {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 10%;
+  margin-left: 10%;
+  display: grid;
+}
+
+@media (min-device-width: 320px) and (max-device-width: 950px) {
+  .uk-slider__input::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    appearance: none;
+    cursor: pointer;
+    background: #000;
+    border: 1px solid #000;
+    border-radius: 25px;
+    margin-top: -14px;
+    transition: all 3s;
+    position: relative;
+  }
+
+  .wrapper {
+    grid-template-columns: 1fr;
+    margin-top: 10%;
+    margin-left: 10%;
+    display: grid;
+  }
+
+  .uk-slider__value_block_orient_vertical {
+    height: 300px;
+    align-content: space-between;
+    margin-left: 27px;
+    display: grid;
+  }
+
+  .page-item {
+    width: 100%;
+    height: 300px;
+    margin-top: 50px;
+    display: grid;
+  }
+}
+
+.js-tooltip-slider-min {
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  color: #fafafa;
+  background: #0cc;
+  border-radius: 50%;
+  padding: 8px;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.js-tooltip-slider-max {
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  color: #fafafa;
+  background: #0cc;
+  border-radius: 50%;
+  padding: 8px;
+  display: none;
+  position: absolute;
+}
+
+/*# sourceMappingURL=index.bb83c982.css.map */

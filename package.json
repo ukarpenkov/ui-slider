@@ -15,7 +15,7 @@
   "source": "src/index.pug",
   "scripts": {
     "start": "yarn parcel src/index.pug",
-    "build": "parcel build src/index.pug ",
+    "build": "parcel build --no-optimize src/index.pug ",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "devDependencies": {
