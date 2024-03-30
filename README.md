@@ -2,7 +2,7 @@
 
 ## [DEMO](https://ukarpenkov.github.io/ui-slider/demo/)
 
-![](https://thumb.cloud.mail.ru/thumb/xw1/uislider.png)
+![](https://raw.githubusercontent.com/ukarpenkov/ui-slider/main/src/img/uislider.png)
 
 ## Как воспользоваться данным слайдером
 
