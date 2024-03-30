@@ -1,6 +1,8 @@
-# ui-slider
+# UI-SLIDER
 
-## [GITHUB PAGES LINK](https://ukarpenkov.github.io/ui-slider/demo/)
+## [DEMO](https://ukarpenkov.github.io/ui-slider/demo/)
+
+![](https://thumb.cloud.mail.ru/thumb/xw1/uislider.png)
 
 ## Как воспользоваться данным слайдером
 
