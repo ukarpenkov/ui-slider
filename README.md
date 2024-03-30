@@ -1,6 +1,6 @@
 # UI-SLIDER
 
-## [DEMO](https://ukarpenkov.github.io/ui-slider/demo/)
+## [DEMO URL](https://ukarpenkov.github.io/ui-slider/demo/)
 
 ![](https://raw.githubusercontent.com/ukarpenkov/ui-slider/main/src/img/uislider.png)
 
@@ -14,16 +14,9 @@
 3. в папке проекта создайте папку 'src';
 4. в папке 'src' создайте 'index.html' с базовой разметкой:
    ```
-   <div class="slider-page">
-     <div class="page-item js-page-item1">
-       <div class="id2 slider-wrapper"></div>
-     </div>
-     <div class="page-item js-page-item2">
-       <div class="id3 slider-wrapper"></div>
-     </div>
-     <div class="page-item js-page-item3">
-       <div class="id4 slider-wrapper"></div>
-     </div>
+   <div class="wrapper" id="wrapper">
+      <div class="slider-page"></div>
+      <div class="toolbar-page"></div>
    </div>
    ```
 5. подключите стили:
