@@ -45,7 +45,7 @@
     "build": "parcel build index.html ",
    },
    ```
-8. для запуска напишите в косли:
+8. для запуска напишите в косоли:
    ```
    yarn parcel index.html
    ```
