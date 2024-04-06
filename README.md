@@ -6,49 +6,65 @@
 
 ## Как воспользоваться данным слайдером
 
-1. Клонируйте себе в папку [данный репозиторий](https://github.com/ukarpenkov/ui-slider)
-2. Перенесите в свой проект следующие файлы и папки
-   - package.json;
-   - папку 'styles';
-   - папку 'scripts';
-3. в папке проекта создайте папку 'src';
-4. в папке 'src' создайте 'index.html' с базовой разметкой:
+1. Клонируйте себе в папку [этот репозиторий](https://github.com/ukarpenkov/get-plugin/tree/main)
+   или перенесите в свой проект следующие файлы и папки
+   - index.js;
+   - папку 'plugin';
+2. в папке проектв создайте 'index.html' с базовой разметкой:
    ```
    <div class="wrapper" id="wrapper">
       <div class="slider-page"></div>
       <div class="toolbar-page"></div>
    </div>
    ```
-5. подключите стили:
+3. Установите нужный вам бандлер, например parcel
    ```
-   <link rel="stylesheet" href="styles/styles.css" />;
+   nmp i
+   npm i parcel
    ```
-6. подключите '.ts' файл:
+4. проверьте путь для подключения стилей плагина в index.html:
    ```
-   <script type="module" src="scripts/app.ts"></script>;
+   <link rel="stylesheet" href="./plugin/slider-plugin/index.bb83c982.css" />
    ```
-7. установите зависимости командой npm i;
-8. при изменении классов необходимо изменить инициализацию слайдера в app.ts
+   при необходимости обновите путь.
+5. проверьте путь для подключения js кода плагина в index.js:
    ```
-     initSlider('.id2', settings1)
+   import {
+   setSliderSettings, initSlider, initTooltips,}
+   from "./plugin/slider-plugin/index.20a44db0";
    ```
-9. для настройки типа слайдера измените параметры объекта
-
-```
-let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
-```
-
-10. возможные опции для слайдера:
-
-- 'interval' / 'single';
-- 'horizontal' / 'vertical';
-- начальное и конечное значение слайдера.
-
-11. запустите проект командой 'npm parcel src/index.html'
-
-12. для использования автотестов скопируйте себе в корневую папку проекта папку 'tests'
-
-13. запустите тесты командой 'wdio run ./wdio.conf.js'
+6. проверьте путь для подключения index.js в index.html:
+   ```
+   <script type="module" src="index.js"></script>
+   ```
+   при необходимости обновите путь.
+7. пропишите необхомые команды для старта и сборки проекта в package.json:
+   ```
+   "scripts": {
+    "start": "yarn parcel index.html",
+    "build": "parcel build index.html ",
+   },
+   ```
+8. для запуска напишите в косли:
+   ```
+   yarn parcel index.html
+   ```
+9. для начальной настройки слайдера использйте следующие аргументы:
+   ```
+    let slider1 = new (0, setSliderSettings)(
+      "1", // css класс для обертки слайдера
+      "interval", // "single"/"interval" - 1 или 2 ручки
+      "horizontal", // "vertial"/"horizontal" - направление слайдера
+      1, // текущее положение левого бегунка
+      50,// текущее положение правого бегунка
+      1, // минимально возможное значение
+      100, // максимально возможное значение
+      1, // шаг слайдера
+      false, // true/false - показать/скрыть тултипы
+      true // true/false - показать/скрыть болк значений
+    );
+    slider1.init();
+   ```
 
 ## Архитектура приложения
 
@@ -77,8 +93,14 @@ new SliderSettings.
 Пример:
 
 ```
+
 let settings1 = new SliderSettings('interval', 'horizontal', 1, 200)
+
 ```
 
 Выше приведена настройка для слайдера с двумя "ручками", со
 значениями от 1 до 200, с горизонтальной ориентацией.
+
+```
+
+```
