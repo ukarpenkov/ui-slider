@@ -74,7 +74,7 @@
 Класс AddSliderToStore содержит основные свойста и методы слайдера
 
 ```
-  id: string - id по прядку
+  id: string - id по порядку
   interval: 'single' | 'interval' - варианты с 1 или 2 ручками
   orientation: 'vertical' | 'horizontal' - направление слайдера
   minValue: number - минимальное положение бегунка при инициализации
