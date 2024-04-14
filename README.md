@@ -106,3 +106,45 @@ src\scripts\controller\toolbarHandlers\toolbar-handlers.ts
 После каждого изменения стэйта происходит вызов функции обновляющую компоненты с усетом новых данных updateSliders()
 
 Отрисовка слайдера и тулбара происходит с помощью функций initSlider и initToolbar. Эти функции содержат верстку элементов и основную логику поведения.
+
+## Используеммые зависимости
+
+```
+  "dependencies": {
+    "jquery": "^3.6.1",
+    "mermaid": "^9.3.0",
+    "pug": "^3.0.2",
+    "yarn": "^1.22.21"
+  },
+  "name": "ui-slider",
+  "version": "1.0.0",
+  "description": "This is a plugin for jQuery that implemented the “slider” functionality - a special controller that allows you to drag for a given numeric value",
+  "repository": "https://github.com/ukarpenkov/ui-slider.git",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "author": "ukarpenkov <truloveu@gmail.com>",
+  "license": "MIT",
+  "source": "src/index.pug",
+  "scripts": {
+    "start": "yarn parcel src/index.pug",
+    "build": "parcel build --no-optimize src/index.pug ",
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "devDependencies": {
+    "@parcel/compressor-brotli": "^2.7.0",
+    "@parcel/compressor-gzip": "^2.7.0",
+    "@parcel/transformer-pug": "^2.7.0",
+    "@types/jest": "^29.2.5",
+    "@types/jquery": "^3.5.29",
+    "@wdio/cli": "^8.1.3",
+    "@wdio/local-runner": "^8.1.3",
+    "@wdio/mocha-framework": "^8.1.2",
+    "@wdio/spec-reporter": "^8.1.2",
+    "chromedriver": "^113.0.0",
+    "eslint": "^8.56.0",
+    "jest-environment-jsdom": "^29.3.1",
+    "parcel": "^2.7.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "wdio-chromedriver-service": "^8.1.1"
+  }
+```
