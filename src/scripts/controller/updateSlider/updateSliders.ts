@@ -1,4 +1,3 @@
-import { store } from '../../model/store'
 import {
   changeMaxPos,
   changeMaxScale,
