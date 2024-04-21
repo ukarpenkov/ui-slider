@@ -11,10 +11,6 @@ export type StateItemType = {
   valueBlock: boolean
 }
 
-type PayloadType = {
-  [key: string]: Partial<StateItemType>
-}
-
 export type ActionType = {
   type: string
   id: string | undefined
